@@ -1,6 +1,4 @@
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
+#include "../base.hpp"
 
 // Higher weights are higher.
 // Primarily used as a set able to get the k-th element

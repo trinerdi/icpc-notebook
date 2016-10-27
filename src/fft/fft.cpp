@@ -1,20 +1,5 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <algorithm>
-#include <string>
-#include <set>
-#include <map>
-#include <queue>
-#include <stack>
-#include <cstring>
-#include <cassert>
-#include <complex>
-using namespace std;
-#define rep(i,a,n) for (int i=a;i<n;i++)
-#define per(i,a,n) for (int i=n-1;i>=a;i--)
-typedef long long ll;
-typedef long double ld;
+#include "../base.hpp"
+
 typedef complex<ld> C;
 const ld PI = 3.14159265358979323;
 const ld EPS = 1e-9;
