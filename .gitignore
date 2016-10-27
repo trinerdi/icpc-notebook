@@ -27,3 +27,7 @@
 *.exe
 *.out
 *.app
+
+# Other
+.*.md5
+*.sublime-*
