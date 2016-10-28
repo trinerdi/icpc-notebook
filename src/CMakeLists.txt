@@ -1,1 +1,0 @@
-add_library(project1_lib numth/misc.cpp)

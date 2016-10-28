@@ -84,25 +84,3 @@ int indexOf(Treap *a, ll val) {
         else return res + lsize + 1;
     }
 }
-
-int main() { // Tests the treap
-    srand(time(0));
-    Treap* t = NULL;
-    int n = 1000000; // n = 10^6 takes about 5 seconds on my machine
-    unordered_set<ll> used; // Elements must be different for the test to work
-    for (int i = 0; i < n; i++) {
-        ll x = rand();
-        while (used.count(x)) x = rand();
-        used.insert(x);
-        insert(t, x);
-    }
-    ll last = 0;
-    for (int i = 0; i < n; i++) {
-        ll x = getKth(t, i);
-        assert(x >= last);
-        assert(indexOf(t, x) == i);
-        last = x;
-        //cout << "element " << i << ": " << x << endl;
-    }
-    return 0;
-}

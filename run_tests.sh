@@ -2,4 +2,6 @@
 cd build
 cmake ..
 make
-./test_fft
+for test in test_*; do
+    ./$test
+done
