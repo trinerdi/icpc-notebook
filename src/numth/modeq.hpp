@@ -26,3 +26,18 @@ ll gcd(ll a, ll b)
 	tie(u, v) = extgcd(a, b);
 	return u * a + v * b;
 }
+
+/* Solves the modular equality ak \equiv b (mod m), returns 0 <= k < m or -1
+ * if there's no solution
+ * Time complexity: O(log m), space complexity: O(1) */
+ll solve_modeq(ll a, ll b, ll m)
+{
+	// We have a * k + m * y = b for unknown k and y
+	ll g = gcd(a, m);
+	if (b % g)
+		return -1;
+
+	ll t = b / g;
+	ll k = extgcd(a, m).first * t;
+	return (k % m + m) % m;
+}
