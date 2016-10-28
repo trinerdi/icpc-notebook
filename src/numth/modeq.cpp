@@ -15,6 +15,9 @@ int main() {
 		ll f = llrand(), g = llrand();
 		tie(u, v) = extgcd(f, g);
 		ll div = f * u + g * v;
+		if (div != gcd(f, g))
+			printf("Inconsistency between extended and regular gcd: %lld != %lld", div, gcd(f, g));
+
 		if (f % div || g % div)
 			printf("%lld doesn't divide both numbers: %lld %lld\n", div, f, g);
 	}
