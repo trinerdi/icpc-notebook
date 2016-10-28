@@ -7,5 +7,5 @@ int main() {
 	// 22302
 
 	rep(i, 0, 1000000)
-		fastexp(rand(), rand(), rand());
+		fastexp(rand(), rand(), max(rand(), 1));
 }

@@ -2,7 +2,7 @@
 #include "modeq.hpp"
 
 ll llrand() {
-	return (((ll)lrand48()) << 31) + lrand48();
+	return max((((ll)lrand48()) << 31) + lrand48(), 1LL);
 }
 
 int main() {
