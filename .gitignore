@@ -31,4 +31,7 @@
 # Other
 .*.md5
 *.sublime-*
-build/
+
+# Specific files
+/export/out.*
+/build

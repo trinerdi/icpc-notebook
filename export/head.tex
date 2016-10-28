@@ -1,0 +1,79 @@
+\newbox\spacebox
+\newdimen\spacedimen
+\advance\hoffset by -15pt
+\advance\hsize by 15pt
+\advance\voffset by -15pt
+\advance\vsize by 60pt
+\font\brm="Liberation Mono" at 12pt
+\parindent=0pt
+\def\setverb{%
+ \def\do##1{\catcode`##1=12}
+ \dospecials
+ \catcode`\\=0
+ \catcode`\{=1
+ \catcode`\}=2
+ \gdef\{{\char123\relax}
+ \gdef\}{\char125\relax}
+ \gdef\b{\char92\relax}
+ \def\par{\leavevmode\endgraf}
+ \spaceskip=0pt
+ \baselineskip=10pt
+ \parskip=1pt plus .1pt minus .1pt
+ \raggedright
+ \rightskip=0pt plus 1fill
+ \leftskip=100pt
+ \setbox\spacebox=\hbox{a}
+ \spacedimen=\wd\spacebox
+ \advance\spacedimen by 1pt
+ \parindent=-\leftskip
+ \setspace
+ \obeyspaces\obeylines
+}
+{\catcode`\^^I=13\catcode`\ =13\gdef\setspace{%
+ \catcode`\^^I=13\catcode`\ =13
+ \def {\hskip\spacedimen\relax}
+ \def^^I{    }
+ }%
+}
+
+\def\verb{%
+	\bgroup
+	\setverb
+	\font\rm="Liberation Mono" at 9pt
+	\font\bf="Liberation Mono/B" at 9pt
+	\font\it="Liberation Mono/I" at 9pt
+	\rm
+}
+
+\def\col#1#2#3{%
+	{%
+	\special{color push rgb #1}%
+	#2%
+	#3%
+	\special{color pop}%
+	}%
+}
+
+\def\sk{\penalty -1000}
+\def\greatsk{\penalty -7000}
+
+\def\typ{\col{0 0 .6}\bf}
+\def\com{\col{.3 .3 .3}\it}
+\def\str{\col{0 .7 0}\rm}
+\def\dir{\col{.5 0 0}\it}
+\def\key{\col{0 0 0}\bf}
+\def\con{\col{.8 .1 .2}\rm}
+
+\footline={\vbox{\vskip 10pt\hrule height .5pt\vskip 5pt\brm\special{color push rgb 0 0 0}Tři nerdi – notebook\hskip 0pt plus 1filll\the\pageno}}
+
+\def\header#1{%
+ {%
+ \font\f="Liberation Mono" at 16pt
+ \vskip 20pt plus 5pt minus 10pt
+ \f
+ \penalty -9000
+ #1
+ \endgraf
+ \penalty 9000
+ }%
+}
