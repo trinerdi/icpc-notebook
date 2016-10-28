@@ -6,6 +6,7 @@ ll llrand() {
 }
 
 int main() {
+	printf("gcd\n");
 	ll d = 129352523LL * 169352, e = 129352523LL * 5293527;
 	// 2270579 -72641 129352523
 	ll u, v;
@@ -20,5 +21,16 @@ int main() {
 
 		if (f % div || g % div)
 			printf("%lld doesn't divide both numbers: %lld %lld\n", div, f, g);
+	}
+
+	printf("\nsolve modeq\n");
+	rep(i, 0, 500000){
+		ll a = rand(), b = rand(), p = max(rand(), 2);
+		ll k = solve_modeq(a, b, p);
+		if (k == -1)
+			continue; // For now assume this is correct
+
+		if ((a * k - b) % p)
+			printf("Invalid solution: %lld * %lld \\equiv %lld (mod %lld) doesn't hold\n", a, k, b, p);
 	}
 }
