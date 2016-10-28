@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 2.8)
 set(PROJECT_NAME TriNerdiICPC)
 project(${PROJECT_NAME})
 
-set(CMAKE_CXX_FLAGS "-g -std=c++11 -Wall")
+set(CMAKE_CXX_FLAGS "-g -std=c++11 -Wall -Wno-sign-compare")
 
 # If you want your own include/ directory, set this, and then you can do
 # include_directories(${COMMON_INCLUDES}) in other CMakeLists.txt files.
