@@ -17,3 +17,12 @@ pair<ll, ll> extgcd(ll a, ll b) {
 
 	return {Aa, Ab};
 }
+
+/* "Regular" Euclid's algorithm that returns gcd(a, b)
+ * Time complexity: O(log a + log b), space complexity: O(1) */
+ll gcd(ll a, ll b)
+{
+	ll u, v;
+	tie(u, v) = extgcd(a, b);
+	return u * a + v * b;
+}
