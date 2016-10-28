@@ -41,3 +41,11 @@ ll solve_modeq(ll a, ll b, ll m)
 	ll k = extgcd(a, m).first * t;
 	return (k % m + m) % m;
 }
+
+/* Given k, returns its modular inverse, 0 < k^-1 < m, such that k * k^-1
+ * \equiv 1 (mod m), or -1 if no such k^-1 exists
+ * Time complexity: O(log m), space complexity: O(1) */
+ll modular_inverse(ll a, ll m)
+{
+	return solve_modeq(a, 1, m);
+}
