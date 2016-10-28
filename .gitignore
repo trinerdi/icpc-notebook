@@ -31,3 +31,4 @@
 # Other
 .*.md5
 *.sublime-*
+build/

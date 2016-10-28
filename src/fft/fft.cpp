@@ -42,20 +42,3 @@ vector<ll> multiplyPolynomials(vector<ll> &a, vector<ll> &b) {
     rep(i, 0, n) res[i] = llround(v[0][i].real() / n);
     return res;
 }
-
-int main() {
-    // basic test
-    vector<ll> p1 = {0, 1, 2, 2};
-    vector<ll> p2 = { -5, 1};
-    vector<ll> res = multiplyPolynomials(p1, p2);
-    // expected: 0 -5 -9 -8 2 0 0 0
-    for (auto x : res) cout << x << " "; cout << endl;
-    
-    // stress test
-    vector<ll> t1, t2;
-    int N = 1e5;
-    rep(i, 0, N) t1.push_back(rand() - 1e9);
-    rep(i, 0, N) t2.push_back(rand() - 1e9);
-    multiplyPolynomials(t1, t2);
-    return 0;
-}
