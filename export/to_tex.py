@@ -46,14 +46,17 @@ def highlight(text):
         return re.sub(r"(^|\W)(%s)($|\W)" % word, r"\1\\%s{%s}\3" % (name, word), text)
 
 
-    for i in ["int", "char", "vector", "string", "map", "set", "ll", "ld", "pair", "auto", "bool", "unsigned", "signed", "short", "unordered_map", "unordered_set", "void"]:
-        text = repl(i, "typ", text)
+    d = {
+        "typ": "bool char signed unsigned short long int ll ld float double void auto string".split(),
+        "tem": "array vector deque forward_list list set map multiset multimap unordered_set unordered_map unordered_multiset unordered_multimap stack queue priority_queue pair".split(),
+        "key": "break case class const continue delete do else for friend goto if inline namespace new private public return static struct switch this typedef using while rep per".split(),
+        "con": "true false PI pi INF inf EPS eps NULL MOD MAXN MAXM".split()
+    }
 
-    for i in ["auto", "for", "while", "if", "else", "switch", "case", "break", "continue", "do", "const", "static", "public", "return", "typedef", "rep", "per"]:
-        text = repl(i, "key", text)
+    for name in d.keys():
+        for kw in d[name]:
+            text = repl(kw, name, text)
 
-    for i in ["true", "false", "PI", "pi", "INF", "inf", "eps", "EPS", "epsilon", "EPSILON", "INFINITY", "infinity"]:
-        text = repl(i, "con", text)
 
     text = re.sub(r"(^|\W)(-?\d+(U?L?L|(\.\d+)?(e-?\d+)?))($|\W)", r"\1\\con{\2}\6", text)
     l.append(text)
