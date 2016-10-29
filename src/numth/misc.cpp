@@ -6,6 +6,6 @@ int main() {
 	printf("%d\n", (int) fastexp(a, b, c));
 	// 22302
 
-	rep(i, 0, 1000000)
+	rep(i, 0, 3000000)
 		fastexp(rand(), rand(), max(rand(), 1));
 }

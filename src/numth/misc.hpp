@@ -1,10 +1,10 @@
 /* Fast exponentiation modulo mod
  * Time complexity: O(log p), space complexity: O(1) */
 ll fastexp(ll a, ll p, ll mod) {
-	if (p == 0)
-		return 1;
+	ll res = 1 % mod;
+	for (; p; a = (a * a) % mod, p /= 2)
+		if (p % 2)
+			res = (res * a) % mod;
 
-	ll res = fastexp(a, p / 2, mod);
-	res = (res * res) % mod;
-	return (p % 2) ? (res * a) % mod : res;
+	return res;
 }
