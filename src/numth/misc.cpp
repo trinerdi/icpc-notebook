@@ -1,11 +1,12 @@
 #include "../base.hpp"
-#include "misc.hpp"
 
-int main() {
-	int a = 563982, b = 25934821, c = 179523;
-	printf("%d\n", (int) fastexp(a, b, c));
-	// 22302
+/* Fast exponentiation modulo mod
+ * Time complexity: O(log p), space complexity: O(1) */
+ll fastexp(ll a, ll p, ll mod) {
+	ll res = 1 % mod;
+	for (; p; a = (a * a) % mod, p /= 2)
+		if (p % 2)
+			res = (res * a) % mod;
 
-	rep(i, 0, 3000000)
-		fastexp(rand(), rand(), max(rand(), 1));
+	return res;
 }

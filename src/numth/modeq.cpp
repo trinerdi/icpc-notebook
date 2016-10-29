@@ -1,36 +1,48 @@
-#include "../base.hpp"
-#include "modeq.hpp"
+/* Extended Euclid's algorithm that yields Bézout's coefficients -- numbers u,
+ * v such that a * u + b * v = gcd(a, b)
+ * Time complexity: O(log a + log b), space complexity: O(1) */
+pair<ll, ll> extgcd(ll a, ll b) {
+	ll Aa = 1, Ab = 0; // a' = Aa * a + Ab * b
+	ll Ba = 0, Bb = 1; // b' = Ba * a + Bb * b
+	if (a < b)
+		swap(a, b), swap(Aa, Ab), swap(Ba, Bb);
 
-ll llrand() {
-	return max((((ll)lrand48()) << 31) + lrand48(), 1LL);
+	while (b) {
+		ll c = a / b;
+		Aa -= c * Ba;
+		Ab -= c * Bb;
+		a = a % b;
+		swap(Aa, Ba), swap(Ab, Bb), swap(a, b);
+	}
+
+	return {Aa, Ab};
 }
 
-int main() {
-	printf("gcd\n");
-	ll d = 129352523LL * 169352, e = 129352523LL * 5293527;
-	// 2270579 -72641 129352523
+/* "Regular" Euclid's algorithm that returns gcd(a, b)
+ * Time complexity: O(log a + log b), space complexity: O(1) */
+ll gcd(ll a, ll b) {
 	ll u, v;
-	tie(u, v) = extgcd(d, e);
-	printf("%lld %lld %lld\n", u, v, u * d + v * e);
-	rep(i, 0, 500000){
-		ll f = llrand(), g = llrand();
-		tie(u, v) = extgcd(f, g);
-		ll div = f * u + g * v;
-		if (div != gcd(f, g))
-			printf("Inconsistency between extended and regular gcd: %lld != %lld", div, gcd(f, g));
+	tie(u, v) = extgcd(a, b);
+	return u * a + v * b;
+}
 
-		if (f % div || g % div)
-			printf("%lld doesn't divide both numbers: %lld %lld\n", div, f, g);
-	}
+/* Solves the modular equality ak \equiv b (mod m), returns 0 <= k < m or -1
+ * if there's no solution
+ * Time complexity: O(log m), space complexity: O(1) */
+ll solve_modeq(ll a, ll b, ll m) {
+	// We have a * k + m * y = b for unknown k and y
+	ll g = gcd(a, m);
+	if (b % g)
+		return -1;
 
-	printf("\nsolve modeq\n");
-	rep(i, 0, 500000){
-		ll a = rand(), b = rand(), p = max(rand(), 2);
-		ll k = solve_modeq(a, b, p);
-		if (k == -1)
-			continue; // For now assume this is correct
+	ll t = b / g;
+	ll k = extgcd(a, m).first * t;
+	return (k % m + m) % m;
+}
 
-		if ((a * k - b) % p)
-			printf("Invalid solution: %lld * %lld \\equiv %lld (mod %lld) doesn't hold\n", a, k, b, p);
-	}
+/* Given k, returns its modular inverse, 0 < k^-1 < m, such that k * k^-1
+ * \equiv 1 (mod m), or -1 if no such k^-1 exists
+ * Time complexity: O(log m), space complexity: O(1) */
+ll modular_inverse(ll a, ll m) {
+	return solve_modeq(a, 1, m);
 }
