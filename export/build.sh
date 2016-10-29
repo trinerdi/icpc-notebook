@@ -1,9 +1,10 @@
+#!/bin/sh
 (
 	echo "\\input head"
 	base=../src
 	while read a; do
 		echo "\\header{$a}"
-		python3 totex.py < "$base"/"$a"
+		python3 to_tex.py < "$base"/"$a"
 	done
 
 	echo "\\bye"
