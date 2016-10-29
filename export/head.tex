@@ -1,21 +1,21 @@
 \newbox\spacebox % Used to meaśure character width
 
-\advance\hoffset by -15pt
-\advance\hsize by 15pt
-\advance\voffset by -15pt
-\advance\vsize by 60pt
+\advance\hoffset by -25pt
+\advance\hsize by 25pt
+\advance\voffset by -5pt
+\advance\vsize by 80pt
 
 \def\dofont#1, #2!{"#1" at #2\relax}
 \def\monofont{\dofont Liberation Mono}
 \def\seriffont{\dofont Liberation Serif}
 
 \newdimen\fontsize
-\fontsize=9pt
-\font\footlinefont=\monofont, 12pt!
+\fontsize=8pt
+\font\headlinefont=\seriffont, 12pt!
 \font\rm=\monofont, \fontsize!
 \font\bf=\monofont/B, \fontsize!
 \font\it=\monofont/I, \fontsize!
-\font\headerfont=\monofont, 16pt!
+\font\headerfont=\monofont, 13pt!
 \rm
 
 \parindent=0pt
@@ -70,8 +70,8 @@
 }
 
 % Blank lines: we want to encourage page breaks here
-\def\sk{\penalty -1000} % regular
-\def\greatsk{\penalty -7000} % after a function definition (after non-indented "}")
+\def\sk{\penalty -500} % regular
+\def\greatsk{\penalty -3000} % after a function definition (after non-indented "}")
 
 \def\typ{\col{0 0 .6}\bf}
 \def\com{\col{.3 .3 .3}\it}
@@ -80,18 +80,20 @@
 \def\key{\col{0 0 0}\bf}
 \def\con{\col{.8 .1 .2}\rm}
 
-\footline={%
+\footline={}
+\headline={%
 	\vbox{%
-		\vskip 10pt
-		\hrule height .5pt
-		\vskip 5pt
-		%
-		\footlinefont
+		\vskip -5pt
+
+		\headlinefont
 		\special{color push rgb 0 0 0}%
 		Tři nerdi – notebook
 		\hskip 0pt plus 1filll
 		\the\pageno
 		\special{color pop}%
+		%
+		\vskip 3pt
+		\hrule height .5pt
 	}%
 }
 
@@ -99,9 +101,9 @@
 	{%
 	\headerfont
 	\vskip 20pt plus 5pt minus 10pt
-	\penalty -9000
+	\penalty -5000
 	#1
 	\endgraf
-	\penalty 9000
+	\penalty 5000
 	}%
 }
