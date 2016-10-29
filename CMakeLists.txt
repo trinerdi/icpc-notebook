@@ -14,7 +14,7 @@ include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 enable_testing()
 
 # Tests
-set(SOURCES_LIST "fft/fft;treap/treap;numth/prime")
+set(SOURCES_LIST "fft/fft;treap/treap;numth/prime;numth/misc")
 
 foreach(CUR ${SOURCES_LIST})
     string(REPLACE "/" "_" UNDERSCORED "${CUR}")
