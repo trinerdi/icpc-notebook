@@ -1,6 +1,7 @@
 import re
 
 
+# Reads the whole stdin
 def readin():
     l = []
     while True:
@@ -11,8 +12,10 @@ def readin():
 
 
 text = readin()
-print("\\verb")
-for i in [("\\", "\\b "), ("{", "\\{"), ("}", "\\}"), ("\n}\n", "\n\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
+print("\\verb") # start verbatim
+
+text = re.sub("^ +$", "", text)
+for i in [("\\", "\\b "), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n", "\n\\}\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
     text = text.replace(i[0], i[1])
 
 def highlight(text):
@@ -52,7 +55,7 @@ def highlight(text):
     for i in ["true", "false", "PI", "pi", "INF", "inf", "eps", "EPS", "epsilon", "EPSILON", "INFINITY", "infinity"]:
         text = repl(i, "con", text)
 
-    text = re.sub(r"(^|\W)(-?\d+(\.\d+)?(e-?\d+)?)($|\W)", r"\1\\con{\2}\5", text)
+    text = re.sub(r"(^|\W)(-?\d+(U?L?L|(\.\d+)?(e-?\d+)?))($|\W)", r"\1\\con{\2}\6", text)
     l.append(text)
     return "".join(l)
 

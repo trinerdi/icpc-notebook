@@ -27,7 +27,7 @@
 	\catcode`\}=2
 	\gdef\{{\char123\relax}
 	\gdef\}{\char125\relax}
-	\gdef\b{\char92\relax} % Backspace
+	\gdef\b##1##2{\char92\relax##2} % Backspace
 	%
 	\def\par{\leavevmode\endgraf} % Allow blank lines
 	%
