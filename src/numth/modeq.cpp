@@ -1,3 +1,5 @@
+#include "../base.hpp"
+
 /* Extended Euclid's algorithm that yields Bézout's coefficients -- numbers u,
  * v such that a * u + b * v = gcd(a, b)
  * Time complexity: O(log a + log b), space complexity: O(1) */
