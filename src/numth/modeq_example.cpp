@@ -1,10 +1,6 @@
 #include "../base.hpp"
 #include "modeq.cpp"
 
-ll llrand() {
-	return max((((ll)lrand48()) << 31) + lrand48(), 1LL);
-}
-
 int main() {
 	printf("gcd\n");
 	ll d = 129352523LL * 169352, e = 129352523LL * 5293527;
