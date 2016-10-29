@@ -1,5 +1,5 @@
 fft/fft.cpp
 treap/treap.cpp
-numth/prime.hpp
-numth/misc.hpp
-numth/modeq.hpp
+numth/prime.cpp
+numth/misc.cpp
+numth/modeq.cpp
