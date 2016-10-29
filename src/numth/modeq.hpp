@@ -20,8 +20,7 @@ pair<ll, ll> extgcd(ll a, ll b) {
 
 /* "Regular" Euclid's algorithm that returns gcd(a, b)
  * Time complexity: O(log a + log b), space complexity: O(1) */
-ll gcd(ll a, ll b)
-{
+ll gcd(ll a, ll b) {
 	ll u, v;
 	tie(u, v) = extgcd(a, b);
 	return u * a + v * b;
@@ -30,8 +29,7 @@ ll gcd(ll a, ll b)
 /* Solves the modular equality ak \equiv b (mod m), returns 0 <= k < m or -1
  * if there's no solution
  * Time complexity: O(log m), space complexity: O(1) */
-ll solve_modeq(ll a, ll b, ll m)
-{
+ll solve_modeq(ll a, ll b, ll m) {
 	// We have a * k + m * y = b for unknown k and y
 	ll g = gcd(a, m);
 	if (b % g)
@@ -45,7 +43,6 @@ ll solve_modeq(ll a, ll b, ll m)
 /* Given k, returns its modular inverse, 0 < k^-1 < m, such that k * k^-1
  * \equiv 1 (mod m), or -1 if no such k^-1 exists
  * Time complexity: O(log m), space complexity: O(1) */
-ll modular_inverse(ll a, ll m)
-{
+ll modular_inverse(ll a, ll m) {
 	return solve_modeq(a, 1, m);
 }
