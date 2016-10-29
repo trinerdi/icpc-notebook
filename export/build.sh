@@ -1,12 +1,12 @@
 #!/bin/sh
 (
-	echo "\\input head"
+	printf '\\input head\n'
 	base=../src
 	while read a; do
-		echo "\\header{$a}"
+		printf '\\header{%s}\n' "$a"
 		python3 to_tex.py < "$base"/"$a"
 	done
 
-	echo "\\bye"
+	printf '\\bye\n'
 ) > out.tex < files
 xetex out
