@@ -4,9 +4,9 @@ typedef complex<ld> C;
 const ld PI = 3.14159265358979323;
 const ld EPS = 1e-9;
 
-// size of input vector should be 2^n and there should be 2^(n-1) zeroes at the end
-// (this is done automatically in multiplyPolynomials)
-// on my machine, 3 seconds for two 10^5 polynomials
+// precise for numbers to ~|1e5| for two polynomials of size 1e4
+// precise for numbers to ~|1e7| for two polynomials of size 100
+// takes about 4 seconds for two 1e5 polynomials on my machine
 
 void fft(int n, vector<C>& v, bool inv) {
     if (n == 1) return;

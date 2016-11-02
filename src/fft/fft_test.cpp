@@ -1,29 +1,27 @@
 #include "gtest/gtest.h"
 #include "fft.cpp"
 
-TEST(FFT, Multiplies) {
+vector<ll> multiplyNaive(vector<ll> &p1, vector<ll> &p2) {
+    int n = 1;
+    while (n < p1.size() || n < p2.size()) n *= 2;
+    n *= 2;
+    
+    vector<ll> want(n, 0);
+    int s1 = p1.size(), s2 = p2.size();
+    p1.resize(n), p2.resize(n);
+    rep(i, 0, n) {
+        rep(j, 0, i + 1) want[i] += p1[i - j] * p2[j];
+    }
+    p1.resize(s1), p2.resize(s2);
+    return want;
+}
+
+
+TEST(FFT, MultipliesSimple) {
     vector<ll> p1 = {8, 2, 1, 6, 3};
     vector<ll> p2 = {3, 4, 2};
     vector<ll> res = multiplyPolynomials(p1, p2);
     EXPECT_EQ((vector<ll> {24, 38, 27, 26, 35, 24, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0}), res);
-}
-
-TEST(FFT, MultipliesMillions) {
-    vector<ll> p1 = {289383, 930886, 692777, 636915};
-    vector<ll> p2 = {747793, 238335, 885386, 760492};
-    vector<ll> res = multiplyPolynomials(p1, p2);
-    EXPECT_EQ((vector<ll> {216398581719, 765080131903, 996132162809, 1685660473322,
-                           1473105549359, 1090766990474, 484368762180, 0
-                          }), res);
-}
-
-TEST(FFT, MultipliesBillions) {
-    vector<ll> p1 = {1804289383, 846930886, 1681692777, 1714636915};
-    vector<ll> p2 = {1957747793, 424238335, 719885386, 1649760492};
-    vector<ll> res = multiplyPolynomials(p1, p2);
-    EXPECT_EQ((vector<ll> {3532343557501581719, 2423525796592131903, 4950512430549162809, 7656603687825473322,
-                           3335273879030549359, 4008732360580990474, 2828740240491762180, 0
-                          }), res);
 }
 
 TEST(FFT, MultipliesNegative) {
@@ -45,4 +43,27 @@ TEST(FFT, MultipliesBothEmpty) {
     vector<ll> p2 = {};
     vector<ll> res = multiplyPolynomials(p1, p2);
     EXPECT_EQ((vector<ll> {0, 0}), res);
+}
+
+TEST(FFT, Multiplies) {
+    rep(i, 0, 100) {
+        vector<ll> p1(50 + rand() % 50), p2(50 + rand() % 50);
+        rep(j, 0, p1.size()) p1[j] = rand() % 20000000 - 10000000;
+        rep(j, 0, p2.size()) p2[j] = rand() % 20000000 - 10000000;
+        vector<ll> want = multiplyNaive(p1, p2);
+        EXPECT_EQ(want, multiplyPolynomials(p1, p2));
+    }
+}
+
+TEST(FFT, Benchmark1e4) {
+    int n = 1e4;
+    int range = 1e5; //numbers from -range to range
+    vector<ll> p1(n), p2(n);
+    rep(j, 0, p1.size()) p1[j] = rand() % (2 * range) - range;
+    rep(j, 0, p2.size()) p2[j] = rand() % (2 * range) - range;
+    vector<ll> res = multiplyPolynomials(p1, p2);
+    p1.resize(10), p2.resize(10);
+    vector<ll> want = multiplyNaive(p1, p2);
+    want.resize(10), res.resize(10);
+    EXPECT_EQ(want, res);
 }
