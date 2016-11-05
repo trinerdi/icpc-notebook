@@ -13,6 +13,14 @@ TEST(Dinic, OneEdgeReverse) {
     EXPECT_EQ(d.getFlow(1, 0), 123);
 }
 
+TEST(Dinic, SelfLoop) {
+    Dinic d(2);
+    d.addEdge(0, 0, 123);
+    d.addEdge(1, 1, 123);
+    d.addEdge(0, 1, 123);
+    EXPECT_EQ(d.getFlow(0, 1), 123);
+}
+
 TEST(Dinic, MultipleEdges) {
     Dinic d(2);
     d.addEdge(0, 1, 100);
@@ -61,6 +69,20 @@ TEST(Dinic, Graph2) {
     
     EXPECT_EQ(5, d.getFlow(1, 4));
 }
+
+TEST(Dinic, BenchmarkV100E10000) {
+    srand(1);
+    int n = 100;
+    int m = 30000;
+    int range = 1000;
+    Dinic d(n);
+    rep(i, 0, m) {
+        d.addEdge(rand() % n, rand() % n, range + rand() % range);
+    }
+    ll flow = d.getFlow(0, n - 1);
+    //EXPECT_EQ(true, true);
+}
+
 
 TEST(Dinic, BenchmarkChainV1000E10000) {
     srand(1);

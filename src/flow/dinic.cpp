@@ -1,17 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <cmath>
-#include <algorithm>
-#include <string>
-#include <set>
-#include <map>
-#include <queue>
-#include <stack>
-#include <cstring>
-using namespace std;
-#define rep(i,a,n) for (int i=a;i<n;i++)
-#define per(i,a,n) for (int i=n-1;i>=a;i--)
-typedef long long ll;
+#include "../base.hpp"
 
 // Assumes undirected graph - capacities are equal in both directions
 // Add edges using addEdge(), then call getFlow(source, sink)
@@ -26,22 +13,17 @@ struct Edge {
     int a, b;
     Flow cap = 1;
     Edge(int _a, int _b, Flow _cap) : a(_a), b(_b), cap(_cap) {}
-    inline int other(int x) {
-        return (x == a) ? b : a;
-    }
-    inline Flow unused(int from) {
-        return (a == from) ? (cap - flow) : (cap + flow);
-    }
+    int other(int x) { return (x == a) ? b : a; }
+    Flow unused(int x) { return (x == a) ? (cap - flow) : (cap + flow); }
 };
 
 struct Dinic {
     int n, S, T;
     vector<Edge> e;
     vector<vector<int>> g;
-    vector<Flow> vals;
-    vector<int> from, d, pt;
+    vector<int> d, pt;
     
-    Dinic(int _N) : n(_N), g(n), vals(n, 0), from(n, 0), d(n, -1), pt(n) {}
+    Dinic(int _N) : n(_N), g(n), d(n, -1), pt(n) {}
     
     void addEdge(int a, int b, Flow cap) {
         e.emplace_back(Edge(a, b, cap));
@@ -55,60 +37,33 @@ struct Dinic {
         queue<int> bfs;
         bfs.push(T);
         while (!bfs.empty()) {
-            int cur = bfs.front();
+            int a = bfs.front();
             bfs.pop();
-            for (auto x : g[cur]) {
-                int remote = e[x].other(cur);
-                if (d[remote] != -1 || e[x].unused(remote) == 0) continue;
-                d[remote] = d[cur] + 1;
-                bfs.push(remote);
+            if (a == S) break;
+            for (auto x : g[a]) {
+                int b = e[x].other(a);
+                if (d[b] != -1 || e[x].unused(b) == 0) continue;
+                d[b] = d[a] + 1;
+                bfs.push(b);
             }
         }
         return d[S] != -1;
     }
     
-    
-    ll blocking() {
-        ll res = 0;
-        
-        while (d[S] < n) {
-            vals[S] = INF;
-            from[S] = 0;
-            int cur = S;
-            while (d[S] < n) {
-                if (cur == T) break;
-                bool found = false;
-                int minD = n + 10;
-                for (int &i = pt[cur]; i < g[cur].size(); i++) {
-                    int x = g[cur][i];
-                    int remote = e[x].other(cur);
-                    Flow unused = e[x].unused(cur);
-                    unused = min(vals[cur], unused);
-                    if (unused == 0) continue;
-                    minD = min(minD, d[remote]);
-                    if (d[remote] == d[cur] - 1) {
-                        from[remote] = x;
-                        vals[remote] = unused;
-                        cur = remote;
-                        found = true;
-                        break;
-                    }
+    Flow blocking(int a, Flow val) {
+        if (a == T || val == 0) return val;
+        for (int &i = pt[a]; i < g[a].size(); i++) {
+            int &x = g[a][i];
+            int b = e[x].other(a);
+            if (d[b] == d[a] - 1) {
+                Flow unused = min(val, e[x].unused(a));
+                if (Flow added = blocking(b, unused)) {
+                    e[x].flow += ((a == e[x].a) ? added : (-added));
+                    return added;
                 }
-                if (!found) {
-                    d[cur] = minD + 1;
-                    if (cur != S) cur = e[from[cur]].other(cur);
-                }
-            }
-            if (d[S] >= n) break;
-            cur = T;
-            Flow added = vals[cur];
-            res += added;
-            while (cur != S) {
-                e[from[cur]].flow += ((cur == e[from[cur]].b) ? added : (-added));
-                cur = e[from[cur]].other(cur);
             }
         }
-        return res;
+        return 0;
     }
     
     Flow getFlow(int _S, int _T) {
@@ -117,7 +72,7 @@ struct Dinic {
         
         while (levels()) {
             fill(pt.begin(), pt.end(), 0);
-            while (ll cur = blocking()) {
+            while (ll cur = blocking(S, INF)) {
                 res += cur;
             }
         }
