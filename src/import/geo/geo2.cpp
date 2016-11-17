@@ -1,11 +1,10 @@
 #include "geo.cpp"
 // intersect lines (A,B) and (C,D), return 2 pts if identical: (WORKS ONLY FOR DOUBLES!!)
-template<class T> vector< complex<T> > 
-intersect_line_line(const complex<T> &A, const complex<T> &B, const complex<T> &C, const complex<T> &D) {
-  vector< complex<T> > res;
-  complex<T> U = B-A, V = D-C;
-  if (colinear(complex<T>(0, 0), U,V)) { // identical or parallel
-    if (colinear(complex<T>(0, 0), U,C-A)) { res.push_back(A); res.push_back(B); }
+vector<Bod> intersect_line_line(const Bod &A, const Bod &B, const Bod &C, const Bod &D) {
+  vector<Bod> res;
+  Bod U = B-A, V = D-C;
+  if (colinear(Bod(0, 0), U,V)) { // identical or parallel
+    if (colinear(Bod(0, 0), U,C-A)) { res.push_back(A); res.push_back(B); }
     return res;
   }
   // one intersection point (WORK ONLY FOR DOUBLES!!!)
@@ -15,15 +14,14 @@ intersect_line_line(const complex<T> &A, const complex<T> &B, const complex<T> &
 }
 
 // intersect a poly and a halfplane to the left of [A,B):
-template<class T> vector< complex<T> > 
-intersect_poly_halfplane(const vector< complex<T> > &V, const complex<T> &A, const complex<T> &B) { 
+vector<Bod> intersect_poly_halfplane(const vector<Bod> &V, const Bod &A, const Bod &B) { 
   int N = V.size();
-  vector< complex<T> > res;
+  vector<Bod> res;
 
   if (N == 0) return res;
   if (N == 1) if (! clockwise(A,B,V[0]) ) return V; else return res;
 
-  for (int i=0; i<N; i++) {
+  rep(i, 0, N) {
     if (! clockwise(A,B,V[i])) res.push_back(V[i]);
     int intersects = 0;
     if (counterclockwise(A,B,V[i])) if (clockwise(A,B, V[(i+1)%N] )) intersects = 1;
@@ -37,11 +35,10 @@ intersect_poly_halfplane(const vector< complex<T> > &V, const complex<T> &A, con
 }
 
 // intersect segments [A,B] and [C,D], may return endpoints of a segment:
-template<class T> vector< complex<T> > 
-intersect_segment_segment(const complex<T> &A, const complex<T> &B, const complex<T> &C, const complex<T> &D) {
-  vector< complex<T> > res;
+vector<Bod> intersect_segment_segment(const Bod &A, const Bod &B, const Bod &C, const Bod &D) {
+  vector<Bod> res;
 
-  complex<T> U = B-A, V = D-C, W = C-A, X = D-A;
+  Bod U = B-A, V = D-C, W = C-A, X = D-A;
   if (colinear(U,V)) { // parallel
     // check for degenerate cases
     if (are_equal(A,B)) { if (is_on_segment(C,D,A)) res.push_back(A); return res; }
@@ -99,8 +96,7 @@ intersect_segment_segment(const complex<T> &A, const complex<T> &B, const comple
   }    
   // not parallel, at most one intersection point
   T k = ( cross_product(C,V) - cross_product(A,V) ) / cross_product(U,V);
-  complex<T> cand = A + k*U;
+  Bod cand = A + k*U;
   if (is_on_segment(A,B,cand) && is_on_segment(C,D,cand)) res.push_back(cand);
   return res;
 }
-

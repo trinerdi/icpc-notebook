@@ -1,7 +1,6 @@
 // intersect circles (C1,r1) and (C2,r2), 3 pts returned if \equiv:
-template<class T> vector< complex<T> > intersect_circle_circle(
-                  const complex<T> &C1, T r1, const complex<T> &C2, T r2) {
-  vector< complex<T> > res;
+vector<Bod> intersect_circle_circle(const Bod &C1, T r1, const Bod &C2, T r2) {
+  vector<Bod> res;
 
   if (are_equal(C1,C2)) {
     // 2x the same point
@@ -23,12 +22,12 @@ template<class T> vector< complex<T> > intersect_circle_circle(
   T x = ( d*d - r2*r2 + r1*r1 ) / (2*d);
   T y = sqrt( 4*d*d*r1*r1 - ( d*d - r2*r2 + r1*r1 )*( d*d - r2*r2 + r1*r1 ) ) / (2*d);
   // I = (C1,C2) \cap chord, N = normal vector
-  complex<T> I = (1.0/d) * ( (d-x)*C1 + x*C2 );
-  complex<T> N( imag(C2-C1), -real(C2-C1) );
+  Bod I = (1.0/d) * ( (d-x)*C1 + x*C2 );
+  Bod N( imag(C2-C1), -real(C2-C1) );
   T Nsize = sqrt(square_size(N));
   N = N * (1/Nsize);
   // compute and return the points in lexicographic order
-  complex<T> I1 = I + y*N, I2 = I - y*N;
+  Bod I1 = I + y*N, I2 = I - y*N;
   if (is_positive(real(I1)-real(I2))) swap(I1,I2);
   if (is_zero(real(I1)-real(I2))) if (is_positive(imag(I1)-imag(I2))) swap(I1,I2);
   res.push_back(I1);
@@ -37,8 +36,7 @@ template<class T> vector< complex<T> > intersect_circle_circle(
 }
 
 // circle through three points A,B,C (smallest enclosing circle for colinear):
-template<class T> complex<T> circumcircle_center(const complex<T> &A, 
-                            const complex<T> &B, const complex<T> &C) {
+Bod circumcircle_center(const Bod &A, const Bod &B, const Bod &C) {
   T a = 0, bx = 0, by = 0;
   a += real(A) * imag(B) + real(B) * imag(C) + real(C) * imag(A);
   a -= real(B) * imag(A) + real(C) * imag(B) + real(A) * imag(C);
@@ -51,16 +49,17 @@ template<class T> complex<T> circumcircle_center(const complex<T> &A,
   bx -= square_size(B) * imag(A) + square_size(C) * imag(B) + square_size(A) * imag(C);
   by -= square_size(A) * real(B) + square_size(B) * real(C) + square_size(C) * real(A);
   by += square_size(B) * real(A) + square_size(C) * real(B) + square_size(A) * real(C);
-  return complex<T> ( bx / (2*a) , by / (2*a) );
+  return Bod ( bx / (2*a) , by / (2*a) );
 }
 
 // rotate(point,center,CCW angle):
-template<class T> complex<T> rotate_point(const complex<T> &bod, const complex<T> &stred, T uhol) { 
-  complex<T> mul(cos(uhol),sin(uhol)); return ((bod-stred)*mul)+stred; 
+Bod rotate_point(const Bod &bod, const Bod &stred, T uhol) { 
+  Bod mul(cos(uhol),sin(uhol));
+  return ((bod-stred)*mul)+stred; 
 }
 
 // angle on the left side of B in polyline A->B->C:
-template<class T> T left_side_angle(const complex<T> &A, const complex<T> &B, const complex<T> &C) {
+T left_side_angle(const Bod &A, const Bod &B, const Bod &C) {
   double a1 = atan2( imag(A-B), real(A-B) );
   double a2 = atan2( imag(C-B), real(C-B) );
   double u = a1 - a2;
