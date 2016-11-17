@@ -2,6 +2,7 @@
 base.hpp
 sc.sh
 fft/ntt.cpp
+fft/fft.cpp
 treap/treap.cpp
 numth/prime.cpp
 numth/misc.cpp
@@ -11,7 +12,9 @@ import/numth/dlog.cpp
 import/numth/gauss.cpp
 flow/dinic.cpp
 import/flow/minmax.cpp
+tree/heavylight.cpp
 tree/centroid.cpp
+tree/lca.cpp
 import/bipart/maxmatch.cpp
 import/bipart/maxmatch2.cpp
 import/geo/geo.cpp

@@ -49,7 +49,7 @@ def highlight(text):
     d = {
         "typ": "bool char signed unsigned short long int ll ld float double void auto string ull".split(),
         "tem": "array vector deque forward_list list set map multiset multimap unordered_set unordered_map unordered_multiset unordered_multimap stack queue priority_queue pair".split(),
-        "key": "break case class const continue delete do else for friend goto if inline namespace new private public return static struct switch this typedef using while rep per".split(),
+        "key": "break case class const continue delete do else for friend goto if inline namespace new private public return static struct switch this typedef using while rep per FOR".split(),
         "con": "true false PI pi INF inf EPS eps NULL MOD MAXN MAXM".split()
     }
 
