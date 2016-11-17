@@ -47,7 +47,7 @@ def highlight(text):
 
 
     d = {
-        "typ": "bool char signed unsigned short long int ll ld float double void auto string".split(),
+        "typ": "bool char signed unsigned short long int ll ld float double void auto string ull".split(),
         "tem": "array vector deque forward_list list set map multiset multimap unordered_set unordered_map unordered_multiset unordered_multimap stack queue priority_queue pair".split(),
         "key": "break case class const continue delete do else for friend goto if inline namespace new private public return static struct switch this typedef using while rep per".split(),
         "con": "true false PI pi INF inf EPS eps NULL MOD MAXN MAXM".split()
@@ -55,6 +55,7 @@ def highlight(text):
 
     for name in d.keys():
         for kw in d[name]:
+            text = repl(kw, name, text)
             text = repl(kw, name, text)
 
 

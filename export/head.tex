@@ -18,8 +18,7 @@
 \font\headerfont=\monofont, 13pt!
 \rm
 
-\parindent=0pt
-\def\setverb{%
+\def\makeprintable{%
 	\def\do##1{\catcode`##1=12}
 	\dospecials
 	\catcode`\\=0
@@ -28,7 +27,10 @@
 	\gdef\{{\char123\relax}
 	\gdef\}{\char125\relax}
 	\gdef\b##1##2{\char92\relax##2} % Backspace
-	%
+}
+
+\parindent=0pt
+\def\setverb{%
 	\def\par{\leavevmode\endgraf} % Allow blank lines
 	%
 	% Allow long lines to break, let them have less \baselineskip, indent line
@@ -108,3 +110,5 @@
 	\penalty 5000
 	}%
 }
+
+\makeprintable
