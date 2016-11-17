@@ -21,7 +21,7 @@ long long get_comb(int n, int k, int p) {
 
 long long get_comb(int n, int k) {
     long long ans = 0, mod = 1;
-    REP(p, PRIMES) {
+    FOR(p, PRIMES) {
         long long a1 = ans, n1 = mod, a2 = get_comb(n, k, p), n2 = primes[p];
         mod = n1 * n2;
         // Chinese remainder theorem
@@ -37,16 +37,16 @@ int composite_comb(int N, int K, int mod) {
 
     // TODO: Factorize mod and create primes
 
-    REP(p, PRIMES) { // Precalculates factorials and inverses
+    FOR(p, PRIMES) { // Precalculates factorials and inverses
         int pr = primes[p];
         fac[p][0] = 1;
-        REP(i, pr) fac[p][i + 1] = ((long long)fac[p][i] * (i+1)) % pr;
+        FOR(i, pr) fac[p][i + 1] = ((long long)fac[p][i] * (i+1)) % pr;
         ifac[p][pr - 1] = power(fac[p][pr - 1], pr - 2, pr);
         per(i, pr - 1, 0) ifac[p][i] = ((long long)ifac[p][i+1]*(i+1)) % pr;
     }
 
     int ans = 0;
-    REP(i, 2 * N) {
+    FOR(i, 2 * N) {
         int n = min(K, i), k = N - 1;
         ans = (ans + get_comb(n, k)) % MOD;
     }

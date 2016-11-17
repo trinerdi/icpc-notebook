@@ -30,7 +30,7 @@ void suffixArray(int* s, int* SA, int n, int K) {
   radixPass(s12 , SA12, s  , n02, K);
 
   int name = 0, c0 = -1, c1 = -1, c2 = -1;
-  REP(i,n02) {
+  FOR(i,n02) {
     if (s[SA12[i]] != c0 || s[SA12[i]+1] != c1 || s[SA12[i]+2] != c2)
     { ++name; c0 = s[SA12[i]]; c1 = s[SA12[i]+1]; c2 = s[SA12[i]+2]; }
     if (SA12[i] % 3 == 1) s12[SA12[i]/3] = name; else s12[SA12[i]/3 + n0] = name;
@@ -38,8 +38,8 @@ void suffixArray(int* s, int* SA, int n, int K) {
 
   if (name < n02) {
     suffixArray(s12, SA12, n02, name);
-    REP(i,n02) s12[SA12[i]] = i + 1;
-  } else REP(i,n02) SA12[s12[i] - 1] = i;
+    FOR(i,n02) s12[SA12[i]] = i + 1;
+  } else FOR(i,n02) SA12[s12[i] - 1] = i;
 
   for (int i=0, j=0; i < n02; ++i) if (SA12[i] < n0) s0[j++] = 3*SA12[i];
   radixPass(s0, SA0, s, n0, K);
@@ -65,7 +65,7 @@ void suffixArray(int* s, int* SA, int n, int K) {
 void findLCP(int* s, int* sa, int* lcp, int n) {//suffix u pomaleho pole
     lcp[0]=0;
     int* rank = new int[n];
-    REP(i,n) rank[sa[i]]=i;//.idx u pomaleho pole
+    FOR(i,n) rank[sa[i]]=i;//.idx u pomaleho pole
     for (int i=0, h=0; i<n; ++i) if (rank[i]>0) {
         int j=sa[rank[i]-1];//.idx u pomaleho pole
         while (i+h<n && j+h<n && s[i+h]==s[j+h]) ++h;
@@ -80,7 +80,7 @@ void findLCP(int* s, int* sa, int* lcp, int n) {//suffix u pomaleho pole
 char in1[MAXLEN], in2[MAXLEN];
 int N, N1, N2, a[MAXLEN], sa[MAXLEN], rank[MAXLEN], height[MAXLEN];
 int main() {
-    scanf("%d%s",&N,in1); REP(n,N) a[n]=in1[n]-'a'+1;
+    scanf("%d%s",&N,in1); FOR(n,N) a[n]=in1[n]-'a'+1;
     suffixArray(a,sa,N,30);
     findLCP(a,sa,height,N);
     int ans=0; for (int n=1; n<N; ++n) ans=max(ans,height[n]);

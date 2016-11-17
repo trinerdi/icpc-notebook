@@ -8,7 +8,7 @@ bool visited[MAXN];
 
 bool match(int x) {
   visited[x] = true;
-  REP(i, partity2.size()) {
+  FOR(i, partity2.size()) {
     if (!graph[partity1[x]][partity2[i]]) continue;
     if (matched[i] == -1 || (!visited[matched[i]] && match(matched[i]))) {
       matched[i] = x;
@@ -23,9 +23,9 @@ int maximum_bipartity() {
   partity2 = vector<int>(set_partity2.begin(), set_partity2.end());
 
   int result = 0;
-  REP(i, partity2.size()) matched[i] = -1;
-  REP(i, partity1.size()) {
-    REP(j, partity1.size()) visited[j] = false;
+  FOR(i, partity2.size()) matched[i] = -1;
+  FOR(i, partity1.size()) {
+    FOR(j, partity1.size()) visited[j] = false;
     result += match(i);
   }
   return result;
