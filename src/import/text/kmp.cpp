@@ -5,7 +5,7 @@ int fail[MAX_NEEDLE];
 void failure() { //precomputes the failure function
   int k;
   fail[0] = -1;
-  FOR(i, 1, N) {
+  rep(i, 1, N + 1) {
     for (k = fail[i - 1]; k >= 0 && needle[k] != needle[i - 1]; k = fail[k]) ;
     fail[i] = k + 1;
   }

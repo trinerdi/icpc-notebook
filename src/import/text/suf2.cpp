@@ -5,10 +5,10 @@ inline bool leq(int a1, int a2, int a3, int b1, int b2, int b3) { return(a1 < b1
 // stably sort a[0..n-1] to b[0..n-1] with keys in 0..K from r
 static void radixPass(int* a, int* b, int* r, int n, int K) {
     int* c = new int[K + 1];
-    FOR(i,0,K) c[i] = 0;
-    REP(i,n) ++c[r[a[i]]];
+    rep(i,0,K + 1) c[i] = 0;
+    rep(i,0, n) ++c[r[a[i]]];
     for (int i=0, sum = 0; i <= K; ++i) { int t=c[i]; c[i]=sum; sum+=t; }
-    REP(i,n) b[c[r[a[i]]]++] = a[i];
+    rep(i,0,n) b[c[r[a[i]]]++] = a[i];
     delete[] c;
 }
 #define GetI() (SA12[t] < n0 ? SA12[t] * 3 + 1 : (SA12[t] - n0) * 3 + 2)

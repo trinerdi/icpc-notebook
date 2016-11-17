@@ -103,13 +103,13 @@ class SegmentTree{
 
       Left[1] = 0;
       Right[1] = SIZE;
-      FOR(i, 1, SIZE - 1) {
+      rep(i, 1, SIZE) {
         Left[2*i] = Left[i];
         Right[2*i] = (Left[i] + Right[i]) / 2;
         Left[2*i + 1] = (Left[i] + Right[i]) / 2;
         Right[2*i + 1] = Right[i];
       }
-      REP(i, 2 * SIZE) {
+      rep(i, 0, 2 * SIZE) {
         value[i] = minimum[i] = maximum[i] = lazy_add[i] = ValueType();
         lazy_set[i] = false;
       }

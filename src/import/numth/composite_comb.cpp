@@ -42,7 +42,7 @@ int composite_comb(int N, int K, int mod) {
         fac[p][0] = 1;
         REP(i, pr) fac[p][i + 1] = ((long long)fac[p][i] * (i+1)) % pr;
         ifac[p][pr - 1] = power(fac[p][pr - 1], pr - 2, pr);
-        FORD(i, pr - 2, 0) ifac[p][i] = ((long long)ifac[p][i+1]*(i+1)) % pr;
+        per(i, pr - 1, 0) ifac[p][i] = ((long long)ifac[p][i+1]*(i+1)) % pr;
     }
 
     int ans = 0;
