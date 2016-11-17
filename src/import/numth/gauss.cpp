@@ -9,15 +9,15 @@ bool gauss(int N) { // returns true if solution found
       if (A[i][i] == 0) return false;
     }
     int I = inv(A[i][i]); // TODO: MOD arithmetics or division
-    rep(j, i, N + 1) A[i][j] = ((long long)A[i][j] * I) % MOD;
+    rep(j, i, N + 1) A[i][j] = ((ll)A[i][j] * I) % MOD;
     rep(j, i + 1, N) per(k, i, N + 1) {
-      A[j][k] = ((A[j][k] - (long long)A[i][k] * A[j][i]) % MOD + MOD) % MOD;
+      A[j][k] = ((A[j][k] - (ll)A[i][k] * A[j][i]) % MOD + MOD) % MOD;
     }
   }
   per(i, 0, N) FOR(j, i) {
-    A[j][N] = ((A[j][N] - (long long)A[i][N] * A[j][i]) % MOD + MOD) % MOD;
+    A[j][N] = ((A[j][N] - (ll)A[i][N] * A[j][i]) % MOD + MOD) % MOD;
     rep(k, 0, i + 1) {
-      A[j][k] = ((A[j][k] - (long long)A[i][k] * A[j][i]) % MOD + MOD) % MOD;
+      A[j][k] = ((A[j][k] - (ll)A[i][k] * A[j][i]) % MOD + MOD) % MOD;
     }
   }
   FOR(i, N) ans[i] = A[i][N];

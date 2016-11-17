@@ -6,17 +6,17 @@
  
  returns: one possible \log_A B (mod P)   or -1, if none
 */
-long long DLOG (long long A, long long B, long long P) {
-  long long M = (long long)ceil(sqrt(P-1.0));
+ll DLOG (ll A, ll B, ll P) {
+  ll M = (ll)ceil(sqrt(P-1.0));
 
-  vector< pair<long long, int> > P1, P2;
-  long long pom = MODEXP(A,M,P);
+  vector< pair<ll, int> > P1, P2;
+  ll pom = MODEXP(A,M,P);
   
   P1.push_back(make_pair(1,0));
   for (int i=1; i<M; i++) P1.push_back(make_pair( (P1[i-1].first * pom)%P ,i)); 
   sort(P1.begin(), P1.end());
 
-  long long Ainv = MODEXP(A,P-2,P);
+  ll Ainv = MODEXP(A,P-2,P);
   P2.push_back(make_pair(B,0));
   for (int i=1; i<M; i++) P2.push_back(make_pair( (P2[i-1].first * Ainv)%P, i));
   sort(P2.begin(), P2.end());

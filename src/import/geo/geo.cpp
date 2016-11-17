@@ -4,7 +4,7 @@ typedef ll T;
 typedef Bod complex<T>;
 
 const double PI = acos(-1);
-// Chceme pouzivat complex<long long> misto complex<int> kvuli cross productu a square_size
+// Chceme pouzivat complex<ll> misto complex<int> kvuli cross productu a square_size
 bool is_negative(double x) { return x < -EPSILON; }
 bool is_zero(double x) { return abs(x) <= EPSILON; }
 bool is_positive(double x) { return x > EPSILON; }

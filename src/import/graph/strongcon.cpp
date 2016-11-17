@@ -34,15 +34,15 @@ int main() {
     najmenej.clear(); najmenej.resize(N,-1);
     spracuvam.clear(); spracuvam.resize(N,false);
     cas=nSCC=0;
-    for (int i=0; i<N; i++) if (SCC[i]==-1) hladaj(i);
+    FOR(i, N) if (SCC[i]==-1) hladaj(i);
 
     vector<int> velkosti(nSCC,0);
     vector<bool> dobry(nSCC,true);
-    for (int i=0; i<N; i++) velkosti[ SCC[i] ]++;
-    for (int i=0; i<N; i++) for (int j=0; j<int(G[i].size()); j++)
+    FOR(i, N) velkosti[ SCC[i] ]++;
+    FOR(i, N) for (int j=0; j<int(G[i].size()); j++)
       if (SCC[i] != SCC[ G[i][j] ]) dobry[ SCC[i] ]=false;
     bool uz = false;
-    for (int i=0; i<N; i++) if (dobry[SCC[i]]) { cout << (uz?" ":"") << (i+1); uz = true; }
+    FOR(i, N) if (dobry[SCC[i]]) { cout << (uz?" ":"") << (i+1); uz = true; }
     cout << endl;
   }
 }

@@ -72,7 +72,7 @@ pair<T,U> MincostMaxflow<T,U>::getFlow(int source, int sink) {
     }
 
     // update vertex potentials
-    for (int i=0; i<N; i++) {
+    FOR(i, N) {
       if (dist[i]==Uinfinity) potential[i] = Uinfinity;
       else if (potential[i]<Uinfinity) potential[i] += dist[i];
     }
