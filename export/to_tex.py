@@ -15,7 +15,7 @@ text = readin()
 print("\\verb") # start verbatim
 
 text = re.sub("^ +$", "", text)
-for i in [("\\", "\\b "), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n", "\n\\}\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
+for i in [("\\", "\\b "), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n\n", "\n\\}\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
     text = text.replace(i[0], i[1])
 
 def highlight(text):
