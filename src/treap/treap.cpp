@@ -24,7 +24,6 @@ struct Treap {
 };
 
 Treap* merge(Treap *l, Treap *r) {
-    assert(l || r);
     if (!l) return r;
     if (!r) return l;
     if (l->weight > r->weight) {
@@ -57,6 +56,15 @@ void insert(Treap *&a, ll val) {
         a = merge(spl.first, new Treap(val));
         a = merge(a, spl.second);
     }
+}
+
+// TODO: works only for integers; all elements in the treap must be unique
+void erase(Treap *&a, ll val) {
+	pair <Treap *, Treap *> spl = split(a, val);
+	pair <Treap *, Treap *> spl2 = split(spl.first, --val);
+	assert(spl2.second->size == 1);
+	delete spl2.second;
+	a = merge(spl2.first, spl.second);
 }
 
 ll getKth(Treap *a, int k) { //zero-indexed
