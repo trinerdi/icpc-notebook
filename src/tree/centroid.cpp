@@ -44,8 +44,7 @@ int find_centroid(const Graph &G, int v) {
 vector<int> counts; // see the example below
 
 /* Centroid-decomposes the tree. A dummy function, calculates degree of each
- * vertex as an example. Destroys and recreates edges, not preserving their
- * order.
+ * vertex as an example. Destroys and recreates edges, preserving their order.
  * Time complexity: O(n log n), space complexity: O(n) */
 void decompose(Graph &G, int start) {
 	int v = find_centroid(G, start);
@@ -58,10 +57,11 @@ void decompose(Graph &G, int start) {
 		while (G[s][++pos] != v)
 			;
 
-		G[s][pos] = G[s].back();
+		swap(G[s][pos], G[s][G[s].size() - 1]);
 		G[s].pop_back();
 		decompose(G, s);
 		G[s].push_back(v);
+		swap(G[s][pos], G[s][G[s].size() - 1]);
 	}
 
 	// <cut here>
