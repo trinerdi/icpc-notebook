@@ -3,6 +3,8 @@
 // Higher weights are higher.
 // Primarily used as a set able to get the k-th element
 
+#define SIZE(t) ((t) ? (t)->size : 0)
+
 struct Treap {
     Treap *lson = NULL, *rson = NULL;
     ll val;
@@ -19,7 +21,7 @@ struct Treap {
     void setSon(bool right, Treap *newSon) {
         Treap *&upd = right ? (rson) : (lson);
         upd = newSon;
-        size = 1 + (lson ? (lson->size) : 0) + (rson ? (rson->size) : 0);
+        size = 1 + SIZE(lson) + SIZE(rson);
     }
 };
 
@@ -68,27 +70,28 @@ void erase(Treap *&a, ll val) {
 }
 
 ll getKth(Treap *a, int k) { //zero-indexed
-    int lsize = (a->lson ? (a->lson->size) : 0);
-    if (lsize == k) {
-        return a->val;
-    } else if (lsize > k) {
-        return getKth(a->lson, k);
-    } else {
-        assert(a->rson); //when k >= size
-        return getKth(a->rson, k - lsize - 1);
+    assert(k < a->size);
+    while (true) {
+        int lsize = SIZE(a->lson);
+        if (lsize == k)
+            return a->val;
+        else if (lsize > k)
+            a = a->lson;
+        else
+            a = a->rson, k -= lsize + 1;
     }
 }
 
 int indexOf(Treap *a, ll val) {
-    if (!a) return -1;
-    int lsize = (a->lson ? (a->lson->size) : 0);
-    if (a->val == val) {
-        return lsize;
-    } else if (val < a->val) {
-        return indexOf(a->lson, val);
-    } else {
-        int res = indexOf(a->rson, val);
-        if (res == -1) return -1;
-        else return res + lsize + 1;
+    int res = 0;
+    while (true) {
+        if (!a) return -1;
+        int lsize = SIZE(a->lson);
+        if (a->val == val)
+            return res + lsize;
+        else if (val < a->val)
+            a = a->lson;
+        else
+            res += lsize + 1, a = a->rson;
     }
 }
