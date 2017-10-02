@@ -6,8 +6,6 @@
 pair<ll, ll> extgcd(ll a, ll b) {
 	ll Aa = 1, Ab = 0; // a' = Aa * a + Ab * b
 	ll Ba = 0, Bb = 1; // b' = Ba * a + Bb * b
-	if (a < b)
-		swap(a, b), swap(Aa, Ab), swap(Ba, Bb);
 
 	while (b) {
 		ll c = a / b;

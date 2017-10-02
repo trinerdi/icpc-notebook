@@ -4,10 +4,12 @@ typedef vector <vector<int> > Graph;
 
 /* Recursive function for finding centroid and calculating subtree size.
  * Returns {size, centroid}, where centroid can be -1 if no suitable vertex has
- * been found.
- * Works on unrooted trees, father is the already visited neighbouring vertex.
- * totcnt shall equal to the count of vertices in the tree. If totcnt is bogus,
- * still counts subtree size correctly. */
+ * been found (happens only if the totcnt parameter is incorrect).
+ *
+ * Works on trees stored in (bidirectional) adjacency list, father is the
+ * already visited neighbour. totcnt should equal to the count of vertices in
+ * the tree (if already known). If totcnt is bogus, the function (obviously)
+ * returns wrong centroid, but still counts subtree size correctly. */
 pair<int, int> _find_centroid(const Graph &G, int v, int father, int totcnt) {
 	int ourcnt = 1; // Size of the subtree rooted at v
 	int centroid = -1;
@@ -16,10 +18,10 @@ pair<int, int> _find_centroid(const Graph &G, int v, int father, int totcnt) {
 		if (s == father)
 			continue;
 
-		int thiscnt, possible_centroid;
-		tie(thiscnt, possible_centroid) = _find_centroid(G, s, v, totcnt);
-		ourcnt += thiscnt;
-		biggest = max(thiscnt, biggest);
+		int subcnt, possible_centroid;
+		tie(subcnt, possible_centroid) = _find_centroid(G, s, v, totcnt);
+		ourcnt += subcnt;
+		biggest = max(subcnt, biggest);
 		if (possible_centroid != -1)
 			centroid = possible_centroid;
 	}
@@ -31,7 +33,8 @@ pair<int, int> _find_centroid(const Graph &G, int v, int father, int totcnt) {
 	return {ourcnt, centroid};
 }
 
-/* Utilises the previous function.
+/* Utilises the previous function -- given a forest G and a vertex v, returns
+ * the centroid of the tree containing v.
  * Time complexity: O(#visited vertices), memory complexity: O(#visited vertices) */
 int find_centroid(const Graph &G, int v) {
 	int n = _find_centroid(G, v, -1, 0).first;
