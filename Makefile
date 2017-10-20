@@ -7,7 +7,10 @@ build-all:
 	cd build && make -j
 
 clean:
-	rm -rf ./build
+	rm -rf ./build export/*.log export/*.pdf
+
+book:
+	export/build.sh
 
 test: build-all
 	cd build && env CTEST_OUTPUT_ON_FAILURE=1 make test
