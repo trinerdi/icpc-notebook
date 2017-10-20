@@ -7,7 +7,7 @@ build-all:
 	cd build && make -j
 
 clean:
-	rm -rf ./build export/*.log export/*.pdf
+	rm -rf ./build export/*.log export/out.{tex,pdf}
 
 book:
 	export/build
