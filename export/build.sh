@@ -1,4 +1,5 @@
 #!/bin/sh
+cd "$(dirname "$(realpath "$0")")"
 (
 	printf '\\input head\n'
 	base=../src
