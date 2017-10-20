@@ -1,14 +1,15 @@
+#!/usr/bin/env python3
+import os
 import re
 import sys
 
 
-text = sys.stdin.read()
-print("\\verb") # start verbatim
+FILE_LIST = "files"
+OUT_NAME = "out"
 
-# Handle whitespace, blank lines and special characters
-text = re.sub("^ +$", "", text)
-for i in [("\\", "\\b "), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n\n", "\n\\}\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
-    text = text.replace(i[0], i[1])
+def readfile(fn):
+    with open(fn) as f:
+        return f.read()
 
 
 def highlight(text):
@@ -60,5 +61,30 @@ def highlight(text):
     l.append(text)
     return "".join(l)
 
-print(highlight(text))
-print("\\egroup")
+
+def process_files(fs, chdir="../src"):
+    def process(text):
+        text = re.sub("^ +$", "", text)
+        for i in [("\\", "\\b "), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n\n", "\n\\}\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
+            text = text.replace(i[0], i[1])
+
+        return highlight(text)
+
+    yield "\\input defs"
+    for fn in fs:
+        yield "\\header{%s}" % fn
+        yield "\\verb"
+        yield process(readfile(chdir + "/" + fn)).strip()
+        yield "\\egroup"
+    yield "\\bye"
+
+
+def main():
+    os.chdir(os.path.realpath(os.path.dirname(sys.argv[0])))
+    l = readfile(FILE_LIST).strip().split("\n")
+    with open("%s.tex" % OUT_NAME, "w") as f:
+        f.write("\n".join(thing for thing in process_files(l)))
+
+    os.system("xetex %s" % OUT_NAME)
+
+main()

@@ -10,7 +10,7 @@ clean:
 	rm -rf ./build export/*.log export/*.pdf
 
 book:
-	export/build.sh
+	export/build
 
 test: build-all
 	cd build && env CTEST_OUTPUT_ON_FAILURE=1 make test
