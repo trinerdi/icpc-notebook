@@ -12,11 +12,13 @@ b(){
 
 c(){
 	f=`name`
-	./"$f"
+	cmd=
+	[ a"$1" = a-d ] && cmd=valgrind
+	$cmd ./"$f"
 }
 
 run(){
-	b "$@" && c
+	b "$@" && c "$@"
 }
 
 e(){
@@ -24,6 +26,6 @@ e(){
 	b "$@"
 	for i in $f.in*; do
 		echo $i:
-		c < $i
+		c "$@" < $i
 	done
 }
