@@ -56,3 +56,17 @@ TEST(GCD, GcdIsBig) {
 
 	EXPECT_EQ(gcd(2000000000000000000LL, 3000000000000000000LL), 1000000000000000000LL);
 }
+
+TEST(MODEQ, Correct) {
+	rep(i, 0, 10000) {
+		ll a = llrand(), b = llrand(), m = max(rand(), 1);
+		ll c = solve_modeq(a, b, m), g = gcd(a, m);
+		if (c == -1) {
+			EXPECT_TRUE(b % g);
+		} else {
+			EXPECT_EQ(((a % m) * (c % m)) % m, b % m);
+			EXPECT_LE(c, m - 1);
+			EXPECT_GE(c, 0);
+		}
+	}
+}

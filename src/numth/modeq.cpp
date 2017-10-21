@@ -23,9 +23,11 @@ ll gcd(ll a, ll b) {
 
 /* Solves the modular equality ak \equiv b (mod m), returns 0 <= k < m or -1
  * if there's no solution
+ * TODO: doesn't work for m >= 2^32
  * Time complexity: O(log m), space complexity: O(1) */
 ll solve_modeq(ll a, ll b, ll m) {
 	// We have a * k + m * y = b for unknown k and y
+	a %= m, b %= m;
 	ll g = gcd(a, m);
 	if (b % g)
 		return -1;
