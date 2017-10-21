@@ -15,6 +15,15 @@ c(){
 	./"$f"
 }
 
-a(){
-	b && c
+run(){
+	b "$@" && c
+}
+
+e(){
+	f=`name`
+	b "$@"
+	for i in $f.in*; do
+		echo $i:
+		c < $i
+	done
 }
