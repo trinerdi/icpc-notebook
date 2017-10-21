@@ -14,3 +14,6 @@ book:
 
 test: build-all
 	cd build && env CTEST_OUTPUT_ON_FAILURE=1 make test
+
+.PHONY: all build-all clean book test
+.DEFAULT_GOAL := test
