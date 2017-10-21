@@ -1,31 +1,18 @@
 name(){
 	basename `realpath .`
 }
-
 b(){
 	flags=-O2\ -fsanitize=address
 	[ a"$1" = a-d ] && flags=-g
-
-	f=`name`
-	g++ -std=c++11 -lm -Wall -Wno-sign-compare -Wshadow $flags "$f".cpp -o "$f"
+	g++ -std=c++11 -lm -Wall -Wno-sign-compare -Wshadow $flags "$(name)".cpp -o "$(name)"
 }
-
 c(){
-	f=`name`
-	cmd=
-	[ a"$1" = a-d ] && cmd=valgrind
-	$cmd ./"$f"
+	`[ a"$1" = a-d ] && echo valgrind` ./"$(name)"
 }
-
 run(){
 	b "$@" && c "$@"
 }
-
 e(){
-	f=`name`
 	b "$@"
-	for i in $f.in*; do
-		echo $i:
-		c "$@" < $i
-	done
+	for i in "$(name)".in*; do echo $i:; c "$@" < $i; done
 }
