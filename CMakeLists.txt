@@ -26,6 +26,7 @@ set(SOURCES_LIST
     tree/centroid
     tree/heavylight
     tree/heavylight2
+    segtree/persistent_segtree
 )
 
 foreach(CUR ${SOURCES_LIST})
