@@ -41,8 +41,7 @@ TEST(PersistentSegtree, BasicUsage) {
     int n = 10;
     vector<Segtree*> trees;
     vector<Naive*> naives;
-    trees.push_back(new Segtree(0, n, 0, NULL, NULL));
-    trees[0]->build();
+    trees.push_back(new Segtree(0, n));
     naives.push_back(new Naive(n));
     compare(trees.back(), naives.back());
     
@@ -67,8 +66,7 @@ TEST(PersistentSegtree, BasicUsage) {
 TEST(PersistentSegtree, Branching) {
     int n = 3;
     vector<Segtree*> trees;
-    trees.push_back(new Segtree(0, n, 0, NULL, NULL));
-    trees[0]->build();
+    trees.push_back(new Segtree(0, n));
     trees.push_back(trees[0]->rangeUpdate(0, 2, 1));
     trees.push_back(trees[0]->rangeUpdate(1, 3, 2));
     trees.push_back(trees[1]->rangeUpdate(1, 3, 2));
@@ -83,8 +81,7 @@ TEST(PersistentSegtree, BenchmarkN100000Q100000) {
     int margin = 50;
     
     vector<Segtree*> trees;
-    trees.push_back(new Segtree(0, n, 0, NULL, NULL));
-    trees[0]->build();
+    trees.push_back(new Segtree(0, n));
     ll tot = 0;
     rep(qi, 0, q) {
         if (qi % 2 == 0) {
