@@ -1,2 +1,2 @@
 language: cpp
-script: ./run_tests.sh
+script: make test

@@ -1,23 +1,19 @@
 \newbox\spacebox % Used to meaśure character width
 
+\def\dofont#1, #2!{"#1" at #2\relax}
+\newdimen\fontsize
+
+\input config
+
+\rm
+
 \advance\hoffset by -25pt
 \advance\hsize by 25pt
 \advance\voffset by -5pt
 \advance\vsize by 80pt
+\parindent=0pt
 
-\def\dofont#1, #2!{"#1" at #2\relax}
-\def\monofont{\dofont Liberation Mono}
-\def\seriffont{\dofont Liberation Serif}
-
-\newdimen\fontsize
-\fontsize=7.5pt
-\font\headlinefont=\seriffont, 10pt!
-\font\rm=\monofont, \fontsize!
-\font\bf=\monofont/B, \fontsize!
-\font\it=\monofont/I, \fontsize!
-\font\headerfont=\monofont, 11pt!
-\rm
-
+% Defines special escape sequences that print {, }, \ when used in monospace
 \def\makeprintable{%
 	\def\do##1{\catcode`##1=12}
 	\dospecials
@@ -29,12 +25,13 @@
 	\gdef\b##1##2{\char92\relax##2} % Backspace
 }
 
-\parindent=0pt
+% Internal macro which sets up the environment for code listing mode
 \def\setverb{%
-	\def\par{\leavevmode\endgraf} % Allow blank lines
+	% Allow blank lines (otherwise multiple consecutive \par's would be treated as one)
+	\def\par{\leavevmode\endgraf}%
 	%
-	% Allow long lines to break, let them have less \baselineskip, indent line
-	% continuations
+	% Allow long lines to break, let them have less \baselineskip (optically),
+	% indent line continuations
 	\baselineskip=1.1\fontsize\relax
 	\parskip=1pt plus .1pt minus .1pt
 	\rightskip=0pt plus 1fill
@@ -45,6 +42,7 @@
 	\obeyspaces\obeylines
 }
 
+% Set up fixed spaces, define tab as four spaces
 {%
  \catcode`\^^I=13\catcode`\ =13
  \gdef\setspace{%
@@ -55,7 +53,7 @@
  }%
 }
 
-
+% Sets up the verbatim environment, end with \egroup
 \def\verb{%
 	\bgroup
 	\setverb
@@ -72,16 +70,9 @@
 }
 
 % Blank lines: we want to encourage page breaks here
+% These macros are inserted automatically by the source code preprocessor
 \def\sk{\penalty -500} % regular
 \def\greatsk{\penalty -3000} % after a function definition (after non-indented "}")
-
-\def\typ{\col{0 0 .5}\bf}
-\def\com{\col{.3 .3 .3}\it}
-\def\str{\col{0 .7 0}\rm}
-\def\dir{\col{.5 0 0}\it}
-\def\key{\col{0 0 0}\bf}
-\def\con{\col{.8 .1 .2}\rm}
-\def\tem{\col{.0 .2 .8}\bf}
 
 \footline={}
 \headline={%
@@ -90,7 +81,7 @@
 
 		\headlinefont
 		\special{color push rgb 0 0 0}%
-		Tři nerdi – notebook
+		\docname
 		\hskip 0pt plus 1filll
 		\the\pageno
 		\special{color pop}%
@@ -100,6 +91,7 @@
 	}%
 }
 
+% Before the listing of one file
 \def\header#1{%
 	{%
 	\headerfont
