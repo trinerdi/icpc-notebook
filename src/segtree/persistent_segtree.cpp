@@ -33,11 +33,6 @@ struct Segtree {
     ll pointQuery(int i) const {
         if (r - l == 1) return val;
         int mid = (l + r) / 2;
-        return val + ((i < mid) ? )
-        if (i < mid) {
-            return val + lson->pointQuery(i);
-        } else {
-            return val + rson->pointQuery(i);
-        }
+        return val + ((i < mid) ? lson : rson)->pointQuery(i);
     }
 };

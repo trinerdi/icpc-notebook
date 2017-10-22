@@ -68,8 +68,14 @@ TEST(PersistentSegtree, Branching) {
     int n = 3;
     vector<Segtree*> trees;
     trees.push_back(new Segtree(0, n, 0, NULL, NULL));
+    trees[0]->build();
+    trees.push_back(trees[0]->rangeUpdate(0, 2, 1));
+    trees.push_back(trees[0]->rangeUpdate(1, 3, 2));
+    trees.push_back(trees[1]->rangeUpdate(1, 3, 2));
+    EXPECT_EQ(getAllValues(trees[1]), vector<ll>({1, 1, 0}));
+    EXPECT_EQ(getAllValues(trees[2]), vector<ll>({0, 2, 2}));
+    EXPECT_EQ(getAllValues(trees[3]), vector<ll>({1, 3, 2}));
 }
-
 
 TEST(PersistentSegtree, BenchmarkN100000Q100000) {
     int n = 100000;
