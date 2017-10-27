@@ -12,9 +12,8 @@ import/numth/dlog.cpp
 import/numth/gauss.cpp
 flow/dinic.cpp
 import/flow/minmax.cpp
-tree/heavylight.cpp
 tree/centroid.cpp
-tree/lca.cpp
+tree/heavylight2.cpp
 import/bipart/maxmatch.cpp
 import/bipart/maxmatch2.cpp
 import/geo/geo.cpp
