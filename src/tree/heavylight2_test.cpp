@@ -46,8 +46,8 @@ bool dfs_first_biggest(int v) {
 }
 
 TEST(LCA, Precomputation) {
-	int n = 1000;
-	rep(i, 0, 100) {
+	int n = 300;
+	rep(i, 0, 30) {
 		gen(n);
 		vector <set <int> > F(n);
 		rep(i, 0, n)
@@ -104,7 +104,7 @@ TEST(LCA, LCA) {
 	}
 }
 
-TEST(LCA, Speed) {
+TEST(LCA, Benchmark) {
 	int n = 100000;
 	gen(n);
 	initHLD();
@@ -114,7 +114,7 @@ TEST(LCA, Speed) {
 	}
 }
 
-TEST(HLD, PrefixSums) {
+TEST(HLD, BenchmarkPrefixSums) {
 	int n = 100000;
 	gen(n);
 	initHLD();
@@ -123,7 +123,7 @@ TEST(HLD, PrefixSums) {
 }
 
 TEST(HLD, PrefixSumsCorrect) {
-	int n = 100;
+	int n = 30;
 	rep(i, 0, 10) {
 		gen(n);
 		initHLD();

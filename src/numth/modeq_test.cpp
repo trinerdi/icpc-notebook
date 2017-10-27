@@ -3,26 +3,26 @@
 #include "../test.hpp"
 
 TEST(GCD, One) {
-	rep(i, 0, 10000)
+	rep(i, 0, 1000)
 		EXPECT_EQ(gcd(llrand(), 1), 1);
 }
 
 TEST(GCD, Zero) {
-	rep(i, 0, 10000) {
+	rep(i, 0, 1000) {
 		ll a = max(llrand(), 1LL);
 		EXPECT_EQ(gcd(a, 0), a);
 	}
 }
 
 TEST(GCD, Commutative) {
-	rep(i, 0, 10000) {
+	rep(i, 0, 1000) {
 		ll a = max(llrand(), 1LL), b = llrand();
 		EXPECT_EQ(gcd(a, b), gcd(b, a));
 	}
 }
 
 TEST(GCD, ProofSmall) {
-	rep(i, 0, 10000) {
+	rep(i, 0, 1000) {
 		ll a = max(rand(), 1), b = rand();
 		ll u, v;
 		tie(u, v) = extgcd(a, b);
@@ -33,7 +33,7 @@ TEST(GCD, ProofSmall) {
 }
 
 TEST(GCD, ProofBig) {
-	rep(i, 0, 10000) {
+	rep(i, 0, 1000) {
 		ll a = max(llrand(), 1LL), b = llrand();
 		ll u, v;
 		tie(u, v) = extgcd(a, b);
@@ -44,7 +44,7 @@ TEST(GCD, ProofBig) {
 }
 
 TEST(GCD, GcdIsBig) {
-	rep(i, 0, 10000) {
+	rep(i, 0, 1000) {
 		ll a = max(lrand48(), 1L), b = lrand48(), c = lrand48();
 		ll u, v;
 		tie(u, v) = extgcd(a * c, b * c);
@@ -58,7 +58,7 @@ TEST(GCD, GcdIsBig) {
 }
 
 TEST(MODEQ, Correct) {
-	rep(i, 0, 10000) {
+	rep(i, 0, 1000) {
 		ll a = llrand(), b = llrand(), m = max(rand(), 1);
 		ll c = solve_modeq(a, b, m), g = gcd(a, m);
 		if (c == -1) {

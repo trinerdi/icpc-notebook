@@ -27,14 +27,14 @@ TEST(FASTEXP, BigBoth) {
 	EXPECT_EQ(fastexp(182934582734019238LL, 529384572361245923LL, 528391432), 300567920LL);
 }
 
-TEST(FASTEXP, Random1e5) {
-	rep(i, 0, 100000)
-		fastexp(llrand(), llrand(), max(rand(), 1));
-}
-
 TEST(FASTEXP, Negative) {
-	rep(i, 0, 50000){
+	rep(i, 0, 5000){
 		ll a = llrand(), b = llrand(), c = max(rand(), 1);
 		EXPECT_EQ(fastexp(a, b, c), fastexp((a % c) - c, b, c));
 	}
+}
+
+TEST(FASTEXP, Benchmark1e5) {
+	rep(i, 0, 100000)
+		fastexp(llrand(), llrand(), max(rand(), 1));
 }

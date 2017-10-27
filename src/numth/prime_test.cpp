@@ -66,14 +66,22 @@ TEST(ISPRIME, Billions) {
 }
 
 
-TEST(PRIMES, Consistent) {
-	vector<bool> sieved = sieve(300000), tested;
+void consistency(int n) {
+	vector<bool> sieved = sieve(n), tested;
 	int cna = 0, cnb = 0;
-	for (int i=0; i<300001; i++) {
+	for (int i=0; i<=n; i++) {
 		tested.push_back(isprime(i));
 		cna += tested[i], cnb += sieved[i];
 	}
 
 	EXPECT_EQ(cna, cnb);
 	EXPECT_EQ(sieved, tested);
+}
+
+TEST(PRIMES, Consistent) {
+	consistency(1000);
+}
+
+TEST(PRIMES, Benchmark) {
+	consistency(100000);
 }

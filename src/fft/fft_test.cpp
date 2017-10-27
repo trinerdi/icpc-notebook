@@ -46,8 +46,8 @@ TEST(FFT, MultipliesBothEmpty) {
 }
 
 TEST(FFT, Multiplies) {
-    rep(i, 0, 100) {
-        vector<ll> p1(50 + rand() % 50), p2(50 + rand() % 50);
+    rep(i, 0, 30) {
+        vector<ll> p1(30 + rand() % 30), p2(30 + rand() % 30);
         rep(j, 0, p1.size()) p1[j] = rand() % 20000000 - 10000000;
         rep(j, 0, p2.size()) p2[j] = rand() % 20000000 - 10000000;
         vector<ll> want = multiplyNaive(p1, p2);

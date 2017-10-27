@@ -13,7 +13,10 @@ book:
 	export/build
 
 test: build-all
-	cd build && env CTEST_OUTPUT_ON_FAILURE=1 make test
+	cd build && env CTEST_OUTPUT_ON_FAILURE=1 GTEST_FILTER="-*Benchmark*" make test
 
-.PHONY: all build-all clean book test
+benchmark: build-all
+	cd build && env CTEST_OUTPUT_ON_FAILURE=1 GTEST_FILTER="*Benchmark*" make test
+
+.PHONY: all build-all clean book test benchmark
 .DEFAULT_GOAL := test

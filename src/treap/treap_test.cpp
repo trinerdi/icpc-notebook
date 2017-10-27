@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 #include "treap.cpp"
 
-TEST(Treap, InsertAndIndex1e5) {
+TEST(Treap, BenchmarkInsertAndIndex1e5) {
     Treap* t = NULL;
     int n = 100000; // n = 10^6 takes about 5 seconds on my machine
     unordered_set<ll> used; // Elements must be different for the test to work
