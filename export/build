@@ -42,7 +42,7 @@ def highlight(text):
             break
 
     def repl(words, name, text):
-        return re.sub(r"(^|\W)(%s)((?= )|$|\W)" % words, r"\1\\%s{\2}\3" % (name), text)
+        return re.sub(r"(^|\W)(%s)((?= )|(?=>)|(?=,)|$|\W)" % words, r"\1\\%s{\2}\3" % (name), text)
 
 
     # Types, templated types, keywords, constants
