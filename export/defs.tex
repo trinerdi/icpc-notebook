@@ -1,4 +1,5 @@
-\newbox\spacebox % Used to meaśure character width
+\newbox\charbox % Used to meaśure character width
+\newdimen\charwidth
 
 \def\dofont#1, #2!{"#1" at #2\relax}
 \newdimen\fontsize
@@ -12,6 +13,12 @@
 \advance\voffset by -5pt
 \advance\vsize by 80pt
 \parindent=0pt
+
+% Calculates the character width of the actual font into \spacesize
+\def\calccharwidth{%
+	\setbox\charbox=\hbox{a}%
+	\charwidth=\wd\charbox
+}
 
 % Defines special escape sequences that print {, }, \ when used in monospace
 \def\makeprintable{%
@@ -47,8 +54,7 @@
  \catcode`\^^I=13\catcode`\ =13
  \gdef\setspace{%
   \catcode`\^^I=13\catcode`\ =13
-  \setbox\spacebox=\hbox{a}%
-  \def {\hskip\wd\spacebox\relax}%
+  \def {\calccharwidth\hskip\charwidth\relax}%
   \def^^I{    }%
  }%
 }
@@ -101,6 +107,12 @@
 	\endgraf
 	\penalty 5000
 	}%
+}
+
+% Used to print a hash at the beggining of a line
+\def\h#1{%
+	\calccharwidth\hskip-5\charwidth
+	\hcol{#1}%
 }
 
 \makeprintable

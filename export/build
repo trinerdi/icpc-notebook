@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import hashlib
 import os
 import re
 import sys
@@ -6,6 +7,20 @@ import sys
 
 FILE_LIST = "files"
 OUT_NAME = "out"
+
+def checksum(line):
+    """Calculates the checksum consistently with /src/check.sh."""
+    numchars = 3
+    line.strip()
+    if len(line) == 0: # Print nothing for an empty line
+        return ""
+
+    line = re.sub(r"\s*|//.*", r"", line)
+    if len(line) == 0: # Indent a comment-only line properly
+        return " " * numchars
+
+    return hashlib.md5(bytes(line + "\n", "utf8")).hexdigest()[:numchars]
+
 
 def readfile(fn):
     with open(fn) as f:
@@ -65,10 +80,16 @@ def highlight(text):
 def process_files(fs, chdir="../src"):
     def process(text):
         text = re.sub("^ +$", "", text)
-        for i in [("\\", "\\b "), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n\n", "\n\\}\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
+        checksums = [checksum(line) for line in text.split("\n")] + [""]
+        for i in [("\\", "\\b "), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n\n", "\n\\}\n\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
             text = text.replace(i[0], i[1])
 
-        return highlight(text)
+        highlighted = highlight(text)
+
+        def puttogether(hash, line):
+            return "\\h{%s}  %s" % (hash, line) if hash else line
+
+        return "\n".join(puttogether(*a) for a in zip(checksums, highlighted.split("\n")))
 
     yield "\\input defs"
     for fn in fs:
