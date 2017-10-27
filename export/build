@@ -15,8 +15,7 @@ def checksum(line):
     if len(line) == 0: # Print nothing for an empty line
         return ""
 
-    line = re.sub(r"\s*([^a-zA-Z0-9])\s*", r"\1", line)
-    line = re.sub(r".*\*/|/[*/].*|^\s*|\s*$", "", line)
+    line = re.sub(r"\s*|//.*", r"", line)
     if len(line) == 0: # Indent a comment-only line properly
         return " " * numchars
 
