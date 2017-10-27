@@ -10,7 +10,7 @@ TEST(Dinic, OneEdge) {
 TEST(Dinic, OneEdgeReverse) {
     Dinic d(2);
     d.addEdge(0, 1, 123);
-    EXPECT_EQ(d.getFlow(1, 0), 123);
+    EXPECT_EQ(d.getFlow(1, 0), 0);
 }
 
 TEST(Dinic, SelfLoop) {
@@ -25,7 +25,37 @@ TEST(Dinic, MultipleEdges) {
     Dinic d(2);
     d.addEdge(0, 1, 100);
     d.addEdge(0, 1, 23);
-    EXPECT_EQ(d.getFlow(1, 0), 123);
+    EXPECT_EQ(d.getFlow(0, 1), 123);
+}
+
+TEST(Dinic, BidirectionalEdges) {
+    Dinic d(2);
+    d.addEdge(0, 1, 100);
+    d.addEdge(1, 0, 23);
+    EXPECT_EQ(d.getFlow(0, 1), 100);
+    EXPECT_EQ(d.getFlow(1, 0), 23);
+}
+
+TEST(Dinic, Capacities) {
+    // We construct a graph where it is necessary to consider residual capacities
+    Dinic d(8);
+    vector<vector<int>> edges = {
+        {0, 1, 1},
+        {1, 2, 1},
+        {2, 3, 1},
+        {0, 4, 2},
+        {4, 5, 2},
+        {5, 2, 2},
+        {2, 1, 1}, // the important reverse edge
+        {1, 6, 2},
+        {6, 7, 2},
+        {7, 3, 2},
+    };
+    for (auto &e : edges) {
+        d.addEdge(e[0], e[1], e[2]);
+    }
+    
+    EXPECT_EQ(d.getFlow(0, 3), 3);
 }
 
 TEST(Dinic, LargeFlow) {
@@ -33,11 +63,10 @@ TEST(Dinic, LargeFlow) {
     rep(i, 0, 100) {
         d.addEdge(0, 1, 100000000000ll);
     }
-    EXPECT_EQ(d.getFlow(1, 0), 10000000000000ll);
+    EXPECT_EQ(d.getFlow(0, 1), 10000000000000ll);
 }
 
 // from: https://www.topcoder.com/community/data-science/data-science-tutorials/maximum-flow-section-1/
-// here we consider undirected (unlike the example)
 TEST(Dinic, Graph1) {
     Dinic d(7);
     d.addEdge(0, 1, 3);
@@ -50,22 +79,29 @@ TEST(Dinic, Graph1) {
     d.addEdge(6, 4, 3);
     ll f = d.getFlow(0, 4);
     
-    EXPECT_EQ(4, f);
-    EXPECT_EQ(3, d.e[0].flow);
-    EXPECT_EQ(1, d.e[1].flow);
-    EXPECT_EQ(3, d.e[2].flow);
-    EXPECT_EQ(-1, d.e[3].flow);
+    EXPECT_EQ(3, f);
+    // e[2n] corresponds to edge n, e[2n+1] to the backwards edge
+    EXPECT_EQ(2, d.e[0].flow);
+    EXPECT_EQ(1, d.e[2].flow);
+    EXPECT_EQ(2, d.e[4].flow);
+    EXPECT_EQ(0, d.e[6].flow);
 }
 
 // from: http://www.spoj.com/problems/FASTFLOW/
 TEST(Dinic, Graph2) {
     Dinic d(5);
-    d.addEdge(1, 2, 3);
-    d.addEdge(2, 3, 4);
-    d.addEdge(3, 1, 2);
-    d.addEdge(2, 2, 5);
-    d.addEdge(3, 4, 3);
-    d.addEdge(4, 3, 3);
+    vector<vector<int>> edges = {
+        {1, 2, 3},
+        {2, 3, 4},
+        {3, 1, 2},
+        {2, 2, 5},
+        {3, 4, 3},
+        {4, 3, 3},
+    };
+    for (auto &e : edges) {
+        d.addEdge(e[0], e[1], e[2]);
+        d.addEdge(e[1], e[0], e[2]);
+    }
     
     EXPECT_EQ(5, d.getFlow(1, 4));
 }
@@ -80,7 +116,6 @@ TEST(Dinic, BenchmarkV100E10000) {
         d.addEdge(rand() % n, rand() % n, range + rand() % range);
     }
     ll flow = d.getFlow(0, n - 1);
-    //EXPECT_EQ(true, true);
 }
 
 
