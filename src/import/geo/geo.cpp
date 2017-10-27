@@ -1,4 +1,5 @@
-#define EPSILON (1e-7) // epsilon used for computations involving doubles ; dec to 1e-9 for %Lf
+#define EPSILON (1e-7)
+// epsilon used for computations involving doubles ; dec to 1e-9 for %Lf
 
 typedef ll T;
 typedef Bod complex<T>;
