@@ -2,14 +2,23 @@
 
 % Font families and sizes
 \def\monofont{\dofont Liberation Mono}
-\def\seriffont{\dofont Droid Serif}
+\def\seriffont{\dofont CMU Serif}
 
-\fontsize=7.5pt
-\font\headlinefont=\seriffont, 10pt!
-\font\rm=\monofont, \fontsize!
-\font\bf=\monofont/B, \fontsize!
-\font\it=\monofont/I, \fontsize!
-\font\headerfont=\monofont, 11pt!
+\fontsize=6pt
+\serifsize=7pt
+\font\headlinefont=\seriffont, 8pt!
+\font\headerfont=\monofont, 8.5pt!
+\def\monofam{%
+	\font\rm=\monofont, \fontsize!%
+	\font\bf=\monofont/B, \fontsize!%
+	\font\it=\monofont/I, \fontsize!%
+}
+\def\seriffam{%
+	\font\rm=\seriffont:mapping=tex-text, \serifsize!%
+	\font\bf=\seriffont/B:mapping=tex-text, \serifsize!%
+	\font\it=\seriffont/I:mapping=tex-text, \serifsize!%
+	\baselineskip=8.5pt%
+}
 
 % Colours
 \def\typ{\col{0 0 .5}\bf}   % type definition

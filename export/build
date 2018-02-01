@@ -10,7 +10,7 @@ OUT_NAME = "out"
 
 def checksum(line):
     """Calculates the checksum consistently with /src/check.sh."""
-    numchars = 3
+    numchars = 2
     line.strip()
     if len(line) == 0: # Print nothing for an empty line
         return ""
@@ -89,13 +89,16 @@ def process_files(fs, chdir="../src"):
         def puttogether(hash, line):
             return "\\h{%s}  %s" % (hash, line) if hash else line
 
-        return "\n".join(puttogether(*a) for a in zip(checksums, highlighted.split("\n")))
+        return "\n".join(puttogether(*a) for a in zip(checksums, highlighted.split("\n"))).strip()
+
+    def sanitize(text):
+        return text.replace("_", "\\_")
 
     yield "\\input defs"
     for fn in fs:
-        yield "\\header{%s}" % fn
-        yield "\\verb"
-        yield process(readfile(chdir + "/" + fn)).strip()
+        yield "\\header{%s}" % sanitize(fn)
+        text = process(readfile(chdir + "/" + fn))
+        yield "\n\\smallskip\\verb|" + text
         yield "\\egroup"
     yield "\\bye"
 

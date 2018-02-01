@@ -1,35 +1,49 @@
 \newbox\charbox % Used to meaśure character width
 \newdimen\charwidth
+\newdimen\charheight
 
 \def\dofont#1, #2!{"#1" at #2\relax}
 \newdimen\fontsize
+\newdimen\serifsize
 
 \input config
 
+% Scale some of the maths fonts down (use 7pt as a base size, not 10). Not all
+% fonts are redefined, but it should be enough for normal usage. Add new
+% definitions (\subscriptfont, \*font4 -- \*font15) when needed.
+\font\sevenex=cmex7
+\font\fiveex=cmex5
+\textfont0=\sevenrm \scriptfont0=\fiverm
+\textfont1=\seveni \scriptfont1=\fivei
+\textfont2=\sevensy \scriptfont2=\fivesy
+\textfont3=\sevenex \scriptfont3=\fiveex
+
+\seriffam
 \rm
 
-\advance\hoffset by -25pt
-\advance\hsize by 25pt
-\advance\voffset by -5pt
-\advance\vsize by 80pt
+\advance\hoffset by -45pt
+\advance\hsize by 90pt
+\advance\voffset by -50pt
+\advance\vsize by 150pt
 \parindent=0pt
 
 % Calculates the character width of the actual font into \spacesize
-\def\calccharwidth{%
-	\setbox\charbox=\hbox{a}%
+\def\calcchardimens{%
+	\setbox\charbox=\hbox{(}%
 	\charwidth=\wd\charbox
+	\charheight=\ht\charbox
 }
 
 % Defines special escape sequences that print {, }, \ when used in monospace
 \def\makeprintable{%
-	\def\do##1{\catcode`##1=12}
+	\def\do##1{\catcode`##1=12}%
 	\dospecials
-	\catcode`\\=0
-	\catcode`\{=1
-	\catcode`\}=2
-	\gdef\{{\char123\relax}
-	\gdef\}{\char125\relax}
-	\gdef\b##1##2{\char92\relax##2} % Backspace
+	\catcode`\\=0%
+	\catcode`\{=1%
+	\catcode`\}=2%
+	\gdef\{{\char123\relax}%
+	\gdef\}{\char125\relax}%
+	\gdef\b##1##2{\char92\relax##2}% Backspace
 }
 
 % Internal macro which sets up the environment for code listing mode
@@ -39,30 +53,42 @@
 	%
 	% Allow long lines to break, let them have less \baselineskip (optically),
 	% indent line continuations
-	\baselineskip=1.1\fontsize\relax
-	\parskip=1pt plus .1pt minus .1pt
-	\rightskip=0pt plus 1fill
-	\leftskip=100pt
-	\parindent=-\leftskip
-	%
-	\setspace
-	\obeyspaces\obeylines
+	\baselineskip=1\fontsize\relax%
+	\parskip=1.7pt plus .1pt minus .1pt%
+	\rightskip=0pt plus 1fill%
+	\leftskip=100pt%
+	\parindent=-\leftskip%
+	\setsimpleverb
+}
+
+% Simplified version used for short code snippets
+\def\setsimpleverb{%
+	\monofam\rm
+	\makeprintable
+	\setspace\obeyspaces\obeylines%
 }
 
 % Set up fixed spaces, define tab as four spaces
 {%
- \catcode`\^^I=13\catcode`\ =13
- \gdef\setspace{%
-  \catcode`\^^I=13\catcode`\ =13
-  \def {\calccharwidth\hskip\charwidth\relax}%
-  \def^^I{    }%
- }%
+ \catcode`\^^I=13\catcode`\ =13%
+ \gdef\setspace{\catcode`\^^I=13\catcode`\ =13%
+ \def {\calcchardimens\hskip\charwidth\relax}\def^^I{    }%
+}%
 }
 
+% TODO: think of some better delimiter than |, try to make { work (\verb|hello}
+% is way less cool than \verb{hello})
+
 % Sets up the verbatim environment, end with \egroup
-\def\verb{%
+\def\verb|{%
 	\bgroup
-	\setverb
+	\setverb%
+}
+
+% Sets up a simplfied verbatim environment, end with \egroup
+\def\simpleverb|{%
+	\bgroup
+	\setsimpleverb%
 }
 
 % \col{rgb color}{font}{content}
@@ -111,8 +137,7 @@
 
 % Used to print a hash at the beggining of a line
 \def\h#1{%
-	\calccharwidth\hskip-5\charwidth
+	\calcchardimens\hskip-4\charwidth
 	\hcol{#1}%
 }
 
-\makeprintable
