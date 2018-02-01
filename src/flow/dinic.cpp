@@ -1,10 +1,13 @@
+/**
+ * Author: Vaclav Volhejn
+ * Source: Based heavily on the Stanford implementation.
+ * Description: The edges with flow>0 were used in the resulting flow.
+ * Time: $O(|V|^2 |E|)$, but much faster in practice: V=5000, E=30000 in 0.27s (SPOJ FASTFLOW)
+ * Usage:
+ *  Dinic d(2); d.addEdge(0, 1, 123);
+ *  assert(d.getFlow(0, 1) == 123);
+ */
 #include "../base.hpp"
-
-// Add directed edges using addEdge(), then call getFlow(source, sink)
-// O(|V|^2 |E|), but much faster in practice: V=5000, E=30000 in 0.27s (SPOJ FASTFLOW)
-// The edges with flow>0 were used in the resulting flow.
-// Based heavily on the Stanford implementation:
-// https://github.com/jaehyunp/stanfordacm/blob/master/code/Dinic.cc
 
 typedef long long Flow;
 const ll INF = 1e15;

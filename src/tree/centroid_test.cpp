@@ -1,6 +1,14 @@
 #include "centroid.cpp"
 #include "gtest/gtest.h"
 
+vector<int> example_decompose(Graph &G) {
+	int n = G.size();
+	counts = {};
+	counts.resize(n);
+	decompose(G, 0);
+	return counts;
+}
+
 Graph gen_tree(int n, int mode) {
 	Graph G(n);
 	rep(i, 1, n) {

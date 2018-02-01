@@ -1,7 +1,14 @@
+/**
+ * Author: Vaclav Volhejn
+ * Description: Binary search tree supporting k-th smallest element queries
+ *  and getting indices of elements. Higher weights are higher in the heap.
+ * Time: $O(\log N)$ per query, with a fairly large constant.
+ * Usage:
+ *  Treap* t = NULL;
+ *  insert(t, 5); insert(t, 2);
+ *  assert(indexOf(t, 5) == 1); assert(getKth(t, 1) == 5);
+ */
 #include "../base.hpp"
-
-// Higher weights are higher.
-// Primarily used as a set able to get the k-th element
 
 #define SIZE(t) ((t) ? (t)->size : 0)
 
@@ -60,16 +67,16 @@ void insert(Treap *&a, ll val) {
     }
 }
 
-// TODO: works only for integers; all elements in the treap must be unique
+/// TODO: works only for integers; all elements in the treap must be unique
 void erase(Treap *&a, ll val) {
-	pair <Treap *, Treap *> spl = split(a, val);
-	pair <Treap *, Treap *> spl2 = split(spl.first, --val);
-	assert(spl2.second->size == 1);
-	delete spl2.second;
-	a = merge(spl2.first, spl.second);
+    pair <Treap *, Treap *> spl = split(a, val);
+    pair <Treap *, Treap *> spl2 = split(spl.first, --val);
+    assert(spl2.second->size == 1);
+    delete spl2.second;
+    a = merge(spl2.first, spl.second);
 }
 
-ll getKth(Treap *a, int k) { //zero-indexed
+ll getKth(Treap *a, int k) { // zero-indexed
     assert(k < a->size);
     while (true) {
         int lsize = SIZE(a->lson);

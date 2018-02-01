@@ -1,16 +1,28 @@
+/**
+ * Author: Richard Hladik
+ * Source: The concept of HLD with rearranging of sons borrowed from <codeforces.com/blog/entry/53170>
+ * Description: Calculates the heavy-light decomposition of given tree.
+ *  Data for chains is stored in one flat structure.
+ *  Also usable for lowest common ancestor.
+ * Time: $O(n \log n)$
+ * Usage: initHLD();
+ *  // What is the value on edges on path from 1 to 2?
+ *  quepdate(1, 2, false, ZERO);
+ *  // Update path from 1 to 2 with value 30
+ *  quepdate(1, 2, true, 30);
+ */
 #include "../base.hpp"
 
-/* The concept of HLD with rearranging of sons borrowed from
- * <codeforces.com/blog/entry/53170> */
 vector<vector<int>> G;
 vector<int> et, in, out, subs, depth, top, par;
-
 typedef ll T;
 
-T ZERO = 0;
-T combine(T a, T b) { return a + b; }
+// Implement these four to customise behavior
+T ZERO = 0; // Neutral element for operations
+T combine(T a, T b) { return a + b; } // How to compose two results
+// Query or update interval from a to b (0<=a,b<|V|)
 T flat_quepdate(int a, int b, bool upd, T val);
-void flat_init(void);
+void flat_init(void); // Initialize the flat data structure
 
 void dfs_counts(int v = 0) {
 	subs[v] = 1;
@@ -43,7 +55,7 @@ void initHLD(void) {
 	flat_init();
 }
 
-/* Needs dfs_counts, buildHLD */
+// Needs dfs_counts(), buildHLD()
 int lca(int a, int b) {
 	for (; top[a] != top[b]; b = par[top[b]])
 		if (depth[top[a]] > depth[top[b]])
@@ -58,6 +70,7 @@ T _quepdate(int a, int b, bool upd, T val) {
 		res = combine(res, flat_quepdate(in[top[b]], in[b], upd, val));
 	return combine(res, flat_quepdate(in[a] + 1, in[b], upd, val));
 }
+
 // lca(a, b) isn't included in the query, which is desired if operating on edge weights
 T quepdate(int a, int b, bool upd, T val) {
 	int l = lca(a, b);
