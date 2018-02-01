@@ -26,6 +26,7 @@
 \advance\voffset by -50pt
 \advance\vsize by 150pt
 \parindent=0pt
+\input eplain
 
 % Calculates the character width of the actual font into \spacesize
 \def\calcchardimens{%
@@ -103,13 +104,13 @@
 
 % Blank lines: we want to encourage page breaks here
 % These macros are inserted automatically by the source code preprocessor
-\def\sk{\penalty -500} % regular
-\def\greatsk{\penalty -3000} % after a function definition (after non-indented "}")
+\def\sk{\penalty -500\vskip -.5\charheight plus .5\charheight} % regular
+\def\greatsk{\penalty -1000\vskip 0pt plus .5\charheight} % after a function definition (after non-indented "}")
 
 \footline={}
 \headline={%
 	\vbox{%
-		\vskip -5pt
+		\vskip 5pt
 
 		\headlinefont
 		\special{color push rgb 0 0 0}%
@@ -141,3 +142,4 @@
 	\hcol{#1}%
 }
 
+\doublecolumns

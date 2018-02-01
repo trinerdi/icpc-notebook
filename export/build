@@ -79,6 +79,11 @@ def highlight(text):
 
 def process_files(fs, chdir="../src"):
     def process(text):
+        # Convert to two-spaced indent, assuming all of the original code is
+        # indented by tabs or four spaces
+        text = text.replace("\t", "    ")
+        text = re.sub("^(  )+", " ", text)
+
         text = re.sub("^ +$", "", text)
         checksums = [checksum(line) for line in text.split("\n")] + [""]
         for i in [("\\", "\\b "), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n\n", "\n\\}\n\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
@@ -100,6 +105,7 @@ def process_files(fs, chdir="../src"):
         text = process(readfile(chdir + "/" + fn))
         yield "\n\\smallskip\\verb|" + text
         yield "\\egroup"
+    yield "\\singlecolumn"
     yield "\\bye"
 
 
