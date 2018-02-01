@@ -142,4 +142,15 @@
 	\hcol{#1}%
 }
 
+\def\O{{\cal O}}
+
+% TODO: quite a hack
+\newbox\usagebox
+\newdimen\usagedimen
+{
+\seriffam\bf
+\setbox\usagebox=\hbox{Usage: }
+\global\usagedimen=\wd\usagebox
+}
+
 \doublecolumns

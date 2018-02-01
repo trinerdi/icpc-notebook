@@ -77,6 +77,27 @@ def highlight(text):
     return "".join(l)
 
 
+def make_header(header):
+    def texify(text):
+        return text.replace("$O", "$\\O").replace("*", "\cdot ")
+
+    keywords = ["Time", "Memory", "Description", "Usage"]
+
+    l = []
+    for h in keywords:
+        if h in header:
+            if h == "Usage":
+                # TODO: quite a hack
+                l.append("{\\leftskip=\\usagedimen\\item{\\bf Usage:}\\simpleverb|%s\\egroup\\par}" % highlight(header[h]))
+            else:
+                l.append("{\\bf %s:} %s" % (h, texify(header[h])))
+
+    if not l:
+        return ""
+    else:
+        return "\n\n".join(l)
+
+
 def process_files(fs, chdir="../src"):
     def process(text):
         # Convert to two-spaced indent, assuming all of the original code is
@@ -84,6 +105,7 @@ def process_files(fs, chdir="../src"):
         text = text.replace("\t", "    ")
         text = re.sub("^(  )+", " ", text)
 
+        header, text = preprocess(text)
         text = re.sub("^ +$", "", text)
         checksums = [checksum(line) for line in text.split("\n")] + [""]
         for i in [("\\", "\\b "), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n\n", "\n\\}\n\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
@@ -94,15 +116,18 @@ def process_files(fs, chdir="../src"):
         def puttogether(hash, line):
             return "\\h{%s}  %s" % (hash, line) if hash else line
 
-        return "\n".join(puttogether(*a) for a in zip(checksums, highlighted.split("\n"))).strip()
+        return header, "\n".join(puttogether(*a) for a in zip(checksums, highlighted.split("\n"))).strip()
 
     def sanitize(text):
         return text.replace("_", "\\_")
 
     yield "\\input defs"
     for fn in fs:
+        header, text = process(readfile(chdir + "/" + fn))
         yield "\\header{%s}" % sanitize(fn)
-        text = process(readfile(chdir + "/" + fn))
+        header_text = make_header(header)
+        if header_text:
+            yield header_text
         yield "\n\\smallskip\\verb|" + text
         yield "\\egroup"
     yield "\\singlecolumn"
@@ -116,5 +141,50 @@ def main():
         f.write("\n".join(thing for thing in process_files(l)))
 
     os.system("xetex %s" % OUT_NAME)
+
+
+def parse_header(text):
+    """Parses /** ... */ headers. Returns a tuple of Key: Content pairs."""
+    if not text.startswith("/**\n"):
+        return None
+    header = text.split("/**\n", 1)[1].split("\n */", 1)[0]
+    key = None
+    d = {}
+    for line in header.split("\n"):
+        if not line.startswith(" * "):
+            raise Exception("Every line in the header should start with \" * \".")
+        line = line.split(" * ", 1)[1]
+        if line[0] != " ":
+            # New field, eat the name and reduce it to the "line continuation" case (below)
+            line = line.split(":", 1)
+            if len(line) != 2:
+                raise Exception("Expected field name ( * Something: ) preceeding the content")
+
+            key = line[0]
+            if key in d:
+                raise Exception("Refusing to use same field twice.")
+            d[key] = []
+            line = line[1]
+
+        line = line.strip()
+        if line:
+            # line continuation (or the first line after field name stripped away)
+            if key is None:
+                raise Exception("Expected field name ( * Something: ...).")
+            d[key].append(line)
+
+    return {k: "\n".join(v) for k, v in d.items()}
+
+
+def preprocess(text):
+    header = parse_header(text)
+    if header is None:
+        header = {}
+
+    # Remove /** ... */ and /// ... comments (including excess whitespace that could remain)
+    text = re.sub(r" */\*\*.*?\*/\n?", "", text, flags=re.DOTALL | re.MULTILINE)
+    text = re.sub(r"\n? *///.*", "", text, flags=re.MULTILINE)
+    return header, text
+
 
 main()
