@@ -5,21 +5,21 @@
 \def\dofont#1, #2!{"#1" at #2\relax}
 \newdimen\fontsize
 \newdimen\serifsize
+\newdimen\scriptsize
+\newdimen\scriptscriptsize
 
 \input config
+
+\seriffam
+\rm
 
 % Scale some of the maths fonts down (use 7pt as a base size, not 10). Not all
 % fonts are redefined, but it should be enough for normal usage. Add new
 % definitions (\subscriptfont, \*font4 -- \*font15) when needed.
-\font\sevenex=cmex7
-\font\fiveex=cmex5
-\textfont0=\sevenrm \scriptfont0=\fiverm
-\textfont1=\seveni \scriptfont1=\fivei
-\textfont2=\sevensy \scriptfont2=\fivesy
-\textfont3=\sevenex \scriptfont3=\fiveex
-
-\seriffam
-\rm
+\textfont0=\tenrm \scriptfont0=\sevenrm
+\textfont1=\teni \scriptfont1=\seveni
+\textfont2=\tensy \scriptfont2=\sevensy
+\textfont3=\tenex \scriptfont3=\sevenex
 
 \advance\hoffset by -45pt
 \advance\hsize by 90pt
@@ -44,7 +44,7 @@
 	\catcode`\}=2%
 	\gdef\{{\char123\relax}%
 	\gdef\}{\char125\relax}%
-	\gdef\b##1##2{\char92\relax##2}% Backspace
+	\gdef\\##1{\char92\relax##1}% Backspace
 }
 
 % Internal macro which sets up the environment for code listing mode
@@ -129,7 +129,7 @@
 	{%
 	\headerfont
 	\vskip 15pt plus 3pt minus 8pt
-	\penalty -5000
+	\penalty -1000
 	#1
 	\endgraf
 	\penalty 5000
@@ -152,5 +152,29 @@
 \setbox\usagebox=\hbox{Usage: }
 \global\usagedimen=\wd\usagebox
 }
+
+% Hotfixes for latex expressions in kactl
+\def\mathbb{}
+\def\text{\hbox}
+\def\textrm#1{\hbox{\rm #1}}
+\def\texttt#1{\hbox{\tt #1}}
+\def\mathtt{}
+\def\mod{\bmod}
+\def\emph#1{{\it #1\/}}
+\def\textbf#1{{\bf #1}}
+\def\binom#1#2{{#1\choose #2}}
+\def\frac#1#2{{#1\over #2}}
+
+\input headers
+
+\def\img#1#2{%
+	\XeTeXpdffile ../src/#2 width #1\relax
+}
+
+\def\centerpic#1#2{\par\line{\hss\img{#1}{#2}\hss}\par}
+% TODO: Implement text wrapping in \rightpic
+%\def\rightpic#1#2{\par\line{\hss\img{#1}{#2}}\par}
+\let\rightpic\centerpic
+\def\figure#1{\rightpic{.2\hsize}{#1}}
 
 \doublecolumns

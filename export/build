@@ -5,18 +5,19 @@ import re
 import sys
 
 
-FILE_LIST = "files"
+FILE_LIST = "notebook.tex"
 OUT_NAME = "out"
+
 
 def checksum(line):
     """Calculates the checksum consistently with /src/check.sh."""
     numchars = 2
     line.strip()
-    if len(line) == 0: # Print nothing for an empty line
+    if len(line) == 0:  # Print nothing for an empty line
         return ""
 
     line = re.sub(r"\s*|//.*", r"", line)
-    if len(line) == 0: # Indent a comment-only line properly
+    if len(line) == 0:  # Indent a comment-only line properly
         return " " * numchars
 
     return hashlib.md5(bytes(line + "\n", "utf8")).hexdigest()[:numchars]
@@ -59,7 +60,6 @@ def highlight(text):
     def repl(words, name, text):
         return re.sub(r"(^|\W)(%s)((?= )|(?=>)|(?=,)|$|\W)" % words, r"\1\\%s{\2}\3" % (name), text)
 
-
     # Types, templated types, keywords, constants
     d = {
         "typ": "bool char signed unsigned short long int ll ld float double void auto string ull",
@@ -71,24 +71,36 @@ def highlight(text):
     for name in d.keys():
         text = repl(d[name].replace(" ", "|"), name, text)
 
-
     text = re.sub(r"(^|\W)(-?\d+(U?L?L|(\.\d+)?(e-?\d+)?))((?= )|$|\W)", r"\1\\con{\2}\6", text)
     l.append(text)
     return "".join(l)
 
 
-def make_header(header):
-    def texify(text):
-        return text.replace("$O", "$\\O").replace("*", "\cdot ")
+def highlight_and_texify(text):
+    for i in [("\\", "\\\\"), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n\n", "\n\\}\n\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
+        text = text.replace(i[0], i[1])
 
-    keywords = ["Time", "Memory", "Description", "Usage"]
+    return highlight(text)
+
+
+def make_header(header):
+    """Extracts relevant information from the header, returns TeX code."""
+    def texify(text):
+        """A set of hacks trying to convert most common shortcuts in the kactl
+        headers (not entering math mode when describing complexities)."""
+        text = text.replace("$O", "$\\O").replace("*", "\cdot ")
+        text = re.sub(r"^O\((.*?)\)", r"$\O(\1)$", text)
+        return text
+
+    # Other keywords are silently discarded
+    keywords = ["Description", "Time", "Memory", "Usage"]
 
     l = []
     for h in keywords:
         if h in header:
             if h == "Usage":
                 # TODO: quite a hack
-                l.append("{\\leftskip=\\usagedimen\\item{\\bf Usage:}\\simpleverb|%s\\egroup\\par}" % highlight(header[h]))
+                l.append("{\\leftskip=\\usagedimen\\item{\\bf Usage:}\\raggedright\\simpleverb|%s\\egroup\\par}" % highlight_and_texify(header[h]))
             else:
                 l.append("{\\bf %s:} %s" % (h, texify(header[h])))
 
@@ -98,7 +110,7 @@ def make_header(header):
         return "\n\n".join(l)
 
 
-def process_files(fs, chdir="../src"):
+def process_file(f, chdir="../src"):
     def process(text):
         # Convert to two-spaced indent, assuming all of the original code is
         # indented by tabs or four spaces
@@ -108,10 +120,7 @@ def process_files(fs, chdir="../src"):
         header, text = preprocess(text)
         text = re.sub("^ +$", "", text)
         checksums = [checksum(line) for line in text.split("\n")] + [""]
-        for i in [("\\", "\\b "), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n\n", "\n\\}\n\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
-            text = text.replace(i[0], i[1])
-
-        highlighted = highlight(text)
+        highlighted = highlight_and_texify(text)
 
         def puttogether(hash, line):
             return "\\h{%s}  %s" % (hash, line) if hash else line
@@ -121,24 +130,25 @@ def process_files(fs, chdir="../src"):
     def sanitize(text):
         return text.replace("_", "\\_")
 
-    yield "\\input defs"
-    for fn in fs:
-        header, text = process(readfile(chdir + "/" + fn))
-        yield "\\header{%s}" % sanitize(fn)
+    def work():
+        header, text = process(readfile(chdir + "/" + f))
+        yield "\\header{%s}" % sanitize(f)
         header_text = make_header(header)
         if header_text:
             yield header_text
         yield "\n\\smallskip\\verb|" + text
         yield "\\egroup"
-    yield "\\singlecolumn"
-    yield "\\bye"
+
+    print(f)
+    return "\n".join(work())
 
 
 def main():
     os.chdir(os.path.realpath(os.path.dirname(sys.argv[0])))
-    l = readfile(FILE_LIST).strip().split("\n")
+    text = readfile(FILE_LIST).strip()
+    text = re.sub(r"(?<=\n)\[\[(.*?)\]\]", lambda a: process_file(a.group(1)), text)
     with open("%s.tex" % OUT_NAME, "w") as f:
-        f.write("\n".join(thing for thing in process_files(l)))
+        f.write(text)
 
     os.system("xetex %s" % OUT_NAME)
 
@@ -150,15 +160,16 @@ def parse_header(text):
     header = text.split("/**\n", 1)[1].split("\n */", 1)[0]
     key = None
     d = {}
+    LINE_START = " * "
     for line in header.split("\n"):
-        if not line.startswith(" * "):
-            raise Exception("Every line in the header should start with \" * \".")
-        line = line.split(" * ", 1)[1]
+        if line.startswith(LINE_START):
+            line = line.split(LINE_START, 1)[1]
+
         if line[0] != " ":
             # New field, eat the name and reduce it to the "line continuation" case (below)
             line = line.split(":", 1)
             if len(line) != 2:
-                raise Exception("Expected field name ( * Something: ) preceeding the content")
+                raise Exception("Expected field name ( * Something: ) preceeding the content: {}".format(line))
 
             key = line[0]
             if key in d:
@@ -184,6 +195,7 @@ def preprocess(text):
     # Remove /** ... */ and /// ... comments (including excess whitespace that could remain)
     text = re.sub(r" */\*\*.*?\*/\n?", "", text, flags=re.DOTALL | re.MULTILINE)
     text = re.sub(r"\n? *///.*", "", text, flags=re.MULTILINE)
+    text = re.sub(r"^\s*\#pragma once", "", text, flags=re.DOTALL).strip()
     return header, text
 
 

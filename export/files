@@ -1,4 +1,4 @@
-../export/files
+\triplecolumns\verb|
 base.hpp
 sc.sh
 fft/ntt.cpp
@@ -9,24 +9,120 @@ numth/misc.cpp
 numth/modeq.cpp
 import/numth/composite_comb.cpp
 import/numth/dlog.cpp
-import/numth/gauss.cpp
 flow/dinic.cpp
-import/flow/minmax.cpp
 tree/centroid.cpp
 tree/heavylight2.cpp
-import/bipart/maxmatch.cpp
-import/bipart/maxmatch2.cpp
-import/geo/geo.cpp
-import/geo/geo2.cpp
-import/geo/geo3-plochy.cpp
-import/geo/geo4-vzdialenosti.cpp
-import/geo/geo5-kruhy.cpp
-import/graph/bicon.cpp
-import/graph/dfu.cpp
-import/graph/strongcon.cpp
-import/stree/fenwick.cpp
-import/stree/rich.cpp
-import/text/kmp.cpp
-import/text/suf1.cpp
-import/text/suf2.cpp
-import/text/aho_corasick.cpp
+
+data-structures/OrderStatisticTree.h
+data-structures/SegmentTree.h
+data-structures/LazySegmentTree.h
+data-structures/UnionFind.h
+data-structures/Matrix.h
+data-structures/LineContainer.h
+data-structures/FenwickTree.h
+data-structures/FenwickTree2d.h
+data-structures/RMQ.h
+
+numerical/Polynomial.h
+numerical/BinarySearch.h
+numerical/GoldenSectionSearch.h
+numerical/PolyRoots.h
+numerical/Determinant.h
+numerical/Simplex.h
+numerical/SolveLinear.h
+numerical/SolveLinear2.h
+numerical/SolveLinearBinary.h
+numerical/MatrixInverse.h
+numerical/FFT.h
+
+number-theory/ModularArithmetic.h
+number-theory/ModInverse.h
+number-theory/ModMulLL.h
+number-theory/ModSqrt.h
+number-theory/NTT.h
+number-theory/factor.h
+number-theory/phiFunction.h
+number-theory/chinese.h
+
+combinatorial/intperm.h
+combinatorial/derangements.h
+combinatorial/binomial.h
+combinatorial/binomialModPrime.h
+combinatorial/RollingBinomial.h
+combinatorial/multinomial.h
+
+graph/bellmanFord.h
+graph/FloydWarshall.h
+graph/TopoSort.h
+graph/EulerWalk.h
+graph/PushRelabel.h
+graph/MinCostMaxFlow.h
+graph/EdmondsKarp.h
+graph/MinCut.h
+graph/GlobalMinCut.h
+graph/hopcroftKarp.h
+graph/DFSMatching.h
+graph/WeightedMatching.h
+graph/GeneralMatching.h
+graph/MinimumVertexCover.h
+graph/SCC.h
+graph/BiconnectedComponents.h
+graph/2sat.h
+graph/TreePower.h
+graph/LCA.h
+graph/CompressTree.h
+graph/LinkCutTree.h
+graph/MatrixTree.h
+
+Primitives:
+ geometry/Point.h
+ geometry/lineDistance.h
+ geometry/SegmentDistance.h
+ geometry/SegmentIntersection.h
+ geometry/SegmentIntersectionQ.h
+ geometry/lineIntersection.h
+ geometry/sideOf.h
+ geometry/onSegment.h
+ geometry/linearTransformation.h
+ geometry/Angle.h
+Circles:
+ geometry/CircleIntersection.h
+ geometry/circleTangents.h
+ geometry/circumcircle.h
+ geometry/MinimumEnclosingCircle.h
+Polygons:
+ geometry/insidePolygon.h
+ geometry/PolygonArea.h
+ geometry/PolygonCenter.h
+ geometry/PolygonCut.h
+ geometry/ConvexHull.h
+ geometry/PolygonDiameter.h
+ geometry/PointInsideHull.h
+ geometry/LineHullIntersection.h
+misc point and set problems:
+ geometry/closestPair.h
+ geometry/kdTree.h
+ geometry/DelaunayTriangulation.h
+3d:
+ geometry/Point3D.h
+ geometry/PolyhedronVolume.h
+ geometry/3dHull.h
+ geometry/sphericalDistance.h
+
+strings/KMP.h
+strings/Manacher.h
+strings/MinRotation.h
+strings/SuffixArray.h
+strings/SuffixTree.h
+strings/Hashing.h
+strings/AhoCorasick.h
+
+various/IntervalContainer.h
+various/IntervalCover.h
+various/ConstantIntervals.h
+various/DivideAndConquerDP.h
+various/KnuthDP.h
+various/TernarySearch.h
+various/LCS.h
+various/LIS.h
+\egroup\doublecolumns

@@ -2,23 +2,32 @@
 
 % Font families and sizes
 \def\monofont{\dofont Liberation Mono}
-\def\seriffont{\dofont CMU Serif}
 
 \fontsize=6pt
 \serifsize=7pt
-\font\headlinefont=\seriffont, 8pt!
+\scriptsize=5pt
+\scriptscriptsize=3.5pt
+\font\headlinefont=cmr10 at 8pt
 \font\headerfont=\monofont, 8.5pt!
 \def\monofam{%
-	\font\rm=\monofont, \fontsize!%
-	\font\bf=\monofont/B, \fontsize!%
-	\font\it=\monofont/I, \fontsize!%
+	\font\tenrm=\monofont, \fontsize!%
+	\font\tenbf=\monofont/B, \fontsize!%
+	\font\tenit=\monofont/I, \fontsize!%
 }
 \def\seriffam{%
-	\font\rm=\seriffont:mapping=tex-text, \serifsize!%
-	\font\bf=\seriffont/B:mapping=tex-text, \serifsize!%
-	\font\it=\seriffont/I:mapping=tex-text, \serifsize!%
+	\font\tenrm=cmr10 at \serifsize\font\sevenrm=cmr7 at \scriptsize\font\fiverm=cmr5 at\scriptscriptsize
+	\font\tenbf=cmbx10 at \serifsize
+	\font\tenit=cmti10 at \serifsize
+	\font\teni=cmmi10 at \serifsize\font\seveni=cmmi7 at \scriptsize\font\fivei=cmmi5 at\scriptscriptsize
+	\font\tensy=cmsy10 at \serifsize\font\sevensy=cmsy7 at \scriptsize\font\fivesy=cmsy5 at\scriptscriptsize
+	\font\tenex=cmex10 at \serifsize\font\sevenex=cmex7 at \scriptsize\font\fiveex=cmex5 at\scriptscriptsize
 	\baselineskip=8.5pt%
 }
+
+% Not serifsize, because the two fonts look different-sized when equal sizes
+% are chosen
+\font\tentt=\monofont, \fontsize!%
+\def\tt{\tentt}
 
 % Colours
 \def\typ{\col{0 0 .5}\bf}   % type definition
@@ -31,4 +40,4 @@
 \def\hcol{\col{.0 .0 .0}\rm}   % hash at the start of (almost) each line
 
 % Miscellanea
-\def\docname{Tři nerdi – notebook}
+\def\docname{Charles University in Prague -- T\v ri nerdi}

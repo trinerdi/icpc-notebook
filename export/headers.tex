@@ -1,0 +1,27 @@
+\newskip\chapterpreskip\newskip\chapterpostskip
+\newskip\sectionpreskip\newskip\sectionpostskip
+\newskip\subsectionpreskip\newskip\subsectionpostskip
+\newskip\subsubsectionpreskip\newskip\subsubsectionpostskip
+\chapterpreskip=15pt\chapterpostskip=8pt
+\sectionpreskip=10pt\sectionpostskip=5pt
+\subsectionpreskip=7pt\subsectionpostskip=4pt
+\subsubsectionpreskip=5pt\subsubsectionpostskip=3pt
+\font\chapterfont=cmbx12 at 11pt
+\font\sectionfont=cmbx12 at 9pt
+\font\subsectionfont=cmbx10 at 8pt
+\font\subsubsectionfont=cmbx10 at 7pt
+
+% Generic header macro
+% TODO: handle two consecutive headers correctly (smaller skips)
+\def\hgeneric#1#2#3#4{{%
+	\vskip#1
+	#2
+	#3
+	%\vskip#4
+}}
+
+\def\chapter#1{\hgeneric{\chapterpreskip}{\chapterfont}{#1}{\chapterpostskip}}
+\def\section#1{\hgeneric{\sectionpreskip}{\sectionfont}{#1}{\sectionpostskip}}
+\def\subsection#1{\hgeneric{\subsectionpreskip}{\subsectionfont}{#1}{\subsectionpostskip}}
+\def\subsubsection#1{\hgeneric{\subsubsectionpreskip}{\subsubsectionfont}{#1}{\subsubsectionpostskip}}
+

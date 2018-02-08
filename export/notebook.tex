@@ -1,0 +1,201 @@
+\input defs
+
+\input files
+
+[[base.hpp]]
+[[sc.sh]]
+[[fft/ntt.cpp]]
+[[fft/fft.cpp]]
+[[treap/treap.cpp]]
+[[numth/prime.cpp]]
+[[numth/misc.cpp]]
+[[numth/modeq.cpp]]
+[[import/numth/composite_comb.cpp]]
+[[import/numth/dlog.cpp]]
+%[[import/numth/gauss.cpp]] % -> [[kactl/numerical/SolveLinear.h]]
+[[flow/dinic.cpp]]
+%[[import/flow/minmax.cpp]] % -> [[kactl/graph/MinCostMaxFlow.h]]
+[[tree/centroid.cpp]]
+[[tree/heavylight2.cpp]]
+%[[import/bipart/maxmatch.cpp]] % -> [[kactl/graph/DFSMatching.h]]
+%[[import/bipart/maxmatch2.cpp]] % -> [[kactl/graph/DFSMatching.h]]
+% [[import/geo/geo.cpp]] % -> KACTL geometry
+% [[import/geo/geo2.cpp]] % -> KACTL geometry
+% [[import/geo/geo3-plochy.cpp]] % -> KACTL geometry
+% [[import/geo/geo4-vzdialenosti.cpp]] % -> KACTL geometry
+% [[import/geo/geo5-kruhy.cpp]] % -> KACTL geometry
+% [[import/graph/bicon.cpp]] % -> [[kactl/graph/BiconnectedComponents.h]]
+% [[import/graph/dfu.cpp]] % -> [[kactl/data-structures/UnionFind.h]]
+% [[import/graph/strongcon.cpp]] % -> [[kactl/graph/SCC.h]]
+% [[import/stree/fenwick.cpp]] % -> [[kactl/data-structures/FenwickTree.h]]
+% [[import/stree/rich.cpp]]
+% [[import/text/kmp.cpp]] % -> [[kactl/strings/KMP.h]]
+% [[import/text/suf1.cpp]] % -> [[kactl/strings/SuffixArray.h]]
+% [[import/text/suf2.cpp]] % -> [[kactl/strings/SuffixArray.h]]
+% [[import/text/aho_corasick.cpp]] % -> [[kactl/strings/AhoCorasick.h]]
+
+KACTL part:
+
+%\input chapters/math
+
+%\kactlchapter{math}
+
+\chapter{Data structures}
+
+[[kactl/data-structures/OrderStatisticTree.h]]
+[[kactl/data-structures/SegmentTree.h]]
+[[kactl/data-structures/LazySegmentTree.h]]
+[[kactl/data-structures/UnionFind.h]]
+%[[kactl/data-structures/SubMatrix.h]]
+[[kactl/data-structures/Matrix.h]]
+[[kactl/data-structures/LineContainer.h]]
+[[data_structures/fast_line_container.cpp]]
+%[[kactl/data-structures/Treap.h]]
+[[kactl/data-structures/FenwickTree.h]]
+[[kactl/data-structures/FenwickTree2d.h]]
+[[kactl/data-structures/RMQ.h]]
+
+\chapter{Numerical}
+
+[[kactl/numerical/Polynomial.h]]
+[[kactl/numerical/BinarySearch.h]]
+[[kactl/numerical/GoldenSectionSearch.h]]
+[[kactl/numerical/PolyRoots.h]]
+%[[kactl/numerical/PolyInterpolate.h]]
+%[[kactl/numerical/HillClimbing.h]]
+%[[kactl/numerical/Integrate.h]]
+%[[kactl/numerical/IntegrateAdaptive.h]]
+[[kactl/numerical/Determinant.h]]
+%[[kactl/numerical/IntDeterminant.h]]
+[[kactl/numerical/Simplex.h]]
+[[kactl/numerical/SolveLinear.h]]
+[[kactl/numerical/SolveLinear2.h]]
+[[kactl/numerical/SolveLinearBinary.h]]
+[[kactl/numerical/MatrixInverse.h]]
+%[[kactl/numerical/Tridiagonal.h]]
+[[kactl/numerical/FFT.h]]
+
+\chapter{Number theory}
+
+[[kactl/number-theory/ModularArithmetic.h]]
+[[kactl/number-theory/ModInverse.h]]
+%[[kactl/number-theory/ModPow.h]]
+%[[kactl/number-theory/ModSum.h]]
+[[kactl/number-theory/ModMulLL.h]]
+[[kactl/number-theory/ModSqrt.h]]
+[[kactl/number-theory/NTT.h]]
+%[[kactl/number-theory/eratosthenes.h]]
+%[[kactl/number-theory/MillerRabin.h]]
+[[kactl/number-theory/factor.h]]
+%[[kactl/number-theory/euclid.h]]
+[[kactl/number-theory/phiFunction.h]]
+[[kactl/number-theory/chinese.h]]
+
+\chapter{Combinatorics}
+
+[[kactl/combinatorial/intperm.h]]
+[[kactl/combinatorial/derangements.h]]
+[[kactl/combinatorial/binomial.h]]
+[[kactl/combinatorial/binomialModPrime.h]]
+[[kactl/combinatorial/RollingBinomial.h]]
+[[kactl/combinatorial/multinomial.h]]
+
+\chapter{Graphs and trees}
+
+[[kactl/graph/bellmanFord.h]]
+[[kactl/graph/FloydWarshall.h]]
+[[kactl/graph/TopoSort.h]]
+[[kactl/graph/EulerWalk.h]]
+[[kactl/graph/PushRelabel.h]]
+[[kactl/graph/MinCostMaxFlow.h]]
+[[kactl/graph/EdmondsKarp.h]]
+[[kactl/graph/MinCut.h]]
+[[kactl/graph/GlobalMinCut.h]]
+[[kactl/graph/hopcroftKarp.h]]
+[[kactl/graph/DFSMatching.h]]
+[[kactl/graph/WeightedMatching.h]]
+[[kactl/graph/GeneralMatching.h]]
+[[kactl/graph/MinimumVertexCover.h]]
+[[kactl/graph/SCC.h]]
+[[kactl/graph/BiconnectedComponents.h]]
+[[kactl/graph/2sat.h]]
+[[kactl/graph/TreePower.h]]
+[[kactl/graph/LCA.h]]
+[[kactl/graph/CompressTree.h]]
+%[[kactl/graph/HLD.h]]
+[[kactl/graph/LinkCutTree.h]]
+[[kactl/graph/MatrixTree.h]]
+
+\chapter{Geometry}
+
+\section{Geometric primitives}
+
+[[kactl/geometry/Point.h]]
+[[kactl/geometry/lineDistance.h]]
+[[kactl/geometry/SegmentDistance.h]]
+[[kactl/geometry/SegmentIntersection.h]]
+[[kactl/geometry/SegmentIntersectionQ.h]]
+[[kactl/geometry/lineIntersection.h]]
+[[kactl/geometry/sideOf.h]]
+[[kactl/geometry/onSegment.h]]
+[[kactl/geometry/linearTransformation.h]]
+[[kactl/geometry/Angle.h]]
+
+\section{Circles}
+
+[[kactl/geometry/CircleIntersection.h]]
+[[kactl/geometry/circleTangents.h]]
+[[kactl/geometry/circumcircle.h]]
+[[kactl/geometry/MinimumEnclosingCircle.h]]
+
+\section{Polygons}
+
+[[kactl/geometry/insidePolygon.h]]
+[[kactl/geometry/PolygonArea.h]]
+[[kactl/geometry/PolygonCenter.h]]
+[[kactl/geometry/PolygonCut.h]]
+[[kactl/geometry/ConvexHull.h]]
+[[kactl/geometry/PolygonDiameter.h]]
+[[kactl/geometry/PointInsideHull.h]]
+[[kactl/geometry/LineHullIntersection.h]]
+
+\section{Misc. Point Set Problems}
+
+[[kactl/geometry/closestPair.h]]
+[[kactl/geometry/kdTree.h]]
+[[kactl/geometry/DelaunayTriangulation.h]]
+% \section{3D}
+[[kactl/geometry/Point3D.h]]
+[[kactl/geometry/PolyhedronVolume.h]]
+[[kactl/geometry/3dHull.h]]
+[[kactl/geometry/sphericalDistance.h]]
+
+\chapter{Strings}
+
+[[kactl/strings/KMP.h]]
+[[kactl/strings/Manacher.h]]
+[[kactl/strings/MinRotation.h]]
+[[kactl/strings/SuffixArray.h]]
+[[kactl/strings/SuffixTree.h]]
+[[kactl/strings/Hashing.h]]
+[[kactl/strings/AhoCorasick.h]]
+
+\chapter{Various}
+
+[[kactl/various/IntervalContainer.h]]
+[[kactl/various/IntervalCover.h]]
+[[kactl/various/ConstantIntervals.h]]
+[[kactl/various/DivideAndConquerDP.h]]
+[[kactl/various/KnuthDP.h]]
+[[kactl/various/TernarySearch.h]]
+[[kactl/various/LCS.h]]
+[[kactl/various/LIS.h]]
+%[[kactl/various/Karatsuba.h]]
+%[[kactl/various/BumpAllocator.h]]
+%[[kactl/various/BumpAllocatorSTL.h]]
+%[[kactl/various/SIMD.h]]
+%[[kactl/various/SmallPtr.h]]
+%[[kactl/various/Unrolling.h]]
+
+\singlecolumn
+\bye
