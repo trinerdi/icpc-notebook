@@ -30,6 +30,7 @@ set(SOURCES_LIST
     data_structures/fast_line_container
     string/aho_corasick
     implementation/set_tricks
+    implementation/compression
 )
 
 foreach(CUR ${SOURCES_LIST})
