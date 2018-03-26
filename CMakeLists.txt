@@ -15,30 +15,30 @@ enable_testing()
 
 # Tests
 set(SOURCES_LIST
-    fft/fft
-    fft/ntt
-    treap/treap
-    numth/prime
-    numth/misc
-    numth/modeq
-    flow/dinic
-    tree/lca
-    tree/centroid
-    tree/heavylight
-    tree/heavylight2
-    segtree/persistent_segtree
-    data_structures/fast_line_container
-    string/aho_corasick
-    implementation/set_tricks
-    implementation/compression
+    numerical/fft
+    numerical/ntt
+    data-structures/treap
+    number-theory/prime
+    number-theory/misc
+    number-theory/modeq
+    graph/dinic
+    graph/lca
+    graph/centroid
+    graph/heavylight
+    graph/heavylight2
+    data-structures/persistent_segtree
+    data-structures/fast_line_container
+    strings/aho_corasick
+    various/set_tricks
+    various/compression
 )
 
 foreach(CUR ${SOURCES_LIST})
     string(REPLACE "/" "_" UNDERSCORED "${CUR}")
     string(REGEX MATCH "^[^/]*" FST "${CUR}")
     string(REGEX MATCH "[^/]*$" SND "${CUR}")
-    add_library(lib_${UNDERSCORED} src/${CUR}.cpp)
-    add_executable(test_${UNDERSCORED} src/${CUR}_test.cpp)
+    add_library(lib_${UNDERSCORED} src/trinerdi/${CUR}.cpp)
+    add_executable(test_${UNDERSCORED} src/trinerdi/${CUR}_test.cpp)
     target_link_libraries(test_${UNDERSCORED} gtest gtest_main lib_${UNDERSCORED})
     add_test(test_${UNDERSCORED} test_${UNDERSCORED})
 endforeach(CUR)
