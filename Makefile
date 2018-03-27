@@ -4,7 +4,7 @@ build-all:
 	@mkdir -p build
 	cd build && cmake ..
 	# -j makes make run in parallel
-	cd build && make -j
+	cd build && make -j 4
 
 clean:
 	rm -rf ./build export/*.log export/out.{tex,pdf}
