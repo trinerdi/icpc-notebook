@@ -115,7 +115,7 @@ TEST(Dinic, BenchmarkV100E10000) {
     rep(i, 0, m) {
         d.addEdge(rand() % n, rand() % n, range + rand() % range);
     }
-    ll flow = d.getFlow(0, n - 1);
+    d.getFlow(0, n - 1);
 }
 
 
