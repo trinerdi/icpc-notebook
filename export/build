@@ -83,7 +83,7 @@ def highlight_and_texify(text):
     return highlight(text)
 
 
-def make_header(header):
+def make_header(header, processed_fn):
     """Extracts relevant information from the header, returns TeX code."""
     def texify(text):
         """A set of hacks trying to convert most common shortcuts in the kactl
@@ -93,21 +93,24 @@ def make_header(header):
         return text
 
     # Other keywords are silently discarded
-    keywords = ["Description", "Time", "Memory", "Usage"]
+    keywords = ["Description", "Time", "Memory", "Usage", "Name"]
 
     l = []
+    heading = "\\ttheader{%s}" % processed_fn
     for h in keywords:
-        if h in header:
-            if h == "Usage":
-                # TODO: quite a hack
-                l.append("{\\leftskip=\\usagedimen\\item{\\bf Usage:}\\raggedright\\simpleverb|%s\\egroup\\par}" % highlight_and_texify(header[h]))
-            else:
-                l.append("{\\bf %s:} %s" % (h, texify(header[h])))
+        if h not in header:
+            continue
 
-    if not l:
-        return ""
-    else:
-        return "\n\n".join(l)
+        if h == "Usage":
+            # TODO: quite a hack
+            l.append("{\\leftskip=\\usagedimen\\item{\\bf Usage:}\\raggedright\\simpleverb|%s\\egroup\\par}" % highlight_and_texify(header[h]))
+        elif h == "Name":
+            heading = "\\header{%s}" % header[h]
+        else:
+            l.append("{\\bf %s:} %s" % (h, texify(header[h])))
+
+    l = [heading] + l
+    return "\n\n".join(l)
 
 
 def process_file(f, chdir="../src"):
@@ -132,8 +135,7 @@ def process_file(f, chdir="../src"):
 
     def work():
         header, text = process(readfile(chdir + "/" + f))
-        yield "\\header{%s}" % sanitize(f)
-        header_text = make_header(header)
+        header_text = make_header(header, sanitize(f))
         if header_text:
             yield header_text
         yield "\n\\smallskip\\verb|" + text
