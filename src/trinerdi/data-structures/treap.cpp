@@ -6,7 +6,7 @@
  * Usage:
  *  Treap* t = NULL;
  *  insert(t, 5); insert(t, 2);
- *  assert(indexOf(t, 5) == 1); assert(getKth(t, 1) == 5);
+ *  assert(getKth(t, 1) == 5);
  */
 #include "../base.hpp"
 
@@ -15,24 +15,18 @@
 struct Treap {
     Treap *lson = NULL, *rson = NULL;
     ll val;
-    int weight;
-    int size = 0;
-    
+    int weight, size = 0;
     Treap(ll _val) : val(_val), weight(rand()), size(1) {}
-    
-    ~Treap() {
-        delete lson;
-        delete rson;
-    }
-    
+    ~Treap() { delete lson; delete rson; }
     void setSon(bool right, Treap *newSon) {
-        Treap *&upd = right ? (rson) : (lson);
+        Treap *&upd = right ? rson : lson;
         upd = newSon;
         size = 1 + SIZE(lson) + SIZE(rson);
     }
 };
 
-Treap* merge(Treap *l, Treap *r) {
+// Warning: Mutates l, r. All of l must be lower than r.
+Treap* merge(Treap *l, Treap *r) { 
     if (!l) return r;
     if (!r) return l;
     if (l->weight > r->weight) {
@@ -44,7 +38,7 @@ Treap* merge(Treap *l, Treap *r) {
     }
 }
 
-pair<Treap*, Treap*> split(Treap *a, ll val) {
+pair<Treap*, Treap*> split(Treap *a, ll val) { // Warning: Mutates a
     if (!a) return {NULL, NULL};
     if (a->val <= val) {
         pair<Treap*, Treap*> res = split(a->rson, val);
@@ -62,8 +56,7 @@ void insert(Treap *&a, ll val) {
         a = new Treap(val);
     } else {
         pair<Treap*, Treap*> spl = split(a, val);
-        a = merge(spl.first, new Treap(val));
-        a = merge(a, spl.second);
+        a = merge(merge(spl.first, new Treap(val)), spl.second);
     }
 }
 
@@ -82,23 +75,7 @@ ll getKth(Treap *a, int k) { // zero-indexed
         int lsize = SIZE(a->lson);
         if (lsize == k)
             return a->val;
-        else if (lsize > k)
-            a = a->lson;
-        else
-            a = a->rson, k -= lsize + 1;
-    }
-}
-
-int indexOf(Treap *a, ll val) {
-    int res = 0;
-    while (true) {
-        if (!a) return -1;
-        int lsize = SIZE(a->lson);
-        if (a->val == val)
-            return res + lsize;
-        else if (val < a->val)
-            a = a->lson;
-        else
-            res += lsize + 1, a = a->rson;
+        else if (lsize > k) a = a->lson;
+        else a = a->rson, k -= lsize + 1;
     }
 }
