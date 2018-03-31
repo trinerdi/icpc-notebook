@@ -4,25 +4,6 @@
 
 [[trinerdi/base.hpp]]
 [[trinerdi/sc.sh]]
-[[trinerdi/numerical/ntt.cpp]]
-[[trinerdi/numerical/fft.cpp]]
-[[trinerdi/data-structures/treap.cpp]]
-[[trinerdi/number-theory/prime.cpp]]
-[[trinerdi/number-theory/misc.cpp]]
-[[trinerdi/number-theory/modeq.cpp]]
-[[trinerdi/import/numth/composite_comb.cpp]]
-[[trinerdi/import/numth/dlog.cpp]]
-[[trinerdi/graph/dinic.cpp]]
-[[trinerdi/graph/centroid.cpp]]
-[[trinerdi/graph/heavylight2.cpp]]
-[[trinerdi/various/set_tricks.cpp]]
-[[trinerdi/various/compression.cpp]]
-
-KACTL part:
-
-%\input chapters/math
-
-%\kactlchapter{math}
 
 \chapter{Data structures}
 
@@ -38,6 +19,7 @@ KACTL part:
 [[kactl/data-structures/FenwickTree.h]]
 [[kactl/data-structures/FenwickTree2d.h]]
 [[kactl/data-structures/RMQ.h]]
+[[trinerdi/data-structures/treap.cpp]]
 
 \chapter{Numerical}
 
@@ -58,9 +40,15 @@ KACTL part:
 [[kactl/numerical/MatrixInverse.h]]
 %[[kactl/numerical/Tridiagonal.h]]
 [[kactl/numerical/FFT.h]]
+[[trinerdi/numerical/ntt.cpp]]
+%[[trinerdi/numerical/fft.cpp]] % KACTL's FFT is faster
 
 \chapter{Number theory}
-
+[[trinerdi/number-theory/prime.cpp]]
+[[trinerdi/number-theory/misc.cpp]]
+[[trinerdi/number-theory/modeq.cpp]]
+[[trinerdi/import/numth/composite_comb.cpp]]
+[[trinerdi/import/numth/dlog.cpp]]
 [[kactl/number-theory/ModularArithmetic.h]]
 [[kactl/number-theory/ModInverse.h]]
 %[[kactl/number-theory/ModPow.h]]
@@ -106,7 +94,10 @@ KACTL part:
 [[kactl/graph/TreePower.h]]
 [[kactl/graph/LCA.h]]
 [[kactl/graph/CompressTree.h]]
-%[[kactl/graph/HLD.h]]
+%[[trinerdi/graph/dinic.cpp]] % PushRelabel is faster on SPOJ FASTFLOW
+[[trinerdi/graph/centroid.cpp]]
+[[trinerdi/graph/heavylight2.cpp]]
+%[[kactl/graph/HLD.h]] % Our HLD is shorter
 [[kactl/graph/LinkCutTree.h]]
 [[kactl/graph/MatrixTree.h]]
 
@@ -166,6 +157,8 @@ KACTL part:
 
 \chapter{Various}
 
+[[trinerdi/various/set_tricks.cpp]]
+[[trinerdi/various/compression.cpp]]
 [[kactl/various/IntervalContainer.h]]
 [[kactl/various/IntervalCover.h]]
 [[kactl/various/ConstantIntervals.h]]
