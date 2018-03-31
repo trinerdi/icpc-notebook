@@ -1,4 +1,5 @@
 /**
+ * Name: Prime sieve, primality test
  * Author: Richard Hladik
  * Description: Sieve of Eratosthenes for finding primes up to m (inclusive).
  *  Deterministic Miller-Rabin primality test, works for $p \leq 2^{32}$.

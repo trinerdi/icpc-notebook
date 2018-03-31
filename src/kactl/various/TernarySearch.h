@@ -1,4 +1,5 @@
 /**
+ * Name: Ternary search
  * Author: Simon Lindholm
  * Date: 2015-05-12
  * License: CC0

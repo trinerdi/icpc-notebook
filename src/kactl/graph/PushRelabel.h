@@ -1,4 +1,5 @@
 /**
+ * Name: Goldberg's (push-relabel) algorithm
  * Author: Simon Lindholm
  * Date: 2015-02-24
  * License: CC0

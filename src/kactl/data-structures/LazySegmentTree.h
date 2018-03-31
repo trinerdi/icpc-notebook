@@ -1,4 +1,5 @@
 /**
+ * Name: Lazy segment tree
  * Author: Simon Lindholm
  * Date: 2016-10-08
  * License: CC0

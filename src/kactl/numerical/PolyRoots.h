@@ -1,4 +1,5 @@
 /**
+ * Name: Polynomial roots
  * Author: Per Austrin
  * Date: 2004-02-08
  * License: CC0

@@ -1,4 +1,5 @@
 /**
+ * Name: Knuth DP optimization
  * Author: Simon Lindholm
  * License: CC0
  * Source: http://codeforces.com/blog/entry/8219

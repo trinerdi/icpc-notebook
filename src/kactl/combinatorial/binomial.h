@@ -1,4 +1,5 @@
 /**
+ * Name: Binomial coefficient
  * Author: Lukas Polacek
  * Date: 2009-11-01
  * License: CC0

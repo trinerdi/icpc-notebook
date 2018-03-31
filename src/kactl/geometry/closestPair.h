@@ -1,4 +1,5 @@
 /**
+ * Name: Closest pair of points
  * Author: Per Austrin, Max Bennedich, Gunnar Kreitz
  * Date: 2004-03-15
  * Description: $i_1$, $i_2$ are the indices to the closest pair of points in the point vector $p$

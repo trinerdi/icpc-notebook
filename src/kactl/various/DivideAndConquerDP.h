@@ -1,4 +1,5 @@
 /**
+ * Name: Divide and conquer
  * Author: Simon Lindholm
  * License: CC0
  * Source: Codeforces

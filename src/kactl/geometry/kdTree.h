@@ -1,4 +1,5 @@
 /**
+ * Name: KD tree
  * Author: Stanford
  * Date: Unknown
  * Source: Stanford Notebook

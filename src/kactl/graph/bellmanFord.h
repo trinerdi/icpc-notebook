@@ -1,4 +1,5 @@
 /**
+ * Name: Bellman--Ford
  * Author: Simon Lindholm
  * Date: 2015-02-23
  * License: CC0

@@ -1,4 +1,5 @@
 /**
+ * Name: Split function into constant intervals
  * Author: Simon Lindholm
  * Date: 2015-03-20
  * License: CC0

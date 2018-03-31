@@ -1,4 +1,5 @@
 /**
+ * Name: Point
  * Author: Ulf Lundstrom
  * Date: 2009-02-26
  * License: CC0

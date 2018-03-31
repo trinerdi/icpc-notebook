@@ -1,4 +1,5 @@
 /**
+ * Name: Linear equations
  * Author: Per Austrin, Simon Lindholm
  * Date: 2004-02-08
  * License: CC0

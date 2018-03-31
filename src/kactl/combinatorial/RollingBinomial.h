@@ -1,4 +1,5 @@
 /**
+ * Name: Rolling binomial
  * Author: Simon Lindholm
  * Date: 2015-03-02
  * License: CC0

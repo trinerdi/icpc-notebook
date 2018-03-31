@@ -1,4 +1,5 @@
 /**
+ * Name: Global min-cut
  * Author: Stanford
  * Date: Unknown
  * Source: Stanford Notebook, http://www.cs.tau.ac.il/~zwick/grad-algo-08/gmc.pdf

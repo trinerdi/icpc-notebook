@@ -1,4 +1,5 @@
 /**
+ * Name: General matching
  * Author: Simon Lindholm
  * Date: 2016-12-09
  * License: CC0

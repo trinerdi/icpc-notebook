@@ -1,4 +1,5 @@
 /**
+ * Name: Linear equations in Z\lower 1.5pt\hbox{\tenbf 2}
  * Author: Simon Lindholm
  * Date: 2016-08-27
  * License: CC0

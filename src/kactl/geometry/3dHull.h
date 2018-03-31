@@ -1,4 +1,5 @@
 /**
+ * Name: 3D hull
  * Author: Johan Sannemo
  * Date: 2017-04-18
  * Source: derived from https://gist.github.com/msg555/4963794 by Mark Gordon

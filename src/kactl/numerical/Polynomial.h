@@ -1,4 +1,5 @@
 /**
+ * Name: Polynomial
  * Author: David Rydh, Per Austrin
  * Date: 2003-03-16
  * Description: A struct for operating on polynomials.

@@ -1,4 +1,5 @@
 /**
+ * Name: Strongly connected components
  * Author: Lukas Polacek
  * Date: 2009-10-28
  * License: CC0

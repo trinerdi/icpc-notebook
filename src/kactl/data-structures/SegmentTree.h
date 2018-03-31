@@ -1,4 +1,5 @@
 /**
+ * Name: Segment tree
  * Author: Lukas Polacek, Johan Sannemo
  * Date: 2009-10-26, 2015-02-10
  * License: CC0

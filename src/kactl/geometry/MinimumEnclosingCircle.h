@@ -1,4 +1,5 @@
 /**
+ * Name: Minimum enclosing circle
  * Author: Simon Lindholm
  * Date: 2017-04-20
  * License: CC0

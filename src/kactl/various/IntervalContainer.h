@@ -1,4 +1,5 @@
 /**
+ * Name: Interval container
  * Author: Simon Lindholm
  * License: CC0
  * Description: Add and remove intervals from a set of disjoint intervals.

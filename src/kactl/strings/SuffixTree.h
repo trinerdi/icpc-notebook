@@ -1,4 +1,5 @@
 /**
+ * Name: Suffix tree
  * Author: Unknown
  * Date: 2017-05-15
  * Source: https://e-maxx.ru/algo/ukkonen

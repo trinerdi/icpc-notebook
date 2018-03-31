@@ -1,7 +1,8 @@
 /**
+ * Name: Chinese remainder theorem
  * Author: Mattias de Zalenski, Per Austrin, Lukas Polacek
  * Date: 2003-02-16
- * Description: Chinese Remainder Theorem.
+ * Description:
  *  {\tt chinese(a, m, b, n)} returns a number $x$, such that
  *  $x\equiv a \pmod m$ and $x\equiv b \pmod n$. For not
  *  coprime $n, m$, use \texttt{chinese\_common}. Note that all numbers must be less than

@@ -1,4 +1,5 @@
 /**
+ * Name: Golden section search
  * Author: Ulf Lundstrom
  * Date: 2009-04-17
  * License: CC0

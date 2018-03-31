@@ -1,4 +1,5 @@
 /**
+ * Name: Modular multiplication for ll
  * Author: Lukas Polacek
  * Date: 2010-01-26
  * License: CC0

@@ -1,4 +1,5 @@
 /**
+ * Name: Inside polygon (general)
  * Author: Ulf Lundstrom
  * Date: 2009-03-22
  * License: CC0

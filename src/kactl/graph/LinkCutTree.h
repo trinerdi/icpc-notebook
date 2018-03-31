@@ -1,4 +1,5 @@
 /**
+ * Name: Link-cut tree
  * Author: Simon Lindholm
  * Date: 2016-07-25
  * Source: https://github.com/ngthanhtrung23/ACM_Notebook_new/blob/master/DataStructure/LinkCut.h

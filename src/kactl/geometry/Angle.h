@@ -1,4 +1,5 @@
 /**
+ * Name: Angle
  * Author: Simon Lindholm
  * Date: 2015-01-31
  * License: CC0

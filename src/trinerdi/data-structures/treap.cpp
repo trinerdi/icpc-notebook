@@ -1,4 +1,5 @@
 /**
+ * Name: Treap
  * Author: Vaclav Volhejn
  * Description: Binary search tree supporting k-th smallest element queries
  *  and getting indices of elements. Higher weights are higher in the heap.

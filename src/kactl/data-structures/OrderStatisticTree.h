@@ -1,4 +1,5 @@
 /**
+ * Name: Order statistics tree
  * Author: Simon Lindholm
  * Date: 2016-03-22
  * License: CC0

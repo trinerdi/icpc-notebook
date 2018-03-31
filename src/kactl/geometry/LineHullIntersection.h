@@ -1,4 +1,5 @@
 /**
+ * Name: Intersect line with convex polygon (queries)
  * Author: Johan Sannemo
  * Date: 2017-05-15
  * License: CC0

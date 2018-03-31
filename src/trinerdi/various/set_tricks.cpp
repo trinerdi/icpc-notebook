@@ -1,4 +1,5 @@
 /**
+ * Name: Closest lower element in a set
  * Author: Václav Volhejn
  * Description: Functions to get the closest lower element in a set.
  *  Given $S$, $k$, returns $\max \{x \mid x \in S; x \leq k\}$, or $-\infty$

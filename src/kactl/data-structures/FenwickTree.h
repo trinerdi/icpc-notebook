@@ -1,4 +1,5 @@
 /**
+ * Name: Fenwick Tree
  * Author: Lukas Polacek
  * Date: 2009-10-30
  * License: CC0

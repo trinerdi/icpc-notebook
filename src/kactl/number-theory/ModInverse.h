@@ -1,4 +1,5 @@
 /**
+ * Name: Modular inverse (precomputation)
  * Author: Simon Lindholm
  * Date: 2016-07-24
  * License: CC0

@@ -1,4 +1,5 @@
 /**
+ * Name: LCA
  * Author: Johan Sannemo, Simon Lindholm
  * Date: 2015-09-20
  * License: CC0

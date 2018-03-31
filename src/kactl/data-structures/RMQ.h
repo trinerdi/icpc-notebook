@@ -1,4 +1,5 @@
 /**
+ * Name: RMQ
  * Author: Johan Sannemo
  * Date: 2015-02-06
  * License: CC0

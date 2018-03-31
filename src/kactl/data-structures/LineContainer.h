@@ -1,4 +1,5 @@
 /**
+ * Name: Line container
  * Author: Simon Lindholm
  * Date: 2017-04-20
  * License: CC0

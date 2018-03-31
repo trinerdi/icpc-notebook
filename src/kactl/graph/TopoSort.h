@@ -1,4 +1,5 @@
 /**
+ * Name: Topological sorting
  * Author: Unknown
  * Date: 2002-09-13
  * Source: predates tinyKACTL

@@ -1,4 +1,5 @@
 /**
+ * Name: Longest common subsequence
  * Author: Håkan Terelius
  * Date: 2010-11-07
  * License: CC0

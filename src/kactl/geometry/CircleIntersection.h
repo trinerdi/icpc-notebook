@@ -1,4 +1,5 @@
 /**
+ * Name: Circle intersection
  * Author: Simon Lindholm
  * Date: 2015-09-01
  * License: CC0

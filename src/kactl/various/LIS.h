@@ -1,4 +1,5 @@
 /**
+ * Name: Longest increasing subsequence
  * Author: Johan Sannemo
  * License: CC0
  * Description: Compute indices for the longest increasing subsequence.
