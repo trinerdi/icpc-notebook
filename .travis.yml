@@ -1,2 +1,12 @@
 language: cpp
-script: make test
+script: make test book
+
+sudo: required
+addons:
+  apt:
+    packages:
+      - texlive-xetex
+      - texlive-fonts-extra
+
+notifications:
+  email: false

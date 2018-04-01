@@ -3,7 +3,7 @@ import hashlib
 import os
 import re
 import sys
-
+import subprocess
 
 FILE_LIST = "notebook.tex"
 OUT_NAME = "out"
@@ -150,7 +150,8 @@ def main():
     with open("%s.tex" % OUT_NAME, "w") as f:
         f.write(text)
 
-    os.system("xetex %s" % OUT_NAME)
+    exit_code = subprocess.call(["xetex", OUT_NAME])
+    return exit_code
 
 
 def parse_header(text):
