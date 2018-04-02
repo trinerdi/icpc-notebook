@@ -16,7 +16,7 @@ enable_testing()
 # Tests
 set(SOURCES_LIST
     numerical/fft
-    numerical/ntt
+    number-theory/ntt
     data-structures/treap
     number-theory/prime
     number-theory/misc
