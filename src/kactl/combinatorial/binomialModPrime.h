@@ -1,4 +1,5 @@
 /**
+ * Name: Binomial modulo prime
  * Author: Håkan Terelius
  * Date: 2009-09-25
  * License: CC0

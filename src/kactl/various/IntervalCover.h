@@ -1,4 +1,5 @@
 /**
+ * Name: Interval cover
  * Author: Johan Sannemo
  * License: CC0
  * Description: Compute indices of smallest set of intervals covering another interval.

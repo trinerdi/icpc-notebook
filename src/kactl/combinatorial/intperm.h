@@ -1,4 +1,5 @@
 /**
+ * Name: Permutation serialization
  * Author: Per Austrin
  * Date: 2003-09-23
  * License: CC0

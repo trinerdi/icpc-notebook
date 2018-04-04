@@ -1,4 +1,5 @@
 /**
+ * Name: Circumcircle
  * Author: Ulf Lundstrom
  * Date: 2009-04-11
  * License: CC0

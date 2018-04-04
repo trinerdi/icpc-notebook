@@ -1,4 +1,5 @@
 /**
+ * Name: Binary search
  * Author: Ulf Lundstrom
  * Date: 2009-08-07
  * License: CC0

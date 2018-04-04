@@ -1,4 +1,5 @@
 /**
+ * Name: Suffix array
  * Author: Lukas Polacek
  * Date: 2009-10-27
  * License: CC0

@@ -1,4 +1,5 @@
 /**
+ * Name: Matrix inversion
  * Author: Max Bennedich
  * Date: 2004-02-08
  * Description: Invert matrix $A$. Returns rank; result is stored in $A$ unless singular (rank < n).

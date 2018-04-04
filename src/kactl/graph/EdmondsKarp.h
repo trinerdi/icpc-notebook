@@ -1,4 +1,5 @@
 /**
+ * Name: Edmonds--Karp
  * Author: Chen Xing
  * Date: 2009-10-13
  * License: CC0

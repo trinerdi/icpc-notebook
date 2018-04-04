@@ -1,4 +1,5 @@
 /**
+ * Name: Dinic's algorithm
  * Author: Vaclav Volhejn
  * Source: Based heavily on the Stanford implementation.
  * Description: The edges with flow>0 were used in the resulting flow.

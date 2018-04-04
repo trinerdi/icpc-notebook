@@ -1,4 +1,5 @@
 /**
+ * Name: Linear equations${}^{++}$
  * Author: Simon Lindholm
  * Date: 2016-09-06
  * License: CC0

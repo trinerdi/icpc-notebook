@@ -1,4 +1,5 @@
 /**
+ * Name: Coordinate compression
  * Author: Václav Volhejn
  * Description: Compress vector $v$ into $v'$ such that $v_i < v_j \iff v'_i < v'_j$
  *  and elements are integers bounded by $0 \leq v'_i < |v|$. Mutates $v$.

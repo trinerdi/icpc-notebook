@@ -1,4 +1,5 @@
 /**
+ * Name: Circle tangents
  * Author: Ulf Lundstrom
  * Date: 2009-04-06
  * License: CC0

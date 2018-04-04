@@ -1,4 +1,5 @@
 /**
+ * Name: Euler walk
  * Author: Chen Xing
  * Date: 2009-04-14
  * License: CC0

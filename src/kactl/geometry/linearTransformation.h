@@ -1,4 +1,5 @@
 /**
+ * Name: Linear transformation
  * Author: Per Austrin, Ulf Lundstrom
  * Date: 2009-04-09
  * Source:

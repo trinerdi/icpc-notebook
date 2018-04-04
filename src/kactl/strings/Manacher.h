@@ -1,4 +1,5 @@
 /**
+ * Name: Longest palindrome
  * Author: User adamant on CodeForces
  * Source: http://codeforces.com/blog/entry/12143
  * Description: For each position in a string, computes $p[0][i]$ = half length of

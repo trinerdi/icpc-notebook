@@ -1,4 +1,5 @@
 /**
+ * Name: Fast line container
  * Author: Vaclav Volhejn, based on Simon Lindholm's code
  * Description: Container where you can add lines of the form $kx+m$,
  *  and query maximum values at points $x$. Assumes that the $k$s of the added lines

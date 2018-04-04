@@ -1,4 +1,5 @@
 /**
+ * Name: String hashing
  * Author: Simon Lindholm
  * Date: 2015-03-15
  * License: CC0

@@ -1,4 +1,5 @@
 /**
+ * Name: Modular arithmetic
  * Author: Lukas Polacek
  * Date: 2009-09-28
  * License: CC0

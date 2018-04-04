@@ -1,4 +1,5 @@
 /**
+ * Name: HLD + LCA
  * Author: Richard Hladik
  * Source: The concept of HLD with rearranging of sons borrowed from <codeforces.com/blog/entry/53170>
  * Description: Calculates the heavy-light decomposition of given tree.

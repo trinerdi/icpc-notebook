@@ -1,4 +1,5 @@
 /**
+ * Name: Minimum vertex cover
  * Author: Johan Sannemo, Simon Lindholm
  * Date: 2016-12-15
  * License: CC0

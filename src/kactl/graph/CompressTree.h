@@ -1,4 +1,5 @@
 /**
+ * Name: Tree compression
  * Author: Simon Lindholm
  * Date: 2016-01-14
  * License: CC0

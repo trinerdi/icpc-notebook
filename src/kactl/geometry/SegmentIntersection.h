@@ -1,4 +1,5 @@
 /**
+ * Name: Segment intersection
  * Author: Ulf Lundstrom
  * Date: 2009-03-21
  * License: CC0

@@ -1,4 +1,5 @@
 /**
+ * Name: Lexigographically smallest rotation
  * Author: Stjepan Glavina
  * Source: https://github.com/stjepang/snippets/blob/master/min_rotation.cpp
  * Description: Finds the lexicographically smallest rotation of a string.

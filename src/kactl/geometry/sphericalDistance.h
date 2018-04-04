@@ -1,4 +1,5 @@
 /**
+ * Name: Spherical distance
  * Author: Ulf Lundstrom
  * Date: 2009-04-07
  * License: CC0

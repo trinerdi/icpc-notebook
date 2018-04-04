@@ -42,13 +42,13 @@ def highlight(text):
         pre, text, post = pre, post[0], post[1]
 
         # The recursion level will be at most 5
-        return (highlight(pre) + "\\%s{%s%s%s}" % (name, begin, text, end), post)
+        return (highlight(pre) + r"\%s{%s%s%s}" % (name, begin, text, end), post)
 
     l = []
     while True:
         # The order is important: /* "string" */ will be highlighted as a comment
         # TODO: preprocessor directives should be ^#.*, but we don't support regexes here
-        for b, e, n in [("//", "\n", "com"), ("/*", "*/", "com"), ("#", "\n", "dir"), ("\"", "\"", "str"), ("'", "'", "str")]:
+        for b, e, n in [("//", "\n", "com"), ("/*", "*/", "com"), ("#", "\n", "dir"), ('"', '"', "str"), ("'", "'", "str")]:
             res = sp(b, e, n, text)
             if res is not None:
                 l.append(res[0])
@@ -77,37 +77,40 @@ def highlight(text):
 
 
 def highlight_and_texify(text):
-    for i in [("\\", "\\\\"), ("{", "\\{"), ("}", "\\}"), ("\n\\}\n\n", "\n\\}\n\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
+    for i in [("\\", r"\\"), ("{", r"\{"), ("}", r"\}"), ("\n\\}\n\n", "\n\\}\n\\greatsk\n"), ("\n\n", "\n\\sk\n")]:
         text = text.replace(i[0], i[1])
 
     return highlight(text)
 
 
-def make_header(header):
+def make_header(header, processed_filename):
     """Extracts relevant information from the header, returns TeX code."""
     def texify(text):
         """A set of hacks trying to convert most common shortcuts in the kactl
         headers (not entering math mode when describing complexities)."""
-        text = text.replace("$O", "$\\O").replace("*", "\cdot ")
+        text = text.replace("$O", r"$\O").replace("*", "\cdot ")
         text = re.sub(r"^O\((.*?)\)", r"$\O(\1)$", text)
         return text
 
     # Other keywords are silently discarded
-    keywords = ["Description", "Time", "Memory", "Usage"]
+    keywords = ["Description", "Time", "Memory", "Usage", "Name"]
 
     l = []
+    heading = r"\ttheader{%s}" % processed_filename
     for h in keywords:
-        if h in header:
-            if h == "Usage":
-                # TODO: quite a hack
-                l.append("{\\leftskip=\\usagedimen\\item{\\bf Usage:}\\raggedright\\simpleverb|%s\\egroup\\par}" % highlight_and_texify(header[h]))
-            else:
-                l.append("{\\bf %s:} %s" % (h, texify(header[h])))
+        if h not in header:
+            continue
 
-    if not l:
-        return ""
-    else:
-        return "\n\n".join(l)
+        if h == "Usage":
+            # TODO: quite a hack
+            l.append(r"{\leftskip=\usagedimen\item{\bf Usage:}\raggedright\simpleverb|%s\egroup\par}" % highlight_and_texify(header[h]))
+        elif h == "Name":
+            heading = r"\header{%s}" % header[h]
+        else:
+            l.append(r"{\bf %s:} %s" % (h, texify(header[h])))
+
+    l = [heading] + l
+    return "\n\n".join(l)
 
 
 def process_file(f, chdir="../src"):
@@ -123,21 +126,20 @@ def process_file(f, chdir="../src"):
         highlighted = highlight_and_texify(text)
 
         def puttogether(hash, line):
-            return "\\h{%s}  %s" % (hash, line) if hash else line
+            return r"\h{%s}  %s" % (hash, line) if hash else line
 
         return header, "\n".join(puttogether(*a) for a in zip(checksums, highlighted.split("\n"))).strip()
 
     def sanitize(text):
-        return text.replace("_", "\\_")
+        return text.replace("_", r"\_")
 
     def work():
         header, text = process(readfile(chdir + "/" + f))
-        yield "\\header{%s}" % sanitize(f)
-        header_text = make_header(header)
+        header_text = make_header(header, sanitize(f))
         if header_text:
             yield header_text
         yield "\n\\smallskip\\verb|" + text
-        yield "\\egroup"
+        yield "\egroup"
 
     print(f)
     return "\n".join(work())

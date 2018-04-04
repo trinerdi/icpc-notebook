@@ -1,4 +1,5 @@
 /**
+ * Name: 3D point
  * Author: Ulf Lundstrom with inspiration from tinyKACTL
  * Date: 2009-04-14
  * License: CC0

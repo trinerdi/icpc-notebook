@@ -1,4 +1,5 @@
 /**
+ * Name: Modular square roots
  * Author: Simon Lindholm
  * Date: 2016-08-31
  * License: CC0

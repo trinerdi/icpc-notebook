@@ -1,4 +1,5 @@
 /**
+ * Name: KMP
  * Author: Johan Sannemo
  * License: CC0
  * Description: $pi[x]$ computes the length of the longest prefix of $s$ that ends at $x$,

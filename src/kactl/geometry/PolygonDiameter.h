@@ -1,4 +1,5 @@
 /**
+ * Name: Polygon diameter
  * Author: Johan Sannemo
  * Date: 2017-03-12
  * License: CC0

@@ -1,4 +1,5 @@
 /**
+ * Name: Aho--Corasick
  * Author: Richard Hladík
  * Description: A (non-compressed) trie implementation and the Aho-Corasick
  *  algorithm. \verb|occurence(i, id)} is called every time there is an

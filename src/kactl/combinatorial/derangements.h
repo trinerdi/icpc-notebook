@@ -1,8 +1,10 @@
 /**
+ * Name: Derangements
  * Author: Per Austrin
  * Date: 2004-03-22
  * License: CC0
- * Description: Generates the $i$:th derangement of $S_n$ (in lexicographical order).
+ * Description: Generates the $i$-th derangement of $S_n$ (in lexicographical
+ *  order). (Derangement is a permutation with no fixed points.)
  */
 #pragma once
 

@@ -1,4 +1,5 @@
 /**
+ * Name: Centroid decomposition
  * Author: Richard Hladik
  * Description: Centroid-decomposes given tree. The sample usage calculates degree of
  *  each vertex.

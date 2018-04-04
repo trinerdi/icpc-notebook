@@ -1,4 +1,5 @@
 /**
+ * Name: Linear programming
  * Author: Stanford
  * Source: Stanford Notebook
  * Description: Solves a general linear maximization problem: maximize $c^T x$ subject to $Ax \le b$, $x \ge 0$.

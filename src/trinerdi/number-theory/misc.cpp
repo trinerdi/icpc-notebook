@@ -1,4 +1,5 @@
 /**
+ * Name: Fast exponentiation
  * Author: Richard Hladik
  * Description: Returns $a^p\ \%\ mod$.
  * Time: $O(\log p)$

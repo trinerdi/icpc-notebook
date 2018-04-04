@@ -1,4 +1,5 @@
 /**
+ * Name: Segment intersection (boolean version)
  * Author: Simon Lindholm (but heavily derived from SegmentIntersection.h, by Ulf)
  * Date: 2016-09-24
  * Source: SegmentIntersection.h

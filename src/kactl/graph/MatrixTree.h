@@ -1,4 +1,5 @@
 /**
+ * Name: Counting the number of spanning trees
  * Author: Simon Lindholm
  * Date: 2016-09-06
  * Source: Wikipedia

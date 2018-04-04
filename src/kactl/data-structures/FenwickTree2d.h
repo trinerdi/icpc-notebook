@@ -1,4 +1,5 @@
 /**
+ * Name: 2D Fenwick tree
  * Author: Simon Lindholm
  * Date: 2017-05-11
  * License: CC0

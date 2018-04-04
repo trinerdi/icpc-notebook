@@ -1,4 +1,5 @@
 /**
+ * Name: Polygon's center of mass
  * Author: Ulf Lundstrom
  * Date: 2009-04-08
  * License: CC0

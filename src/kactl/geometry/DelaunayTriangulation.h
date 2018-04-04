@@ -1,4 +1,5 @@
 /**
+ * Name: Delaunay triangulation
  * Author: Mattias de Zalenski
  * Date: Unknown
  * Source: Geometry in C

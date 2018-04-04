@@ -1,4 +1,5 @@
 /**
+ * Name: Point on segment
  * Author: Ulf Lundstrom
  * Date: 2009-04-09
  * License: CC0
