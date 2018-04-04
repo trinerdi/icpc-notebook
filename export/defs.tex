@@ -3,10 +3,53 @@
 \newdimen\charheight
 
 \def\dofont#1, #2!{"#1" at #2\relax}
-\newdimen\fontsize
 \newdimen\serifsize
+\newdimen\fontsize
 \newdimen\scriptsize
 \newdimen\scriptscriptsize
+% \serifsize is to be set in config, other three are temporary
+
+\newfam\doublefam
+\def\mathbb{\fam=\doublefam}
+
+% Switches to monospace font with given size
+% Before calling, \monofont must be defined
+\def\mkmonofam#1{%
+	\fontsize=#1
+	% multiplied to visually match serif
+	\multiply\fontsize by6
+	\divide\fontsize by7
+	\font\tenrm=\monofont, \fontsize!%
+	\font\tenbf=\monofont/B, \fontsize!%
+	\font\tenit=\monofont/I, \fontsize!%
+}
+
+% Switches to serif font family with given size.
+% Automatically determines \baselineskip, script and superscript sizes.
+\def\mkseriffam#1{%
+	\fontsize=#1\relax\scriptsize=#1\relax\scriptscriptsize=#1\relax
+	\multiply\scriptsize by 7\divide\scriptsize by 10
+	\divide\scriptscriptsize by 2
+	\font\tenrm=cmr10 at \fontsize\font\sevenrm=cmr7 at \scriptsize\font\fiverm=cmr5 at\scriptscriptsize
+	\font\tenbf=cmbx10 at \fontsize
+	\font\tenit=cmti10 at \fontsize
+	\font\teni=cmmi10 at \fontsize\font\seveni=cmmi7 at \scriptsize\font\fivei=cmmi5 at\scriptscriptsize
+	\font\tensy=cmsy10 at \fontsize\font\sevensy=cmsy7 at \scriptsize\font\fivesy=cmsy5 at\scriptscriptsize
+	\font\tenex=cmex10 at \fontsize\font\sevenex=cmex7 at \scriptsize\font\fiveex=cmex5 at\scriptscriptsize
+	\baselineskip=\fontsize
+	\multiply\baselineskip by 12\relax%
+	\divide\baselineskip by 10\relax%
+	\multiply\fontsize by 6\divide\fontsize by 7
+	\font\tentt=\monofont, \fontsize!
+	\textfont0=\tenrm \scriptfont0=\sevenrm
+	\textfont1=\teni \scriptfont1=\seveni
+	\textfont2=\tensy \scriptfont2=\sevensy
+	\textfont3=\tenex \scriptfont3=\sevenex
+	\font\doubletext=msbm10 at \fontsize
+	\textfont\doublefam=\doubletext
+}
+
+\def\tt{\tentt}
 
 \input config
 
@@ -52,9 +95,7 @@
 	% Allow blank lines (otherwise multiple consecutive \par's would be treated as one)
 	\def\par{\leavevmode\endgraf}%
 	%
-	% Allow long lines to break, let them have less \baselineskip (optically),
-	% indent line continuations
-	\baselineskip=1\fontsize\relax%
+	% Allow long lines to break, indent line continuations
 	\parskip=1.7pt plus .1pt minus .1pt%
 	\rightskip=0pt plus 1fill%
 	\leftskip=100pt%
@@ -65,6 +106,8 @@
 % Simplified version used for short code snippets
 \def\setsimpleverb{%
 	\monofam\rm
+	\calcchardimens
+	\baselineskip=\charheight\relax%
 	\makeprintable
 	\setspace\obeyspaces\obeylines%
 }
@@ -154,7 +197,6 @@
 }
 
 % Hotfixes for latex expressions in kactl
-\def\mathbb{}
 \def\text{\hbox}
 \def\textrm#1{\hbox{\rm #1}}
 \def\texttt#1{\hbox{\tt #1}}
