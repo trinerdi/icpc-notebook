@@ -36,23 +36,27 @@
 	\font\teni=cmmi10 at \fontsize\font\seveni=cmmi7 at \scriptsize\font\fivei=cmmi5 at\scriptscriptsize
 	\font\tensy=cmsy10 at \fontsize\font\sevensy=cmsy7 at \scriptsize\font\fivesy=cmsy5 at\scriptscriptsize
 	\font\tenex=cmex10 at \fontsize\font\sevenex=cmex7 at \scriptsize\font\fiveex=cmex5 at\scriptscriptsize
+	\font\tendbl=msbm10 at \fontsize\font\sevendbl=msbm7 at \scriptsize\font\fivedbl=msbm5 at\scriptscriptsize
 	\baselineskip=\fontsize
 	\multiply\baselineskip by 12\relax%
 	\divide\baselineskip by 10\relax%
+	\setbox\strutbox=\hbox{\vrule height .9\fontsize depth .4\fontsize width 0pt}%
 	\multiply\fontsize by 6\divide\fontsize by 7
 	\font\tentt=\monofont, \fontsize!
 	\textfont0=\tenrm \scriptfont0=\sevenrm
 	\textfont1=\teni \scriptfont1=\seveni
 	\textfont2=\tensy \scriptfont2=\sevensy
 	\textfont3=\tenex \scriptfont3=\sevenex
-	\font\doubletext=msbm10 at \fontsize
-	\textfont\doublefam=\doubletext
+	\textfont\bffam=\tenbf \scriptfont\bffam=\sevenbf
+	\textfont\doublefam=\tendbl \scriptfont\doublefam=\sevendbl
 }
 
 \def\tt{\tentt}
 
 \input config
 
+\abovedisplayskip=6pt plus 1.5pt minus 4.5pt
+\belowdisplayskip=6pt plus 1.5pt minus 4.5pt
 \seriffam
 \rm
 
@@ -85,9 +89,9 @@
 	\catcode`\\=0%
 	\catcode`\{=1%
 	\catcode`\}=2%
-	\gdef\{{\char123\relax}%
-	\gdef\}{\char125\relax}%
-	\gdef\\##1{\char92\relax##1}% Backspace
+	\def\{{\char123\relax}%
+	\def\}{\char125\relax}%
+	\def\\##1{\char92\relax##1}% Backspace
 }
 
 % Internal macro which sets up the environment for code listing mode
@@ -186,6 +190,7 @@
 }
 
 \def\O{{\cal O}}
+\def\d{\,{\rm d}}
 
 % TODO: quite a hack
 \newbox\usagebox
@@ -204,6 +209,7 @@
 \def\mod{\bmod}
 \def\emph#1{{\it #1\/}}
 \def\textbf#1{{\bf #1}}
+\def\mathbf#1{{\bf #1}}
 \def\binom#1#2{{#1\choose #2}}
 \def\frac#1#2{{#1\over #2}}
 
