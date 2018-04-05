@@ -199,6 +199,7 @@ def preprocess(text):
     text = re.sub(r" */\*\*.*?\*/\n?", "", text, flags=re.DOTALL | re.MULTILINE)
     text = re.sub(r"\n? *///.*", "", text, flags=re.MULTILINE)
     text = re.sub(r"^\s*\#pragma once", "", text, flags=re.DOTALL).strip()
+    text = re.sub(r'^\s*\#include "\.\./base.hpp"', "", text, flags=re.DOTALL).strip()
     return header, text
 
 
