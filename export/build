@@ -152,7 +152,14 @@ def main():
     with open("%s.tex" % OUT_NAME, "w") as f:
         f.write(text)
 
-    exit_code = subprocess.call(["xetex", OUT_NAME])
+    # Two runs are needed because TOC needs to be created at all, the third one
+    # is for correct page numbers in TOC (because the TOC itself may cause
+    # things to appear one page later than previously)
+    for i in range(3):
+        exit_code = subprocess.call(["xetex", OUT_NAME])
+        if exit_code:
+            break
+
     return exit_code
 
 

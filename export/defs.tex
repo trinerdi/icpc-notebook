@@ -169,6 +169,7 @@
 
 % Before the listing of one file
 \def\header#1{%
+	\writetocentry{notebook}{kapitola|#1}
 	{%
 	\headerfont
 	\vskip 15pt plus 3pt minus 8pt
@@ -223,4 +224,23 @@
 \let\rightpic\centerpic
 \def\figure#1{\rightpic{.2\hsize}{#1}}
 
-\doublecolumns
+
+\def\tocnotebookentry#1#2{%
+	\tocwork#1|#2|\par
+}
+\def\tocwork#1|#2|#3|{{%
+	\def\tmp{#2}
+	\def\tmpB{}
+	\ifx\tmp\tmpB
+		\def\content{\medskip{\bf #1\hfill #3}}
+	\else
+		\def\content{{#2}\hfill#3}
+	\fi
+	\content\par
+}}
+
+\def\dotoc{%
+	\triplecolumns
+	{\let\ttheaderfont\tt\readtocfile}
+	\doublecolumns
+}
