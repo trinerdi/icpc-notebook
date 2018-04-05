@@ -4,7 +4,8 @@
  * Date: 2009-10-13
  * License: CC0
  * Source: N/A
- * Description: Find a maximum matching in a bipartite graph.
+ * Description: Find a maximum matching in a bipartite graph. $g$ must {\bf
+ *  only} contain edges from left to right.
  * Status: Tested on oldkattis.adkbipmatch and SPOJ:MATCHING
  * Usage: vector<int> ba(m, -1); hopcroftKarp(g, ba);
  * Time: $O(\sqrt{V}E)$
