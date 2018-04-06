@@ -43,23 +43,23 @@
 %[[trinerdi/numerical/fft.cpp]] % KACTL's FFT is faster
 
 \chapter{Number theory}
+[[trinerdi/number-theory/fastexp.cpp]]
 [[trinerdi/number-theory/prime.cpp]]
-[[trinerdi/number-theory/misc.cpp]]
-[[trinerdi/number-theory/modeq.cpp]]
-[[trinerdi/import/numth/composite_comb.cpp]]
-[[trinerdi/import/numth/dlog.cpp]]
+%[[kactl/number-theory/MillerRabin.h]] % -> our prime.cpp
+[[kactl/number-theory/eratosthenes.h]]
+%[[trinerdi/number-theory/sieve.cpp]] % KACTL's is a dependency
+[[kactl/number-theory/euclid.h]]
+%[[trinerdi/number-theory/modeq.cpp]] % What about mod inv?
 [[kactl/number-theory/ModularArithmetic.h]]
 [[kactl/number-theory/ModInverse.h]]
-%[[kactl/number-theory/ModPow.h]]
-%[[kactl/number-theory/ModSum.h]]
+%[[kactl/number-theory/ModPow.h]] % -> our fastexp.cpp
+%[[kactl/number-theory/ModSum.h]] % Obscure
 [[kactl/number-theory/ModMulLL.h]]
-[[kactl/number-theory/ModSqrt.h]]
+[[kactl/number-theory/ModSqrt.cpp]]
+[[trinerdi/import/numth/dlog.cpp]]
 %[[trinerdi/number-theory/ntt.cpp]] % KACTL's NTT is faster
 [[kactl/number-theory/NTT.h]]
-%[[kactl/number-theory/eratosthenes.h]]
-%[[kactl/number-theory/MillerRabin.h]]
 [[kactl/number-theory/factor.h]]
-%[[kactl/number-theory/euclid.h]]
 [[kactl/number-theory/phiFunction.h]]
 [[kactl/number-theory/chinese.h]]
 

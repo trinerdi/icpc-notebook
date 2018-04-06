@@ -1,4 +1,5 @@
 /**
+ * Name: Sieve of Eratosthenes
  * Author: Håkan Terelius
  * Date: 2009-08-26
  * License: CC0

@@ -13,7 +13,7 @@
 #pragma once
 
 #include "ModMulLL.h"
-#include "MillerRabin.h"
+#include "../../trinerdi/number-theory/prime.cpp"
 #include "eratosthenes.h"
 
 vector<ull> pr;
@@ -29,7 +29,7 @@ vector<ull> factor(ull d) {
 		}
 	//d is now a product of at most 2 primes.
 	if (d > 1) {
-		if (prime(d))
+		if (isprime(d))
 			res.push_back(d);
 		else while (true) {
 			ull has = rand() % 2321 + 47;

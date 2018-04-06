@@ -1,5 +1,5 @@
 #include "../base.hpp"
-#include "misc.cpp"
+#include "fastexp.cpp"
 
 int main() {
 	int a = 563982, b = 25934821, c = 179523;

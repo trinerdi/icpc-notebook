@@ -19,7 +19,8 @@ set(SOURCES_LIST
     number-theory/ntt
     data-structures/treap
     number-theory/prime
-    number-theory/misc
+    number-theory/sieve
+    number-theory/fastexp
     number-theory/modeq
     graph/dinic
     graph/lca
@@ -31,6 +32,7 @@ set(SOURCES_LIST
     strings/aho_corasick
     various/set_tricks
     various/compression
+    ../kactl/number-theory/ModSqrt
 )
 
 foreach(CUR ${SOURCES_LIST})

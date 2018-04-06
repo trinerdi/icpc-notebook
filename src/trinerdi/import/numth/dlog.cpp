@@ -1,22 +1,25 @@
-/*
- O( \sqrt{P} \log P )  discrete logarithm algorithm by Shanks
- 
- parameters: A, B, P
- expects: P is a prime, 1 < A < P < 2^31
- 
- returns: one possible \log_A B (mod P)   or -1, if none
-*/
-ll DLOG (ll A, ll B, ll P) {
+/**
+ * Name: Discrete logarithm
+ * Author: Charles University Team
+ * Description: Return a possible $\log_A B \mod P$ or $-1$ if none exists.
+ *  $P$ must be prime and $1 < A < P < 2^{31}$.
+ * Time: $O(\sqrt{P} \log P)$
+ */
+#include "../../base.hpp"
+#include "../../number-theory/fastexp.cpp"
+
+/// Shanks' algorithm
+ll dlog(ll A, ll B, ll P) {
   ll M = (ll)ceil(sqrt(P-1.0));
 
   vector< pair<ll, int> > P1, P2;
-  ll pom = MODEXP(A,M,P);
+  ll pom = fastexp(A,M,P);
   
   P1.push_back(make_pair(1,0));
   for (int i=1; i<M; i++) P1.push_back(make_pair( (P1[i-1].first * pom)%P ,i)); 
   sort(P1.begin(), P1.end());
 
-  ll Ainv = MODEXP(A,P-2,P);
+  ll Ainv = fastexp(A,P-2,P);
   P2.push_back(make_pair(B,0));
   for (int i=1; i<M; i++) P2.push_back(make_pair( (P2[i-1].first * Ainv)%P, i));
   sort(P2.begin(), P2.end());

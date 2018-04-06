@@ -14,7 +14,7 @@
  */
 #pragma once
 
-#include "ModPow.h"
+#include "../../trinerdi/number-theory/fastexp.cpp"
 
 const ll mod = (119 << 23) + 1, root = 3; // = 998244353
 // For p < 2^30 there is also e.g. (5 << 25, 3), (7 << 26, 3),
@@ -33,8 +33,8 @@ void ntt(ll* x, ll* temp, ll* roots, int N, int skip) {
 	}
 }
 void ntt(vl& x, bool inv = false) {
-	ll e = modpow(root, (mod-1) / x.size());
-	if (inv) e = modpow(e, mod-2);
+	ll e = fastexp(root, (mod-1) / x.size(), mod);
+	if (inv) e = fastexp(e, mod-2, mod);
 	vl roots(x.size(), 1), temp = roots;
 	rep(i,1,x.size()) roots[i] = roots[i-1] * e % mod;
 	ntt(&x[0], &temp[0], &roots[0], x.size(), 1);
@@ -50,7 +50,7 @@ vl conv(vl a, vl b) {
 	}
 	a.resize(n); ntt(a);
 	b.resize(n); ntt(b);
-	vl c(n); ll d = modpow(n, mod-2);
+	vl c(n); ll d = fastexp(n, mod-2, mod);
 	rep(i,0,n) c[i] = a[i] * b[i] % mod * d % mod;
 	ntt(c, true); c.resize(s); return c;
 }

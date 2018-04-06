@@ -1,22 +1,10 @@
 /**
- * Name: Prime sieve, primality test
+ * Name: Primality test
  * Author: Richard Hladik
- * Description: Sieve of Eratosthenes for finding primes up to m (inclusive).
- *  Deterministic Miller-Rabin primality test, works for $p \leq 2^{32}$.
- * Time: Sieve: $O(n \log \log n)$, Miller-Rabin: $O(\log p)$
+ * Description: Deterministic Miller-Rabin primality test, works for $p \leq 2^{32}$.
+ * Time: $O(\log p)$
  */
-#include "misc.cpp"
-
-vector<bool> sieve(int m) {
-	m++;
-	vector<bool> is_p(m, true);
-	is_p[0] = is_p[1] = false;
-	rep(i, 2, m)
-		if (is_p[i])
-			for (int j = 2 * i; j < m; j += i)
-				is_p[j] = false;
-	return is_p;
-}
+#include "fastexp.cpp"
 
 bool isprime(ll p) {
 	if (p == 2 || p == 7 || p == 61)
