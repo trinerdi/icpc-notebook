@@ -1,13 +1,17 @@
+/**
+ * Name: Persistent segment tree
+ * Author: Vaclav Volhejn
+ * Description: A segment tree whose updates do not invalidate previous versions.
+ *  For $N$ elements, call \verb|new Segtree(0, N)}. Exclusive right bounds.
+ * Time: $O(\log N)$ per update/query
+ */
 #include "../base.hpp"
 
-/* A segment tree whose updates do not invalidate previous versions.
- * For N elements, call `new Segtree(0, N)`.
- * We use exclusive right bounds everywhere; the interval is [l, r). */
 struct Segtree {
     int l, r;
     ll val = 0;
     Segtree *lson = NULL, *rson = NULL;
-    // Constructor used internally, does not initialize children
+
     Segtree (int _l, int _r) : l(_l), r(_r) {
         if (r - l > 1) {
             int mid = (l + r) / 2;

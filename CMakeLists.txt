@@ -28,6 +28,7 @@ set(SOURCES_LIST
     graph/heavylight
     graph/heavylight2
     data-structures/persistent_segtree
+    data-structures/lazy_segtree
     data-structures/fast_line_container
     strings/aho_corasick
     various/set_tricks
