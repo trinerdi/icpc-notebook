@@ -1,4 +1,5 @@
 /**
+ * Name: Bit hacks
  * Author: Václav Volhejn
  * Source: KACTL notebook (various/chapter.tex)
  * Status: Tested manually, forAllSubsetMasks tested at Ptz
