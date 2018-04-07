@@ -49,6 +49,8 @@ void buildHLD(int v = 0, int c = 0) {
 }
 
 void initHLD(void) {
+	in = {}, in.resize(G.size());
+	out = subs = depth = top = par = in;
 	par[0] = -1, et = {}, depth[0] = 0;
 	dfs_counts();
 	dfs_numbering();

@@ -17,7 +17,7 @@ ll flat_quepdate(int l, int r, bool upd, ll val) {
 }
 
 void gen(int n) {
-	clean(G), clean(et), clean(in), clean(out), clean(subs), clean(depth), clean(top), clean(par);
+	clean(G);
 	rep(i, 0, n)
 		if (i)
 			G[rand() % i].push_back(i);
