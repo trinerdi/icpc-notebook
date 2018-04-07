@@ -6,6 +6,8 @@ import sys
 import subprocess
 
 FILE_LIST = "notebook.tex"
+TITLE_NAME = "title"
+TMP_OUT_NAME = "tmp"
 OUT_NAME = "out"
 
 
@@ -146,7 +148,22 @@ def process_file(f, chdir="../src"):
     return "\n".join(work())
 
 
+def make_title_page():
+    return subprocess.call(["pdfcsplain", TITLE_NAME])
+
+
+def add_title_page():
+    title_pdf = "%s.pdf" % TITLE_NAME
+    tmp_pdf = "%s.pdf" % TMP_OUT_NAME
+    out_pdf = "%s.pdf" % OUT_NAME
+    return subprocess.call(["pdfunite", title_pdf, tmp_pdf, out_pdf])
+
+
 def main():
+    add_title = True
+    if len(sys.argv) > 1 and sys.argv[1] == "--no-title":
+        add_title = False
+
     os.chdir(os.path.realpath(os.path.dirname(sys.argv[0])))
     text = readfile(FILE_LIST).strip()
     text = re.sub(r"(?<=\n)\[\[(.*?)\]\]", lambda a: process_file(a.group(1)), text)
@@ -159,7 +176,13 @@ def main():
     for i in range(3):
         exit_code = subprocess.call(["xetex", OUT_NAME])
         if exit_code:
-            break
+            return exit_code
+
+    if add_title:
+        os.rename("%s.pdf" % OUT_NAME, "%s.pdf" % TMP_OUT_NAME)
+        make_title_page()
+        add_title_page()
+        os.unlink("%s.pdf" % TMP_OUT_NAME)
 
     return exit_code
 

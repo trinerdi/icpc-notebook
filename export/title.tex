@@ -1,0 +1,49 @@
+\footline={}
+\headline={\hss}
+\leftskip=0pt plus 1fill
+\rightskip=0pt plus 1fill
+
+\def\mk#1#2{
+	\def\rm{\font\f=csr#1 at #2pt\f}
+	\def\it{\font\f=csti#1 at #2pt\f}
+	\def\bf{\font\f=csbx#1 at #2pt\f}
+	\baselineskip=#2pt
+	\multiply\baselineskip by6
+	\divide\baselineskip by5
+}
+
+\def\fr#1#2#3{{\font\f=csr#1 at #2pt\relax \f#3}}
+\def\fb#1#2#3{{\font\f=csbx#1 at #2pt\relax \f#3}}
+\def\ft#1#2#3{{\font\f=csti#1 at #2pt\relax \f#3}}
+
+\leavevmode\vskip 3.5cm
+\line{\hss\pdfximage width .7\hsize{faculty_logo.pdf}\pdfrefximage\pdflastximage\relax\hss}
+
+\vskip 2.5cm
+
+\fb{10}{25}{Team Reference Document}
+
+\vskip 8mm
+
+\fr{10}{15}{ACM-ICPC World Finals, 2018 April 15--20, Beijing}
+
+\def\packalign#1{\hbox{\vtop{\halign{#1}}}}
+
+\vskip 5cm
+
+{\mk{10}{14}\rm
+\line{%
+\hss
+\packalign{#\hss\cr
+ {\it Contestants:}\cr
+ Filip Bialas\cr
+ Richard Hladík\cr
+ Václav Volhejn\cr
+}
+\hskip 3cm
+\packalign{#\hss\cr
+ \hfill{\it Coach:}\cr
+ doc. Mgr. Zdeněk Dvořák, Ph.D.\cr
+}\hss}
+
+\bye

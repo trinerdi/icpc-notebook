@@ -9,6 +9,9 @@ build-all:
 clean:
 	rm -rf ./build export/*.log export/out.{tex,pdf}
 
+book-notitle:
+	export/build --no-title
+
 book:
 	export/build
 

@@ -1,5 +1,5 @@
 language: cpp
-script: make test book
+script: make test book-notitle
 
 sudo: required
 addons:
