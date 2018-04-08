@@ -5,7 +5,7 @@
  * License: GNU Free Documentation License 1.2
  * Source: http://rosettacode.org/wiki/Fast_Fourier_transform
  *  Papers about accuracy: http://www.daemonology.net/papers/fft.pdf, http://www.cs.berkeley.edu/~fateman/papers/fftvsothers.pdf
- * Description: Fast Fourier transform. Also includes a function for convolution:
+ * Description: Fast Fourier transform. Also includes convolution:
  *  \texttt{conv(a, b) = c}, where $c[x] = \sum a[i]b[x-i]$. $a$ and $b$ should be of roughly equal size.
  *  For convolutions of integers, rounding the results of conv
  *  works if $(|a| + |b|)\max(a, b) < \mathtt{\sim} 10^9$ (in theory maybe $10^6$);

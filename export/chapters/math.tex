@@ -1,0 +1,336 @@
+% Written by Anders Sjoqvist and Ulf Lundstrom, 2009
+% The main sources are: tinyKACTL, Beta and Wikipedia
+% Transcribed to plain TeX by Richard Hladík in 2018.
+{
+% Quick fixes
+\let\section\header
+\def\subsection#1{\header{\subsectionfont#1}}
+\def\subsubsection#1{\header{\subsubsectionfont#1}}
+\chapter{Mathematics (text)}
+
+\section{Equations}
+
+$$ax^2+bx+c=0 \Rightarrow x = \frac{-b\pm\sqrt{b^2-4ac}}{2a}$$
+
+The extremum is given by $x = -b/2a$.
+%
+$$\eqalign{ax+by&=e\cr cx+dy&=f\cr}
+\,\Rightarrow\,
+\eqalign{x&=\frac{ed-bf}{ad-bc}\cr y&=\frac{af-ec}{ad-bc}\cr}$$
+%
+In general, given an equation $Ax = b$, the solution to a variable $x_i$ is given by
+$$x_i = \frac{\det A_i'}{\det A} $$
+where $A_i'$ is $A$ with the $i$'th column replaced by $b$.
+
+\section{Recurrences}
+
+If $a_n = c_1 a_{n-1} + \dots + c_k a_{n-k}$, and $r_1, \dots, r_k$ are distinct roots of $x^k + c_1 x^{k-1} + \dots + c_k$, there are $d_1, \dots, d_k$ s.t.
+$$a_n = d_1r_1^n + \dots + d_kr_k^n. $$
+Non-distinct roots $r$ become polynomial factors, e.g. $a_n = (d_1n + d_2)r^n$.
+
+\section{Trigonometry}
+
+$$\eqalign{
+\sin(v+w)&=\sin v\cos w+\cos v\sin w\cr
+\cos(v+w)&=\cos v\cos w-\sin v\sin w\cr
+\tan(v+w)&=\frac{\tan v+\tan w}{1-\tan v\tan w}\cr
+\sin v+\sin w&=2\sin\frac{v+w}{2}\cos\frac{v-w}{2}\cr
+\cos v+\cos w&=2\cos\frac{v+w}{2}\cos\frac{v-w}{2}\cr
+(V+W)\tan(v-w)/2&=(V-W)\tan(v+w)/2\cr}$$
+where $V, W$ are lengths of sides opposite angles $v, w$.
+$$\eqalign{a\cos x+b\sin x&=r\cos(x-\phi)\cr
+a\sin x+b\cos x&=r\sin(x+\phi)\cr}$$
+where $r=\sqrt{a^2+b^2}$, $\phi=\mathop{\rm atan2}(b,a)$.
+
+\section{Geometry}
+
+\subsection{Triangles}
+
+Side lengths: $a,b,c$
+
+Semiperimeter: $p=\frac{a+b+c}{2}$
+
+Area: $A=\sqrt{p(p-a)(p-b)(p-c)}$
+
+Circumradius: $R=\frac{abc}{4A}$
+
+Inradius: $r=\frac{A}{p}$
+
+Length of median (divides triangle into two equal-area triangles):$$m_a=\frac{1}{2}\sqrt{2b^2+2c^2-a^2}$$
+
+Length of bisector (divides angles in two): $s_a=\sqrt{bc\left[1-\left(\frac{a}{b+c}\right)^2\right]}$
+
+Law of sines: $\frac{\sin\alpha}{a}=\frac{\sin\beta}{b}=\frac{\sin\gamma}{c}=\frac{1}{2R}$
+
+Law of cosines: $a^2=b^2+c^2-2bc\cos\alpha$
+
+Law of tangents: $$\frac{a+b}{a-b}=\frac{\tan\frac{\alpha+\beta}{2}}{\tan\frac{\alpha-\beta}{2}}$$
+
+\subsection{Quadrilaterals}
+
+With side lengths $a,b,c,d$, diagonals $e, f$, diagonals angle $\theta$, area $A$ and
+magic flux $F=b^2+d^2-a^2-c^2$:
+
+$$ 4A = 2ef \cdot \sin\theta = F\tan\theta = \sqrt{4e^2f^2-F^2} $$
+
+ For cyclic quadrilaterals the sum of opposite angles is $180^\circ$,
+$ef = ac + bd$, and $A = \sqrt{(p-a)(p-b)(p-c)(p-d)}$.
+
+\subsection{Spherical coordinates}
+\figure{kactl/math/sphericalCoordinates.pdf}
+
+$$\eqalign{x &= r\sin\theta\cos\phi\cr
+y &= r\sin\theta\sin\phi\cr
+z &= r\cos\theta\cr}\;\eqalign{
+	r &= \sqrt{x^2+y^2+z^2}\cr
+\theta &= \mathop{\rm acos}\left(z/\sqrt{x^2+y^2+z^2}\right)\cr
+\phi &= \mathop{\rm atan2}\left(y,x\right)\cr}$$
+
+\section{Derivatives/Integrals}
+
+$$\eqalign{
+\frac{d}{dx}\arcsin x &= \frac{1}{\sqrt{1-x^2}}\cr
+\frac{d}{dx}\arccos x &= -\frac{1}{\sqrt{1-x^2}}\cr
+\frac{d}{dx}\tan x &= 1+\tan^2 x\cr
+\frac{d}{dx}\arctan x &= \frac{1}{1+x^2}\cr}\;\;\;\eqalign{
+\int\tan ax &= -\frac{\ln|\cos ax|}{a}\cr
+\int x\sin ax &= \frac{\sin ax-ax \cos ax}{a^2} \cr
+\int e^{-x^2} &= \frac{\sqrt \pi}{2} \text{erf}(x)\cr
+\int xe^{ax}dx &= \frac{e^{ax}}{a^2}(ax-1)\cr}$$
+
+Integration by parts:
+$$\int_a^bf(x)g(x)\d x = [F(x)g(x)]_a^b-\int_a^bF(x)g'(x)\d x$$
+
+\section{Sums}
+
+$$c^a + c^{a+1} + \dots + c^{b} = \frac{c^{b+1} - c^a}{c-1},\; c \neq 1$$
+%
+$$\eqalign{
+	1 + 2 + 3 + \dots + n &= \frac{n(n+1)}{2} \cr
+	1^2 + 2^2 + 3^2 + \dots + n^2 &= \frac{n(2n+1)(n+1)}{6} \cr
+	1^3 + 2^3 + 3^3 + \dots + n^3 &= \frac{n^2(n+1)^2}{4} \cr
+	1^4 + 2^4 + 3^4 + \dots + n^4 &= \frac{n(n+1)(2n+1)(3n^2 + 3n - 1)}{30} \cr
+}$$
+
+\section{Series} 
+
+$$e^x = 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\dots,\quad(-\infty<x<\infty)$$
+$$\ln(1+x) = x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\dots,\quad(-1<x\leq1)$$
+$$\sqrt{1+x} = 1+\frac{x}{2}-\frac{x^2}{8}+\frac{2x^3}{32}-\frac{5x^4}{128}+\dots,\quad(-1\leq x\leq1)$$
+$$\sin x = x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\dots,\quad(-\infty<x<\infty)$$
+$$\cos x = 1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\dots,\quad(-\infty<x<\infty)$$
+
+\section{Probability theory}
+
+Let $X$ be a discrete random variable with probability $p_X(x)$ of assuming the
+value $x$. It will then have an expected value (mean)
+$\mu={\mathbb E}(X)=\sum_xxp_X(x)$ and variance
+$\sigma^2=V(X)={\mathbb E}(X^2)-({\mathbb E}(X))^2=\sum_x(x-{\mathbb E}(X))^2p_X(x)$
+where $\sigma$ is the standard deviation. If $X$ is instead continuous it will
+have a probability density function $f_X(x)$ and the sums above will instead be
+integrals with $p_X(x)$ replaced by $f_X(x)$.
+
+Expectation is linear:
+$${\mathbb E}(aX+bY) = a{\mathbb E}(X)+b{\mathbb E}(Y)$$
+For independent $X$ and $Y$, $$V(aX+bY) = a^2V(X)+b^2V(Y).$$
+
+\subsection{Discrete distributions}
+
+\subsubsection{Binomial distribution}
+The number of successes in $n$ independent yes/no experiments, each of which yields success with probability $p$ is $\textrm{Bin}(n,p),\,n=1,2,\dots,\, 0\leq p\leq1$.
+$$p(k)=\binom{n}{k}p^k(1-p)^{n-k}$$
+$$\mu = np,\,\sigma^2=np(1-p)$$
+$\textrm{Bin}(n,p)$ is approximately $\textrm{Po}(np)$ for small $p$.
+
+\subsubsection{First success distribution}
+The number of trials needed to get the first success in independent yes/no experiments, each of which yields success with probability $p$, is $\textrm{Fs}(p),\,0\leq p\leq1$.
+$$p(k)=p(1-p)^{k-1},\,k=1,2,\dots$$
+$$\mu = \frac1p,\,\sigma^2=\frac{1-p}{p^2}$$
+
+\subsubsection{Poisson distribution}
+The number of events occurring in a fixed period of time $t$ if these events occur with a known average rate $\kappa$ and independently of the time since the last event is $\textrm{Po}(\lambda),\,\lambda=t\kappa$.
+$$p(k)=e^{-\lambda}\frac{\lambda^k}{k!}, k=0,1,2,\dots$$
+$$\mu=\lambda,\,\sigma^2=\lambda$$
+
+\subsection{Continuous distributions}
+
+\subsubsection{Uniform distribution}
+If the probability density function is constant between $a$ and $b$ and 0 elsewhere it is $\textrm{U}(a,b),\quad a<b$.
+$$f(x) = \cases{{1\over b-a}& $a<x<b$;\cr0& otherwise.\cr}$$
+%
+$$\mu=\frac{a+b}{2},\quad\sigma^2=\frac{(b-a)^2}{12}$$
+
+\subsubsection{Exponential distribution}
+The time between events in a Poisson process is $\textrm{Exp}(\lambda),\lambda>0$.
+$$f(x) = \cases{\lambda e^{-\lambda x}&$x\ge 0$,\cr 0&otherwise.\cr}$$
+$$\mu=\frac{1}{\lambda},\quad\sigma^2=\frac{1}{\lambda^2}$$
+
+\subsubsection{Normal distribution}
+Most real random values with mean $\mu$ and variance $\sigma^2$ are well described by ${\cal N}(\mu,\sigma^2)$, where $\sigma>0$.
+$$ f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}} $$
+If $X_1 \sim {\cal N}(\mu_1,\sigma_1^2)$ and $X_2 \sim {\cal N}(\mu_2,\sigma_2^2)$ then
+$$ aX_1 + bX_2 + c \sim {\cal N}(\mu_1+\mu_2+c,a^2\sigma_1^2+b^2\sigma_2^2) $$
+
+\section{Markov chains}
+A \emph{Markov chain} is a discrete random process with the property that the next state depends only on the current state.
+Let $X_1,X_2,\ldots$ be a sequence of random variables generated by the Markov process.
+Then there is a transition matrix $\mathbf{P} = (p_{ij})$, with $p_{ij} = \Pr(X_n = i | X_{n-1} = j)$,
+and $\mathbf{p}^{(n)} = \mathbf P^n \mathbf p^{(0)}$ is the probability distribution for $X_n$ (i.e., $p^{(n)}_i = \Pr(X_n = i)$),
+where $\mathbf{p}^{(0)}$ is the initial distribution.
+
+% \subsubsection{Stationary distribution}
+$\mathbf{\pi}$ is a stationary distribution if $\mathbf{\pi} = \mathbf{\pi P}$.
+If the Markov chain is \emph{irreducible} (it is possible to get to any state from any state),
+% TODO: make \scriptfont\mathbb work
+then $\pi_i = \frac{1}{{\mathbb E}(T_i)}$ where ${\mathbb E}(T_i)$  is the expected time between two visits in state $i$.
+$\pi_j/\pi_i$ is the expected number of visits in state $j$ between two visits in state $i$.
+
+For a connected, undirected and non-bipartite graph, where the transition probability is uniform among all neighbors, $\pi_i$ is proportional to node $i$'s degree.
+
+% \subsubsection{Ergodicity}
+A Markov chain is \emph{ergodic} if the asymptotic distribution is independent of the initial distribution.
+A finite Markov chain is ergodic iff it is irreducible and \emph{aperiodic} (i.e., the gcd of cycle lengths is 1).
+$\lim_{k\rightarrow\infty}\mathbf{P}^k = \mathbf{1}\pi$.
+
+% \subsubsection{Absorption}
+A Markov chain is an A-chain if the states can be partitioned into two sets $\mathbf{A}$ and $\mathbf{G}$, such that all states in $\mathbf{A}$ are absorbing ($p_{ii}=1$), and all states in $\mathbf{G}$ leads to an absorbing state in $\mathbf{A}$.
+The probability for absorption in state $i\in\mathbf{A}$, when the initial state is $j$, is $a_{ij} = p_{ij}+\sum_{k\in\mathbf{G}} a_{ik}p_{kj}$.
+The expected time until absorption, when the initial state is $i$, is $t_i = 1+\sum_{k\in\mathbf{G}}p_{ki}t_k$.
+
+
+\section{Number-theoretical}
+
+\subsection{Pythagorean Triples}
+ The Pythagorean triples are uniquely generated by
+ $$a=k\cdot (m^{2}-n^{2}),\ \,b=k\cdot (2mn),\ \,c=k\cdot (m^{2}+n^{2}),$$
+ with $m > n > 0$, $k > 0$, $m \bot n$, and either $m$ or $n$ even.
+
+\subsection{Primes}
+	$p=962592769$ is such that $2^{21} \mid p-1$, which may be useful. For hashing
+	use 970592641 (31-bit number), 31443539979727 (45-bit), 3006703054056749
+	(52-bit). There are 78498 primes less than $1\,000\,000$.
+
+	Primitive roots exist modulo any prime power $p^a$, except for $p = 2, a > 2$, and there are $\phi(\phi(p^a))$ many.
+	For $p = 2, a > 2$, the group ${\mathbb Z}_{2^a}^\times$ is instead isomorphic to ${\mathbb Z}_2 \times {\mathbb Z}_{2^{a-2}}$.
+
+\subsection{Estimates}
+	$\sum_{d|n} d = O(n \log \log n)$.
+
+	The number of divisors of $n$ is at most around 100 for $n < 5e4$, 500 for $n < 1e7$, 2000 for $n < 1e10$, $200\,000$ for $n < 1e19$.
+
+\chapter{Combinatorial (text)}
+
+%\section{The Twelvefold Way}
+%	\import{twelvefoldway.tex}
+
+\section{Permutations}
+%\subsection{Factorial}
+%	\import{factorial.tex}
+%	\kactlimport{intperm.h}
+
+\subsection{Cycles}
+	Let the number of $n$-permutations whose cycle lengths all belong to the set $S$ be denoted by $g_S(n)$. Then
+	$$\sum_{n=0} ^\infty g_S(n) \frac{x^n}{n!} = \exp\left(\sum_{n\in S} \frac{x^n} {n} \right)$$
+
+\subsection{Involutions}
+	An involution is a permutation with maximum cycle length 2, and it is its own inverse.
+	$$a(n) = a(n-1) + (n-1)a(n-2)$$
+	$$a(0) = a(1) = 1$$
+	1, 1, 2, 4, 10, 26, 76, 232, 764, 2620, 9496, 35696, 140152
+
+\subsection{Stirling numbers of the first kind}
+	$$s(n,k) = (-1)^{n-k}c(n,k)$$
+	$c(n,k)$ is the unsigned Stirling numbers of the first kind, and they count the number of permutations on $n$ items with $k$ cycles.
+	$$s(n,k) = s(n-1,k-1) - (n-1) s(n-1,k)$$
+	$$s(0,0) = 1, s(n,0) = s(0,n) = 0$$
+	$$c(n,k) = c(n-1,k-1) + (n-1) c(n-1,k)$$
+	$$c(0,0) = 1, c(n,0)=c(0,n)=0$$
+
+\subsection{Eulerian numbers}
+	Number of permutations $\pi \in S_n$ in which exactly $k$ elements are greater than the previous element. $k$ $j$:s s.t. $\pi(j)>\pi(j+1)$, $k+1$ $j$:s s.t. $\pi(j)\geq j$, $k$ $j$:s s.t. $\pi(j)>j$.
+	$$E(n,k) = (n-k)E(n-1,k-1) + (k+1)E(n-1,k)$$
+	$$E(n,0) = E(n,n-1) = 1$$
+	$$E(n,k) = \sum_{j=0}^k(-1)^j\binom{n+1}{j}(k+1-j)^n$$
+
+\subsection{Burnside's lemma}
+	Given a group $G$ of symmetries and a set $X$, the number of elements of $X$ \emph{up to symmetry} equals
+	 $$ {\frac {1}{|G|}}\sum _{{g\in G}}|X^{g}|, $$
+	 where $X^{g}$ are the elements fixed by $g$ ($g.x = x$).
+
+	 If $f(n)$ counts "configurations" (of some sort) of length $n$, we can ignore rotational symmetry using $G = \mathbb Z_n$ to get
+	 $$ g(n) = \frac 1 n \sum_{k=0}^{n-1}{f(\text{gcd}(n, k))} = \frac 1 n \sum_{k|n}{f(k)\phi(n/k)}. $$
+
+\section{Partitions and subsets}
+\subsection{Partition function}
+	Partitions of $n$ with exactly $k$ parts, $p(n,k)$, i.e., writing $n$ as a sum of $k$ positive integers, disregarding the order of the summands.
+	$$p(n,k) = p(n-1,k-1)+p(n-k,k)$$
+	$$p(0,0)=p(1,n)=p(n,n)=p(n,n-1)=1$$
+
+	For partitions with any number of parts, $p(n)$ obeys
+	$$ p(0) = 1,\ p(n) = \sum_{k \in \mathbb Z \setminus \{0\}}{(-1)^{k+1} p(n - k(3k-1) / 2)} $$
+	$$ p(n) \sim 0.145 / n \cdot \exp(2.56 \sqrt{n}) $$
+
+%	\begin{center}
+%	\begin{tabular}{c|c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c@{\ }c}
+%		$n$    & 0 & 1 & 2 & 3 & 4 & 5 & 6  & 7  & 8  & 9  & 20  & 50  & 100 \\ \hline
+%		$p(n)$ & 1 & 1 & 2 & 3 & 5 & 7 & 11 & 15 & 22 & 30 & 627 & $\mathtt{\sim}$2e5 & $\mathtt{\sim}$2e8 \\
+%	\end{tabular}
+%	\end{center}
+%
+%
+\subsection{Stirling numbers of the second kind}
+	Partitions of $n$ distinct elements into exactly $k$ groups.
+	$$S(n,k) = S(n-1,k-1) + k S(n-1,k)$$
+	$$S(n,1) = S(n,n) = 1$$
+	$$S(n,k) = \frac{1}{k!}\sum_{j=0}^k (-1)^{k-j}\binom{k}{j}j^n$$
+
+\subsection{Bell numbers}
+	Total number of partitions of $n$ distinct elements.
+	$$B(n) = \sum_{k=1}^n \binom{n-1}{k-1}B(n-k) = \sum_{k=1}^n S(n,k)$$
+	$$B(0) = B(1) = 1$$
+	The first are 1, 1, 2, 5, 15, 52, 203, 877, 4140, 21147, 115975, 678570, 4213597.
+	For a prime $p$
+	$$B(p^m+n)\equiv mB(n)+B(n+1) \pmod{p}$$
+
+\subsection{Triangles}
+	Given rods of length $1,\ldots,n$,
+	$$T(n) = \frac{1}{24} \cases{n(n-2)(2n-5) & $n$ even\cr(n-1)(n-3)(2n-1) & $n$ odd}.$$
+	is the number of distinct triangles (positive are) that can be constructed, i.e., the \# of 3-subsets of $[n]$ s.t. $x\leq y\leq z$ and $z\neq x+y$.
+
+\section{General purpose numbers}
+\subsection{Catalan numbers}
+	$$C_n=\frac{1}{n+1}\binom{2n}{n}= \binom{2n}{n}-\binom{2n}{n+1} = \frac{(2n)!}{(n+1)!n!}$$
+	$$C_{n+1} = \frac{2(2n+1)}{n+2}C_n$$
+	$$C_0=1, C_{n+1}=\sum C_iC_{n-i}$$
+	First few are 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900.
+		\itemitem{$\bullet$}\# of monotonic lattice paths of a $n\times n$-grid which do not pass above the diagonal.
+		\itemitem{$\bullet$}\# of expressions containing $n$ pairs of parenthesis which are correctly matched.
+		\itemitem{$\bullet$}\# of full binary trees with with $n+1$ leaves (0 or 2 children).
+		\itemitem{$\bullet$}\# of non-isomorphic ordered trees with $n+1$ vertices.
+		\itemitem{$\bullet$}\# of ways a convex polygon with $n+2$ sides can be cut into triangles by connecting vertices with straight lines.
+		\itemitem{$\bullet$}\# of permutations of $[n]$ with no three-term increasing subsequence.
+
+\subsection{Super Catalan numbers}
+	The number of monotonic lattice paths of a $n\times n$-grid that do not touch the diagonal.
+	$$S(n) = \frac{3(2n-3)S(n-1)-(n-3)S(n-2)}{n}$$
+	$$S(1)=S(2)=1$$
+	1, 1, 3, 11, 45, 197, 903, 4279, 20793, 103049, 518859
+
+\subsection{Motzkin numbers}
+	Number of ways of drawing any number of nonintersecting chords among $n$ points on a circle. Number of lattice paths from $(0,0)$ to $(n,0)$ never going below the $x$-axis, using only steps NE, E, SE.
+	$$M(n) = \frac{3(n-1)M(n-2)+(2n+1)M(n-1)}{n+2}$$
+	$$M(0) = M(1) = 1$$
+	1, 1, 2, 4, 9, 21, 51, 127, 323, 835, 2188, 5798, 15511, 41835, 113634
+
+\subsection{Narayana numbers}
+	Number of lattice paths from $(0,0)$ to $(2n,0)$ never going below the $x$-axis, using only steps NE and SE, and with $k$ peaks.
+	$$N(n,k) = \frac{1}{n}\binom{n}{k}\binom{n}{k-1}$$
+	$$N(n,1) = N(n,n) = 1$$
+	$$\sum_{k=1}^n N(n,k) = C_n$$
+	1, 1, 1, 1, 3, 1, 1, 6, 6, 1, 1, 10, 20, 10, 1, 1, 15, 50
+
+\subsection{Schr\" oder numbers}
+	Number of lattice paths from $(0,0)$ to $(n,n)$ using only steps N,NE,E, never going above the diagonal. Number of lattice paths from $(0,0)$ to $(2n,0)$ using only steps NE, SE and double east EE, never going below the $x$-axis. Twice the Super Catalan number, except for the first term.
+	1, 2, 6, 22, 90, 394, 1806, 8558, 41586, 206098
+
+}
