@@ -10,3 +10,8 @@ This repo contains the code used in the ACM-ICPC notebook of the team _Tři nerd
 
 ## Code style
 TODO
+
+## Creating the PDF on Mac
+
+- Install the Liberation Mono font
+- we need the `pdfunite` command, but it is not directly available. Run `brew install poppler` instead.
